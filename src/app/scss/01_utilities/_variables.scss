@@ -1,0 +1,21 @@
+$colores:(
+    'primario': (#EEF6FB,#DCEDF6,#CBE5F2,#B9DCED,#97CAE4, #74B9DB, #51A7D2, #4186A8, #31647E, #204354, #18323F, #10212A, #081115),
+    'secundario': (#EAFCF6, #D6F8ED,#C1F5E4, #ADF1DB, #83EBC8, #5AE4B6, #31DDA4, #27B183, #1D8562, #145842, #0F4231, #0A2C21, #051610),
+    'gris': (#FFFFFF, #F7F7F7, #EEEEEE, #E6E6E6, #DDDDDD,#CDCDCD, #BCBCBC,#ABABAB,#8D8D8D, #707070,#525252, #353535, #262626, #171717),
+    'rojo': (#FFEDED,#FFDBDB, #FFCACA,#FFB8B8, #FF9494,#FF7171, #FF4D4D, #D33E3E, #A72E2E, #7C1F1F, #661717, #500F0F, #3A0808, #240000),
+    'amarillo': (#FEFDEF, #FDFADE, #FCF8CE, #FBF6BE, #F9F19D, #F7ED7D, #F5E85C, #CCC14A, #A39A38, #797226, #655F1D, #504B14, #3C380B, #272402)
+);
+
+$padding:(2px,4px,8px,16px,24px,32px,40px,48px,56px,64px);
+$margin:(2px,4px,8px,16px,24px,32px,40px,48px,56px,64px);
+$border-radius:(2px,4px,8px,16px,24px,32px,40px,48px,56px,64px);
+$font-size:(12px,14px,16px,18px,20px,24px,28px,32px,36px,40px);
+$font-weight:(300,400,500,600,700,800,900,1000,1100,1200,1300);
+$box-shadow:(none,  0  1px  3px  rgb(0 0 0 / 20%), 0  4px  6px  rgb(0 0 0 / 20%),0  5px 15px  rgb(0 0 0 / 20%),0 10px 24px  rgb(0 0 0 / 20%),0 15px 35px  rgb(0 0 0 / 20%)); 
+$font-families:(
+  'Article': "'Istok Web', sans-serif",
+  'header': "'Poetsen One', sans-serif"
+);
+$gap:(4px,8px,16px,24px,32px,40px,48px,56px,64px);
+$widths:(10px, 20px, 30px ,50px ,100px,150px,200px,250px,300px,350px,400px,450px,500px, 600px,700px,800px,900px,1000px,1200px,1300px,1400px);
+$height:(10px, 20px, 30px, 50px ,100px,150px,200px,250px,300px,350px,400px,450px,500px, 600px,700px,800px,900px,1000px,1200px,1300px,1400px);

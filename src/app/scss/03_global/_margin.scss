@@ -1,0 +1,9 @@
+@use '../01_utilities/index' as utilities;
+@use "sass:list";
+
+:root {
+  @for $i from 1 through list.length(utilities.$margin) {
+    $margin: list.nth(utilities.$margin, $i);
+    --mls-sys-margin-#{$i}: #{$margin};
+  }
+}

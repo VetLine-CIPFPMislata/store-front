@@ -1,0 +1,8 @@
+@use "sass:list";
+@use "../01_utilities/index" as utilities;
+
+:root {
+    @each $nombre, $familias in utilities.$font-families {
+        --mls-sys-font-#{$nombre}: #{ $familias };
+    }
+}

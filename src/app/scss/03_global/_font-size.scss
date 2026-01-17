@@ -1,0 +1,9 @@
+@use '../01_utilities/index' as utilities;
+@use "sass:list";
+
+:root {
+  @for $i from 1 through list.length(utilities.$font-size) {
+    $font-size: list.nth(utilities.$font-size, $i);
+    --mls-sys-font-size-#{$i}: #{$font-size};
+  }
+}
