@@ -1,1 +1,91 @@
-<p>inicio works!</p>
+<div class="inicio">
+    <div class="inicio__filters">
+        <div class="category-select">
+            <select (change)="onCategoryChange($event)" class="category-select__input">
+                <option value="all">Categorías</option>
+                @for (category of categories; track category.id) {
+                <option [value]="category.id">{{ category.name }}</option>
+                }
+            </select>
+            <div class="category-select__icon">
+                <i class="bi bi-chevron-down"></i>
+            </div>
+        </div>
+    </div>
+
+    <main class="inicio__content">
+        @if (isLoading) {
+        <div class="inicio__loading">Cargando productos...</div>
+        } @else {
+        <div class="product-grid">
+            @for (articulo of articulos; track articulo.id) {
+            <div class="product-card">
+                <div class="product-card__image-container">
+                    <img [src]="articulo.pictureProduct" [alt]="articulo.name"
+                        class="product-card__image">
+                </div>
+
+                <div class="product-card__body">
+                    <h3 class="product-card__title">{{ articulo.name }}</h3>
+
+                    <div class="product-card__rating">
+                        @for (star of getStars(articulo.rating || 5); track $index) {
+                        <i class="bi bi-star-fill"></i>
+                        }
+                        @for (star of getStars(5 - (articulo.rating || 5)); track $index) {
+                        <i class="bi bi-star"></i>
+                        }
+                        <span class="product-card__rating-value">({{ articulo.rating || 5 }}.0)</span>
+                    </div>
+
+                    <p class="product-card__description">{{ articulo.productDescription }}</p>
+
+                    <div class="product-card__pricing">
+                        @if (articulo.basePrice && articulo.basePrice > articulo.price) {
+                        <span class="product-card__price--offer">{{ articulo.price | number:'1.2-2' }} €</span>
+                        <span class="product-card__price--original">{{ articulo.basePrice | number:'1.2-2' }} €</span>
+                        } @else {
+                        <span class="product-card__price">{{ articulo.price | number:'1.2-2' }} €</span>
+                        }
+                    </div>
+                </div>
+
+                <button class="product-card__button" (click)="addToCart(articulo)">
+                    Añadir al carrito <i class="bi bi-cart2"></i>
+                </button>
+            </div>
+            } @empty {
+            <div class="inicio__empty">No hay productos disponibles en esta categoría.</div>
+            }
+        </div>
+
+        @if (totalPages > 1) {
+        <div class="pagination">
+            <button class="pagination__button" [disabled]="currentPage === 0" (click)="changePage(0)"
+                title="Primera página">
+                <i class="bi bi-chevron-double-left"></i>
+            </button>
+
+            <button class="pagination__button" [disabled]="currentPage === 0" (click)="changePage(currentPage - 1)"
+                title="Anterior">
+                <i class="bi bi-chevron-left"></i>
+            </button>
+
+            <span class="pagination__info">
+                Página {{ currentPage + 1 }} de {{ totalPages }}
+            </span>
+
+            <button class="pagination__button" [disabled]="currentPage === totalPages - 1"
+                (click)="changePage(currentPage + 1)" title="Siguiente">
+                <i class="bi bi-chevron-right"></i>
+            </button>
+
+            <button class="pagination__button" [disabled]="currentPage === totalPages - 1"
+                (click)="changePage(totalPages - 1)" title="Última página">
+                <i class="bi bi-chevron-double-right"></i>
+            </button>
+        </div>
+        }
+        }
+    </main>
+</div>

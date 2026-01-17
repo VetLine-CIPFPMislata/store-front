@@ -55,10 +55,9 @@
   }
 
   &__exit-icon {
-    height: var(--header-icon-height);
-    object-fit: contain;
     cursor: pointer;
     transition: transform 0.3s ease;
+    font-size: var(--header-icon-height);
 
     &:hover {
       transform: scale(1.1);
