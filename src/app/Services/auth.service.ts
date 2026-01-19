@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { LoginRequest } from '../Modelos/LoginRequest';
 import { LoginResponse } from '../Modelos/LoginResponse';
+import { RegisterRequest } from '../Modelos/RegisterRequest';
+import { RegisterResponse } from '../Modelos/RegisterResponse';
 import { User } from '../Modelos/User';
 
 
@@ -14,10 +16,16 @@ import { User } from '../Modelos/User';
 export class AuthService {
   private urlAuth = '/api/auth';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) { }
+
+  //ng serve --proxy-config src/proxy.conf.json
 
   login(credentials: LoginRequest): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.urlAuth}/login`, credentials);
+  }
+
+  register(registerData: RegisterRequest): Observable<RegisterResponse> {
+    return this.http.post<RegisterResponse>(`${this.urlAuth}/register`, registerData);
   }
 
   logout(): Observable<any> {
@@ -25,7 +33,7 @@ export class AuthService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    
+
     return this.http.post(`${this.urlAuth}/logout`, {}, { headers });
   }
 
@@ -34,8 +42,8 @@ export class AuthService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    
-    return this.http.get<User>(`${this.urlAuth}/me`, { headers });
+
+    return this.http.get<User>(`${this.urlAuth}/me/any`, { headers });
   }
 
   saveToken(token: string): void {
@@ -69,6 +77,6 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     return this.getToken() !== null;
-}                 
+  }
 
 }

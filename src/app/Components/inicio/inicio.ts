@@ -3,6 +3,8 @@ import { Articulo } from '../../Modelos/Articulo';
 import { Category } from '../../Modelos/Category';
 import { Http } from '../../Services/http';
 import { DecimalPipe } from '@angular/common';
+import { AuthService } from '../../Services/auth.service';
+import { Router } from '@angular/router';
 import { CarritoService } from '../../Services/carrito.service';
 
 @Component({
@@ -25,6 +27,8 @@ export class Inicio {
 
   constructor(
     private http: Http,
+    private authService: AuthService,
+    private router: Router,
     private carritoService: CarritoService
   ) { }
 
@@ -39,6 +43,7 @@ export class Inicio {
       },
       error: (err) => console.error('Error al cargar categorías:', err)
     });
+    this.cargarArticulos();
   }
 
   cargarArticulos(categoriaNombre?: string, page: number = 0): void {
@@ -83,8 +88,12 @@ export class Inicio {
     }
   }
 
-
-  addToCart(articulo: Articulo): void {
+  addToCart(articulo: Articulo) {
+    if (!this.authService.isAuthenticated()) {
+      alert('Debes iniciar sesión para añadir productos al carrito');
+      this.router.navigate(['/login']);
+      return;
+    }
     this.carritoService.addToCart(articulo);
   }
 
@@ -92,4 +101,5 @@ export class Inicio {
     return Array(Math.floor(cantidad)).fill(0);
   }
 }
+
 

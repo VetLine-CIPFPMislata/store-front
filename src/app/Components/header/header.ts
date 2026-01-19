@@ -27,7 +27,16 @@ export class Header implements OnInit {
   }
 
   onLogout() {
-    this.authService.clearAuth();
-    this.router.navigate(['/login']);
+    this.authService.logout().subscribe({
+      next: () => {
+        this.authService.clearAuth();
+        this.router.navigate(['/login']);
+      },
+      error: (error) => {
+        console.error('Error al cerrar sesión:', error);
+        this.authService.clearAuth();
+        this.router.navigate(['/login']);
+      }
+    });
   }
 }

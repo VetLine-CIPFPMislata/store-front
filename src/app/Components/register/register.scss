@@ -1,0 +1,188 @@
+.register {
+    --register-bg-color: var(--mls-sys-color-primario-1);
+    --register-container-bg: var(--mls-sys-color-gris-1);
+    --register-title-color: var(--mls-sys-color-primario-10);
+    --register-label-color: var(--mls-sys-color-primario-9);
+    --register-input-bg: var(--mls-sys-color-gris-1);
+    --register-input-border-color: var(--mls-sys-color-primario-5);
+    --register-input-focus-border: var(--mls-sys-color-primario-9);
+    --register-input-focus-shadow: var(--mls-sys-color-primario-3);
+    --register-btn-bg: var(--mls-sys-color-primario-7);
+    --register-btn-color: var(--mls-sys-color-gris-1);
+    --register-btn-hover-bg: var(--mls-sys-color-primario-9);
+    --register-error-bg: var(--mls-sys-color-rojo-2);
+    --register-error-color: var(--mls-sys-color-rojo-9);
+    --register-error-border: var(--mls-sys-color-rojo-7);
+    --register-header-border-color: var(--mls-sys-color-primario-5);
+    --register-padding-sm: var(--mls-sys-padding-2);
+    --register-padding-md: var(--mls-sys-padding-3);
+    --register-padding-lg: var(--mls-sys-padding-4);
+    --register-gap-sm: var(--mls-sys-gap-1);
+    --register-gap-md: var(--mls-sys-gap-2);
+    --register-gap-lg: var(--mls-sys-gap-3);
+    --register-font-family: var(--mls-sys-font-Article, sans-serif);
+    --register-title-font-size: var(--mls-sys-font-size-7);
+    --register-label-font-size: var(--mls-sys-font-size-4);
+    --register-label-font-weight: var(--mls-sys-font-weight-4);
+    --register-input-font-size: var(--mls-sys-font-size-4);
+    --register-btn-font-size: var(--mls-sys-font-size-5);
+    --register-btn-font-weight: var(--mls-sys-font-weight-4);
+    --register-border-radius-sm: var(--mls-sys-border-radius-2);
+    --register-border-radius-md: var(--mls-sys-border-radius-3);
+    --register-shadow: var(--mls-sys-box-shadow-3);
+    --register-margin-error: var(--mls-sys-margin-1);
+    --register-margin-form: var(--mls-sys-margin-3);
+    --register-font-size-error: var(--mls-sys-font-size-1);
+    --register-text-error: var(--mls-sys-color-rojo-9);
+    
+
+    --register-logo-width: var(--mls-sys-width-6);
+    --register-container-max-width: var(--mls-sys-width-13);
+
+
+    --register-bg-image: url("/imagenFondoVetLine.avif");
+    --register-bg-overlay: rgba(24, 24, 24, 0.223);
+
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: var(--register-padding-md);
+    box-sizing: border-box;
+    position: relative;
+
+
+    background:
+        linear-gradient(var(--register-bg-overlay), var(--register-bg-overlay)),
+        var(--register-bg-image);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    &__container {
+        max-width: var(--register-container-max-width);
+        width: 100%;
+        background-color: var(--register-container-bg);
+        border-radius: var(--register-border-radius-md);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+        padding: var(--register-padding-lg);
+    }
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &__header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--register-gap-md);
+        margin-bottom: var(--register-gap-md);
+        padding-bottom: var(--register-padding-md);
+        border-bottom: 2px solid var(--register-header-border-color);
+        font-family: var(--register-font-family);
+    }
+
+    &__logo {
+        width: var(--register-logo-width);
+    }
+
+    &__title {
+        margin: 0;
+        font-size: var(--register-title-font-size);
+        color: var(--register-title-color);
+        text-align: center;
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        gap: var(--register-gap-lg);
+        font-family: var(--register-font-family);
+    }
+
+    &__error {
+        padding: var(--register-padding-sm);
+        background-color: var(--register-error-bg);
+        color: var(--register-error-color);
+        border: 2px solid var(--register-error-border);
+        border-radius: var(--register-border-radius-sm);
+        font-size: var(--register-input-font-size);
+        text-align: center;
+    }
+
+    &__field {
+        display: flex;
+        flex-direction: column;
+        gap: var(--register-gap-sm);
+    }
+
+    &__label {
+        font-size: var(--register-label-font-size);
+        font-weight: var(--register-label-font-weight);
+        color: var(--register-label-color);
+    }
+
+    &__error-message {
+        display: flex;
+        justify-content: start;
+        color: var(--register-text-error);
+        font-size: var(--register-font-size-error);
+        margin: var(--register-margin-error);
+        text-align: center;
+        margin-top: 0;
+        margin-bottom: var(--register-margin-form);
+        
+    }
+
+    &__input {
+        padding: var(--register-padding-md);
+        border: 2px solid var(--register-input-border-color);
+        border-radius: var(--register-border-radius-sm);
+        background-color: var(--register-input-bg);
+        font-size: var(--register-input-font-size);
+        transition: all 0.3s ease;
+
+        &:focus {
+            outline: none;
+            border-color: var(--register-input-focus-border);
+        }
+
+        &::placeholder {
+            color: var(--register-input-border-color);
+        }
+    }
+
+    &__btn {
+        padding: var(--register-padding-md);
+        background-color: var(--register-btn-bg);
+        color: var(--register-btn-color);
+        font-size: var(--register-btn-font-size);
+        font-weight: var(--register-btn-font-weight);
+        border: none;
+        border-radius: var(--register-border-radius-md);
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover:not(:disabled) {
+            background-color: var(--register-btn-hover-bg);
+            transform: translateY(-2px);
+            box-shadow: var(--register-shadow);
+        }
+
+        &:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+    }
+}
+
+@media (max-height: 600px) {
+    .register {
+        height: auto;
+        min-height: var(--register-available-height);
+        padding: var(--register-padding-sm);
+    }
+}

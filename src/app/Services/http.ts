@@ -10,7 +10,7 @@ import { Articulo } from '../Modelos/Articulo';
 })
 export class Http {
     private urlProducts = '/api/products';
-    private urlCategories = '/api/categories';
+    private urlCategories = '/api/categories/public';
 
     constructor(
         private http: HttpClient,

@@ -4,7 +4,7 @@
   --header-link-color: var(--mls-sys-color-gris-1);
   --header-link-hover-color: var(--mls-sys-color-primario-10);
   --header-link-hover-bg: var(--mls-sys-color-primario-3);
-  --header-padding: var(--mls-sys-padding-3);
+  --header-padding: var(--mls-sys-padding-2);
   --header-gap: var(--mls-sys-gap-4);
   --header-link-font-size: var(--mls-sys-font-size-5);
   --header-shadow: var(--mls-sys-box-shadow-2);
@@ -76,6 +76,7 @@
     display: flex;
     gap: var(--header-gap);
     align-items: center;
+    padding-right: var(--header-padding);
   }
 
   &__cart-container {

@@ -25,11 +25,17 @@
   --login-label-font-size: var(--mls-sys-font-size-4);
   --login-label-font-weight: var(--mls-sys-font-weight-4);
   --login-input-font-size: var(--mls-sys-font-size-4);
-  --login-btn-font-size: var(--mls-sys-font-size-5);
+  --login-btn-font-size: var(--mls-sys-font-size-3);
   --login-btn-font-weight: var(--mls-sys-font-weight-4);
   --login-border-radius-sm: var(--mls-sys-border-radius-2);
   --login-border-radius-md: var(--mls-sys-border-radius-3);
   --login-shadow: var(--mls-sys-box-shadow-3);
+  --login-btn-bg-register: var(--mls-sys-color-primario-1);
+  --login-btn-color-register: var(--mls-sys-color-gris-8);
+  --login-margin-error: var(--mls-sys-margin-1);
+  --login-margin-form: var(--mls-sys-margin-3);
+  --login-font-size-error: var(--mls-sys-font-size-1);
+  --login-text-error: var(--mls-sys-color-rojo-9);
 
   --login-logo-width: var(--mls-sys-width-8);
   --login-container-max-width: var(--mls-sys-width-13);
@@ -48,7 +54,7 @@
   position: relative;
 
 
-  background: 
+  background:
     linear-gradient(var(--login-bg-overlay), var(--login-bg-overlay)),
     var(--login-bg-image);
   background-size: cover;
@@ -64,9 +70,10 @@
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
     padding: var(--login-padding-lg);
   }
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   &__header {
     display: flex;
@@ -98,6 +105,18 @@
     font-family: var(--login-font-family);
   }
 
+  &__btn-register {
+    display: flex;
+    justify-content: center;
+    padding: var(--login-padding-md);
+    font-size: var(--login-btn-font-size);
+    font-weight: var(--login-btn-font-weight);
+    color: var(--login-btn-color-register);
+    cursor: pointer;
+    border-radius: var(--login-border-radius-sm);
+
+  }
+
   &__error {
     padding: var(--login-padding-sm);
     background-color: var(--login-error-bg);
@@ -118,6 +137,17 @@
     font-size: var(--login-label-font-size);
     font-weight: var(--login-label-font-weight);
     color: var(--login-label-color);
+  }
+
+  &__error-message {
+    display: flex;
+    justify-content: start;
+    color: var(--login-text-error);
+    font-size: var(--login-font-size-error);
+    margin: var(--login-margin-error);
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: var(--login-margin-form);
   }
 
   &__input {

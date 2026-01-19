@@ -1,0 +1,53 @@
+<div class="register">
+    <div class="register__container">
+        <div class="register__header">
+            <h1 class="register__title">Registro</h1>
+        </div>
+
+        <form class="register__form" (ngSubmit)="onRegister()">
+            @if (errorMessage) {
+            <div class="register__error">
+                {{ errorMessage }}
+            </div>
+            }
+
+            <div class="register__field">
+                <label class="register__label" for="name">Nombre: *</label>
+                <input [(ngModel)]="registerData.name" name="name" id="name" class="register__input" #nameInput="ngModel"
+                    placeholder="Juan Pérez" required>
+                    
+            </div>
+            @if(nameInput.invalid && nameInput.touched){
+            <p class="register__error-message">El nombre es obligatorio</p>
+            }
+
+            <div class="register__field">
+                <label class="register__label" for="email">Email: *</label>
+                <input type="email" [(ngModel)]="registerData.email" name="email" id="email" class="register__input" #emailInput="ngModel"
+                    placeholder="usuario@example.com" required>
+            </div>
+            @if(emailInput.invalid && emailInput.touched){
+            <p class="register__error-message">El email es obligatorio</p>
+            }
+
+            <div class="register__field">
+                <label class="register__label" for="password">Contraseña: *</label>
+                <input type="password" [(ngModel)]="registerData.password" name="password" id="password" #passwordInput="ngModel"
+                    class="register__input" placeholder="••••••••" required>
+            </div>
+            @if(passwordInput.invalid && passwordInput.touched){
+            <p class="register__error-message">La contraseña es obligatoria</p>
+            }
+
+            <div class="register__field">
+                <label class="register__label" for="phone">Teléfono (opcional):</label>
+                <input type="tel" [(ngModel)]="registerData.phone" name="phone" id="phone" class="register__input"
+                    placeholder="+34 600 123 456">
+            </div>
+
+            <button type="submit" class="register__btn" [disabled]="isLoading">
+                {{ isLoading ? 'Registrando...' : 'Registrarse' }}
+            </button>
+        </form>
+    </div>
+</div>

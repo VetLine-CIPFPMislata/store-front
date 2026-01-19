@@ -95,4 +95,8 @@ export class Login {
       }
     }
   }
+
+  onRegister() {
+    this.router.navigate(['/register']);
+  }
 }
