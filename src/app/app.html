@@ -1,3 +1,7 @@
-<app-header />
+@if (router.url !== '/login') {
+    <app-header />
+}
 <router-outlet />
-<app-footer />
+@if (router.url !== '/login') {
+    <app-footer />
+}

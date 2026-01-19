@@ -1,9 +1,12 @@
 <header class="header">
     <div class="header__left">
-        <img src="Vetline-Photoroom.png" alt="Vetline Logo" class="header__logo" routerLink="/">
+        <img src="Vetline-Photoroom.png" alt="Vetline Logo" class="header__logo" routerLink="/inicio">
         <nav class="header__nav">
             <a routerLink="/inicio" class="header__link">Tienda</a>
         </nav>
     </div>
-    <i class="bi bi-box-arrow-right header__exit-icon" (click)="onLogout()"></i>
+    <div class="header__right">
+        <i class="bi bi-cart2 header__cart-icon" routerLink="/carrito"></i>
+        <i class="bi bi-box-arrow-right header__exit-icon" (click)="onLogout()"></i>
+    </div>
 </header>

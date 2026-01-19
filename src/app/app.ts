@@ -1,5 +1,5 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject, signal } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
 import { Header } from "./Components/header/header";
 import { Footer } from "./Components/footer/footer";
 
@@ -11,4 +11,5 @@ import { Footer } from "./Components/footer/footer";
 })
 export class App {
   protected readonly title = signal('store-front');
+  protected readonly router = inject(Router);
 }

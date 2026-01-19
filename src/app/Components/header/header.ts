@@ -1,18 +1,19 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
 
 @Component({
-  selector: 'app-header', 
-  imports: [],
+  selector: 'app-header',
+  imports: [RouterLink],
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })
 export class Header {
- constructor(
+
+  constructor(
     private authService: AuthService,
     private router: Router
-  ) {}
+  ) { }
 
   onLogout() {
     this.authService.clearAuth();

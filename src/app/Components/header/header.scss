@@ -14,6 +14,7 @@
   --header-logo-height: var(--mls-sys-height-4);
   --header-icon-height: var(--mls-sys-height-3);
   --header-font-family: var(--mls-sys-font-header, sans-serif);
+  --header-icon-margin-right: var(--mls-sys-margin-4);
 
   display: flex;
   align-items: center;
@@ -35,6 +36,7 @@
   }
 
   &__link {
+    cursor: pointer;
     color: var(--header-link-color);
     text-decoration: none;
     font-size: var(--header-link-font-size);
@@ -52,12 +54,32 @@
     height: var(--header-logo-height);
     object-fit: contain;
     cursor: pointer;
+    &:hover {
+      transition: all 0.6s ease;
+      transform: scale(1.05);
+    }
   }
 
   &__exit-icon {
     cursor: pointer;
     transition: transform 0.3s ease;
     font-size: var(--header-icon-height);
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  &__right {
+    display: flex;
+    gap: var(--header-gap);
+  }
+
+  &__cart-icon {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    font-size: var(--header-icon-height);
+    margin-right: var(--header-icon-margin-right);
 
     &:hover {
       transform: scale(1.1);
