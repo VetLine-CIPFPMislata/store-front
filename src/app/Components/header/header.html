@@ -6,7 +6,14 @@
         </nav>
     </div>
     <div class="header__right">
-        <i class="bi bi-cart2 header__cart-icon" routerLink="/carrito"></i>
+        <div class="header__cart-container">
+            <i class="bi bi-cart2 header__cart-icon" routerLink="/carrito"></i>
+            @if ((cartCount$ | async) ?? 0; as count) {
+            @if (count > 0) {
+            <span class="header__cart-badge">{{ count }}</span>
+            }
+            }
+        </div>
         <i class="bi bi-box-arrow-right header__exit-icon" (click)="onLogout()"></i>
     </div>
 </header>

@@ -1,1 +1,124 @@
-<p>carrito works!</p>
+<div class="carrito">
+    <div class="carrito__container">
+        <div class="carrito__header">
+            <h1 class="carrito__title">Mi Cesta</h1>
+        </div>
+
+        <div class="carrito__content">
+            @if (items.length > 0) {
+            @if (subtotal >= 20) {
+            <div class="carrito__free-ship-banner">
+                <i class="bi bi-check-circle-fill"></i>
+                <span>¡Enhorabuena! Has alcanzado el envío gratuito</span>
+            </div>
+            }
+
+            <div class="carrito__layout">
+                <div class="carrito__items">
+                    @for (item of items; track item.articulo.id) {
+                    <div class="cart-item">
+                        <div class="cart-item__checkbox">
+                            <input type="checkbox" [checked]="item.selected"
+                                (change)="toggleSelection(item.articulo.id)" class="cart-item__checkbox-input">
+                        </div>
+
+                        <div class="cart-item__image">
+                            <img [src]="item.articulo.pictureProduct" [alt]="item.articulo.name">
+                        </div>
+
+                        <div class="cart-item__details">
+                            <h3 class="cart-item__name">{{ item.articulo.name }}</h3>
+                            <p class="cart-item__description">{{ item.articulo.productDescription }}</p>
+
+                            <div class="cart-item__pricing">
+                                @if (item.articulo.basePrice && item.articulo.basePrice > item.articulo.price) {
+                                <span class="cart-item__price--offer">{{ item.articulo.price | number:'1.2-2' }}
+                                    €</span>
+                                <span class="cart-item__price--original">{{ item.articulo.basePrice | number:'1.2-2' }}
+                                    €</span>
+                                } @else {
+                                <span class="cart-item__price">{{ item.articulo.price | number:'1.2-2' }} €</span>
+                                }
+                            </div>
+
+                            <div class="cart-item__controls">
+                                <div class="cart-item__quantity-pill">
+                                    <button class="cart-item__quantity-btn"
+                                        (click)="decreaseQuantity(item.articulo.id, item.cantidad)">-</button>
+                                    <span class="cart-item__quantity-value">{{ item.cantidad }}</span>
+                                    <button class="cart-item__quantity-btn"
+                                        (click)="increaseQuantity(item.articulo.id, item.cantidad)">+</button>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="cart-item__remove" (click)="removeItem(item.articulo.id)" title="Eliminar">
+                            <i class="bi bi-trash3"></i>
+                        </button>
+                    </div>
+                    }
+                </div>
+
+                <aside class="carrito__sidebar">
+                    <div class="summary">
+                        <h2 class="summary__title">Resumen del pedido</h2>
+                        <div class="summary__row">
+                            <span class="summary__label">Subtotal</span>
+                            <span class="summary__value">{{ subtotal | number:'1.2-2' }} €</span>
+                        </div>
+                        <div class="summary__row">
+                            <span class="summary__label">Gastos de envío</span>
+                            @if (costeEnvio === 0) {
+                            <span class="summary__value summary__value--free">GRATIS</span>
+                            } @else {
+                            <span class="summary__value">{{ costeEnvio | number:'1.2-2' }} €</span>
+                            }
+                        </div>
+                        <div class="summary__row summary__row--total">
+                            <span class="summary__label">Total</span>
+                            <span class="summary__value">{{ total | number:'1.2-2' }} €</span>
+                        </div>
+
+                        <button class="summary__checkout-btn">
+                            <span>Realizar pedido</span>
+                            <i class="bi bi-arrow-right"></i>
+                        </button>
+
+                        <div class="summary__trust">
+                            <p>Pago seguro garantizado</p>
+                            <div class="badges">
+                                <i class="bi bi-credit-card"></i>
+                                <i class="bi bi-paypal"></i>
+                                <i class="bi bi-shield-lock"></i>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+            } @else {
+            <div class="carrito__empty">
+                <i class="bi bi-bag-x"></i>
+                <p>Tu cesta está vacía ahora mismo.</p>
+                <button class="carrito__shop-button" routerLink="/inicio">Volver a la tienda</button>
+            </div>
+            }
+        </div>
+    </div>
+
+    @if (showConfirmModal) {
+    <div class="modal-overlay" (click)="closeConfirmModal()">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+            <div class="modal-header">
+                <i class="bi bi-exclamation-circle modal-icon"></i>
+            </div>
+            <div class="modal-body">
+                <p>¿Seguro que quieres eliminar este producto?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" (click)="closeConfirmModal()">Mantener</button>
+                <button class="btn-confirm" (click)="confirmDelete()">Eliminar</button>
+            </div>
+        </div>
+    </div>
+    }
+</div>

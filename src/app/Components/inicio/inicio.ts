@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { Observable, finalize } from 'rxjs';
 import { Articulo } from '../../Modelos/Articulo';
 import { Category } from '../../Modelos/Category';
 import { Http } from '../../Services/http';
 import { DecimalPipe } from '@angular/common';
+import { CarritoService } from '../../Services/carrito.service';
 
 @Component({
   selector: 'app-inicio',
@@ -14,90 +14,82 @@ import { DecimalPipe } from '@angular/common';
 export class Inicio {
   articulos: Articulo[] = [];
   categories: Category[] = [];
-  selectedCategoryId: number | null = null;
+
   isLoading: boolean = false;
+  selectedCategoryId: number | null = null;
 
   currentPage: number = 0;
   totalPages: number = 0;
   pageSize: number = 10;
   currentCategoryName: string | null = null;
 
-  constructor(private http: Http) { }
+  constructor(
+    private http: Http,
+    private carritoService: CarritoService
+  ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.cargarCategories();
     this.cargarArticulos();
   }
-
-  cargarCategories() {
+  cargarCategories(): void {
     this.http.getCategories().subscribe({
       next: (response: any) => {
-        console.log('Categories loaded:', response);
         this.categories = response.data || response;
       },
-      error: (err) => console.error('Error fetching categories:', err)
+      error: (err) => console.error('Error al cargar categorías:', err)
     });
   }
 
-  cargarArticulos(categoriaNombre?: string, page: number = 0) {
+  cargarArticulos(categoriaNombre?: string, page: number = 0): void {
     this.isLoading = true;
     this.currentPage = page;
-    this.currentCategoryName = categoriaNombre || null;
 
-    const obs = categoriaNombre
-      ? this.http.getArticulosByCategoria(categoriaNombre)
-      : this.http.getArticulos(page, this.pageSize);
-
-    obs.pipe(
-      finalize(() => this.isLoading = false)
-    ).subscribe({
-      next: (response: any) => {
-        console.log('Articles loaded:', response);
-
-        const rawArticulos = response.data || (Array.isArray(response) ? response : []);
-        this.totalPages = response.totalPages || (Array.isArray(response) ? 1 : 0);
-
-        this.articulos = rawArticulos.map((art: any) => ({
-          ...art,
-          rating: art.rating || ((art.id % 3) + 3)
-        }));
-      },
-      error: (err) => {
-        console.error('Error fetching articles:', err);
-        this.articulos = [];
-        this.totalPages = 0;
-      }
-    });
+    if (categoriaNombre) {
+      this.http.getArticulosByCategoria(categoriaNombre).subscribe((response: any) => {
+        this.articulos = response.data || response;
+        this.totalPages = 1;
+        this.isLoading = false;
+      });
+    } else {
+      this.http.getArticulos(page, this.pageSize).subscribe((response: any) => {
+        this.articulos = response.data || response;
+        this.totalPages = response.totalPages || 1;
+        this.isLoading = false;
+      });
+    }
   }
 
-  changePage(newPage: number) {
+  changePage(newPage: number): void {
     if (newPage >= 0 && newPage < this.totalPages) {
       this.cargarArticulos(this.currentCategoryName || undefined, newPage);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }
 
-  onCategoryChange(event: Event) {
-    const selectElement = event.target as HTMLSelectElement;
-    const value = selectElement.value;
+  onCategoryChange(event: Event): void {
+    const select = event.target as HTMLSelectElement;
+    const idSeleccionado = select.value;
 
-    if (value === 'all') {
+    if (idSeleccionado === 'all') {
       this.selectedCategoryId = null;
       this.cargarArticulos();
     } else {
-      const category = this.categories.find(c => c.id === Number(value));
-      if (category) {
-        this.selectedCategoryId = category.id;
-        this.cargarArticulos(category.name);
+      const catEncontrada = this.categories.find(c => c.id === Number(idSeleccionado));
+      if (catEncontrada) {
+        this.selectedCategoryId = catEncontrada.id;
+        this.cargarArticulos(catEncontrada.name);
       }
     }
   }
 
-  addToCart(articulo: Articulo) {
-    console.log('Producto añadido:', articulo.name);
+
+  addToCart(articulo: Articulo): void {
+    this.carritoService.addToCart(articulo);
   }
 
-  getStars(rating: number = 0): number[] {
-    return Array(Math.floor(rating)).fill(0);
+  getStars(cantidad: number = 0): number[] {
+    return Array(Math.floor(cantidad)).fill(0);
   }
 }
+
