@@ -1,6 +1,9 @@
+<div class="app-container">
   <app-header />
-
-<router-outlet />
-@if (router.url !== '/login' && router.url !== '/register') {
-    <app-footer />
-}
+  <main class="app-main">
+    <router-outlet />
+  </main>
+  @if (router.url !== '/login' && router.url !== '/register') {
+  <app-footer />
+  }
+</div>

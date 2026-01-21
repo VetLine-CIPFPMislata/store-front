@@ -6,14 +6,20 @@
         </nav>
     </div>
     <div class="header__right">
+
         <div class="header__cart-container">
+            @if (isLoggedIn && cartCount > 0) {
             <i class="bi bi-cart2 header__cart-icon" routerLink="/carrito"></i>
-            @if ((cartCount$ | async) ?? 0; as count) {
-            @if (count > 0) {
-            <span class="header__cart-badge">{{ count }}</span>
-            }
+
+            <span class="header__cart-badge">{{ cartCount }}</span>
             }
         </div>
+        @if (isLoggedIn) {
         <i class="bi bi-box-arrow-right header__exit-icon" (click)="onLogout()"></i>
+        }@else {
+        <div class="header__login-container--iniciar-sesion">
+            <a routerLink="/login"><i class="bi bi-person-circle"></i> Iniciar sesión</a>
+        </div>
+        }
     </div>
 </header>

@@ -5,9 +5,10 @@
   --header-link-hover-color: var(--mls-sys-color-primario-10);
   --header-link-hover-bg: var(--mls-sys-color-primario-3);
   --header-padding: var(--mls-sys-padding-2);
-  --header-padding-right: var(--mls-sys-padding-2);
-  --header-gap: var(--mls-sys-gap-4);
+  --header-padding-right: var(--mls-sys-padding-5);
+  --header-gap: var(--mls-sys-gap-6);
   --header-link-font-size: var(--mls-sys-font-size-5);
+  --header-link-font-size-login: var(--mls-sys-font-size-4);
   --header-shadow: var(--mls-sys-box-shadow-2);
   --header-border-radius: var(--mls-sys-border-radius-3);
   --header-link-padding-y: var(--mls-sys-padding-1);
@@ -121,5 +122,26 @@
     font-weight: bold;
     box-shadow: var(--header-badge-shadow);
     font-family: var(--header-font-family-cart);
+  }
+
+  &__login-container--iniciar-sesion {
+    a {
+      color: var(--header-link-color);
+      font-family: var(--header-font-family-cart);
+      font-size: var(--header-link-font-size-login);
+      text-decoration: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: var(--mls-sys-gap-2);
+
+      i {
+        font-size: 1.2rem;
+      }
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
   }
 }

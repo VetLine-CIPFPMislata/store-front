@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { LoginRequest } from '../Modelos/LoginRequest';
 import { LoginResponse } from '../Modelos/LoginResponse';
@@ -15,6 +15,8 @@ import { User } from '../Modelos/User';
 })
 export class AuthService {
   private urlAuth = '/api/auth';
+  private authStatus = new BehaviorSubject<boolean>(this.isAuthenticated());
+  public authStatus$ = this.authStatus.asObservable();
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -48,6 +50,7 @@ export class AuthService {
 
   saveToken(token: string): void {
     localStorage.setItem('authToken', token);
+    this.authStatus.next(true);
   }
 
   getToken(): string | null {
@@ -73,6 +76,7 @@ export class AuthService {
     localStorage.removeItem('authToken');
     localStorage.removeItem('userEmail');
     localStorage.removeItem('userName');
+    this.authStatus.next(false);
   }
 
   isAuthenticated(): boolean {

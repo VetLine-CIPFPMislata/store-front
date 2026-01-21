@@ -1,30 +1,38 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
 import { CarritoService } from '../../Services/carrito.service';
-import { AsyncPipe } from '@angular/common';
-import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, AsyncPipe],
+  imports: [RouterLink],
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })
-export class Header implements OnInit {
-  cartCount$!: Observable<number>;
+export class Header {
+  private authService = inject(AuthService);
+  private router = inject(Router);
+  private carritoService = inject(CarritoService);
 
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-    private carritoService: CarritoService
-  ) { }
+  isLoggedIn = false;
+  cartCount = 0;
+
+  constructor() {
+    
+  }
 
   ngOnInit() {
-    this.cartCount$ = this.carritoService.carritoItems$.pipe(
-      map(items => items.reduce((total, item) => total + item.cantidad, 0))
-    );
-  }
+    this.authService.authStatus$.subscribe(status => {
+      this.isLoggedIn = status;
+    });
+
+    this.carritoService.carritoItems$.subscribe(items => {
+      let total = 0;
+      for (let item of items) {
+        total += item.cantidad;
+      }
+      this.cartCount = total;
+    }); }
 
   onLogout() {
     this.authService.logout().subscribe({
