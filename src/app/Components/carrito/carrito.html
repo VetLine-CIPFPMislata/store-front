@@ -106,17 +106,17 @@
     </div>
 
     @if (showConfirmModal) {
-    <div class="modal-overlay" (click)="closeConfirmModal()">
-        <div class="modal-content" (click)="$event.stopPropagation()">
-            <div class="modal-header">
-                <i class="bi bi-exclamation-circle modal-icon"></i>
+    <div class="carrito__modal-overlay" (click)="closeConfirmModal()">
+        <div class="carrito__modal-content" (click)="$event.stopPropagation()">
+            <div class="carrito__modal-header">
+                <i class="bi bi-exclamation-circle carrito__modal-icon"></i>
             </div>
-            <div class="modal-body">
-                <p>¿Seguro que quieres eliminar este producto?</p>
+            <div class="carrito__modal-body">
+                <p class="carrito__modal-text">¿Seguro que quieres eliminar este producto?</p>
             </div>
-            <div class="modal-footer">
-                <button class="btn-cancel" (click)="closeConfirmModal()">Mantener</button>
-                <button class="btn-confirm" (click)="confirmDelete()">Eliminar</button>
+            <div class="carrito__modal-footer">
+                <button class="carrito__btn-cancel" (click)="closeConfirmModal()">Mantener</button>
+                <button class="carrito__btn-confirm" (click)="confirmDelete()">Eliminar</button>
             </div>
         </div>
     </div>

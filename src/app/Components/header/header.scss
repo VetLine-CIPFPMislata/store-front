@@ -5,6 +5,7 @@
   --header-link-hover-color: var(--mls-sys-color-primario-10);
   --header-link-hover-bg: var(--mls-sys-color-primario-3);
   --header-padding: var(--mls-sys-padding-2);
+  --header-padding-right: var(--mls-sys-padding-2);
   --header-gap: var(--mls-sys-gap-4);
   --header-link-font-size: var(--mls-sys-font-size-5);
   --header-shadow: var(--mls-sys-box-shadow-2);
@@ -16,6 +17,16 @@
   --header-font-family: var(--mls-sys-font-header, sans-serif);
   --header-font-family-cart: var(--mls-sys-font-Article, sans-serif);
   --header-icon-margin-right: var(--mls-sys-margin-4);
+
+  --header-badge-bg: var(--mls-sys-color-primario-10);
+  --header-badge-text: var(--mls-sys-color-gris-1);
+
+  --header-badge-size: var(--mls-sys-width-2);
+
+  --header-badge-font-size: var(--mls-sys-font-size-1);
+  --header-badge-offset: -8px;
+  --header-badge-radius: var(--mls-sys-border-radius-8);
+  --header-badge-shadow: var(--mls-sys-box-shadow-1);
 
   display: flex;
   align-items: center;
@@ -76,7 +87,7 @@
     display: flex;
     gap: var(--header-gap);
     align-items: center;
-    padding-right: var(--header-padding);
+    padding-right: var(--header-padding-right);
   }
 
   &__cart-container {
@@ -96,19 +107,19 @@
 
   &__cart-badge {
     position: absolute;
-    top: -8px;
-    right: -8px;
-    background-color: var(--mls-sys-color-primario-10);
-    color: white;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
+    top: var(--header-badge-offset);
+    right: var(--header-badge-offset);
+    background-color: var(--header-badge-bg);
+    color: var(--header-badge-text);
+    border-radius: var(--header-badge-radius);
+    width: var(--header-badge-size);
+    height: var(--header-badge-size);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 12px;
+    font-size: var(--header-badge-font-size);
     font-weight: bold;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--header-badge-shadow);
     font-family: var(--header-font-family-cart);
   }
 }

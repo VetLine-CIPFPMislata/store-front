@@ -58,11 +58,13 @@ export class Inicio {
       });
     } else {
       this.http.getArticulos(page, this.pageSize).subscribe((response: any) => {
+        console.log(response);
         this.articulos = response.data || response;
         this.totalPages = response.totalPages || 1;
         this.isLoading = false;
       });
     }
+
   }
 
   changePage(newPage: number): void {
@@ -95,6 +97,10 @@ export class Inicio {
       return;
     }
     this.carritoService.addToCart(articulo);
+  }
+
+  viewProduct(id: number): void {
+    this.router.navigate(['/product', id]);
   }
 
   getStars(cantidad: number = 0): number[] {

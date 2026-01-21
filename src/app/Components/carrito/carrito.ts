@@ -13,7 +13,7 @@ export class Carrito {
   items: CarritoItem[] = [];
   subtotal: number = 0;
   total: number = 0;
-  costeEnvio: number = 4.99; // Precio estándar de envío
+  costeEnvio: number = 4.99;
 
   showConfirmModal = false;
   itemToDeleteId: number | null = null;
@@ -36,7 +36,6 @@ export class Carrito {
       }
     }
 
-    // Lógica de envío gratis a partir de 20€
     if (this.subtotal >= 20 || this.subtotal === 0) {
       this.costeEnvio = 0;
     } else {

@@ -30,18 +30,18 @@
     --register-border-radius-sm: var(--mls-sys-border-radius-2);
     --register-border-radius-md: var(--mls-sys-border-radius-3);
     --register-shadow: var(--mls-sys-box-shadow-3);
+    --register-container-shadow: var(--mls-sys-box-shadow-5);
     --register-margin-error: var(--mls-sys-margin-1);
     --register-margin-form: var(--mls-sys-margin-3);
     --register-font-size-error: var(--mls-sys-font-size-1);
     --register-text-error: var(--mls-sys-color-rojo-9);
-    
 
     --register-logo-width: var(--mls-sys-width-6);
     --register-container-max-width: var(--mls-sys-width-13);
 
-
     --register-bg-image: url("/imagenFondoVetLine.avif");
     --register-bg-overlay: rgba(24, 24, 24, 0.223);
+    --register-available-height: 600px;
 
 
     display: flex;
@@ -66,13 +66,12 @@
         width: 100%;
         background-color: var(--register-container-bg);
         border-radius: var(--register-border-radius-md);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+        box-shadow: var(--register-container-shadow);
         padding: var(--register-padding-lg);
     }
 
-    display: flex;
+    /* display: flex; -> Esto estaba duplicado fuera del container pero dentro de .register, eliminando redundancia */
     flex-direction: column;
-    justify-content: center;
 
     &__header {
         display: flex;
@@ -134,7 +133,7 @@
         text-align: center;
         margin-top: 0;
         margin-bottom: var(--register-margin-form);
-        
+
     }
 
     &__input {

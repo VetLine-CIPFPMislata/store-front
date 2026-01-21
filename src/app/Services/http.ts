@@ -22,7 +22,7 @@ export class Http {
         return new HttpHeaders({
             'Authorization': `Bearer ${token}`
         });
-    }
+    }       
 
     getArticulos(page: number = 0, size: number = 10): Observable<Articulo[]> {
         return this.http.get<Articulo[]>(`${this.urlProducts}/public?page=${page + 1}&size=${size}`, { headers: this.getHeaders() });
@@ -34,5 +34,9 @@ export class Http {
 
     getArticulosByCategoria(categoria: string): Observable<Articulo[]> {
         return this.http.get<Articulo[]>(`${this.urlProducts}/search/category/${categoria}`, { headers: this.getHeaders() });
+    }
+
+    getArticuloById(id: number): Observable<Articulo> {
+        return this.http.get<Articulo>(`${this.urlProducts}/${id}`, { headers: this.getHeaders() });
     }
 }
