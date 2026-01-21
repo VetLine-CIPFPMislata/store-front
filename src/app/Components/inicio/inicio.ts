@@ -106,6 +106,7 @@ export class Inicio {
   getStars(cantidad: number = 0): number[] {
     return Array(Math.floor(cantidad)).fill(0);
   }
+  
 }
 
 
