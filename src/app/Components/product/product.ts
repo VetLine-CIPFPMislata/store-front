@@ -73,7 +73,6 @@ export class Product implements OnInit {
 
   addToCart(): void {
     if (!this.authService.isAuthenticated()) {
-      alert('Debes iniciar sesión para añadir productos al carrito');
       this.router.navigate(['/login']);
       return;
     }

@@ -35,6 +35,9 @@
     --inicio-border-radius-large: var(--mls-sys-border-radius-8);
     --inicio-grid-min-width: var(--mls-sys-width-8);
     --inicio-category-width: var(--mls-sys-width-8);
+    --inicio-gap-medium: var(--mls-sys-gap-3);
+    --inicio-gap-large: var(--mls-sys-gap-4);
+    --inicio-gap-small: var(--mls-sys-gap-2);
 
     display: flex;
     flex-direction: column;
@@ -228,7 +231,7 @@
     justify-content: center;
     align-items: center;
     gap: var(--inicio-gap-small);
-    margin-top: var(--inicio-gap-large);
+    margin-top: var(--inicio-gap-medium);
     padding-bottom: var(--inicio-gap-large);
 
     &__button {

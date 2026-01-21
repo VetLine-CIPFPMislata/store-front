@@ -386,72 +386,77 @@
     }
 }
 
+.carrito {
+    &__modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(1px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2000;
+    }
 
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(1px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2000;
-}
+    &__modal-content {
+        background: var(--carrito-card-bg);
+        padding: 30px;
+        border-radius: var(--carrito-border-radius);
+        max-width: 400px;
+        width: 90%;
+        text-align: center;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    }
 
-.modal-content {
-    background: var(--carrito-card-bg);
-    padding: 30px;
-    border-radius: var(--carrito-border-radius);
-    max-width: 400px;
-    width: 90%;
-    text-align: center;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
-
-    .modal-icon {
+    &__modal-icon {
         font-size: 50px;
         color: var(--text-warning);
         margin-bottom: 15px;
     }
 
-    p {
+    &__modal-text {
         font-size: 18px;
         font-weight: 600;
         margin-bottom: 25px;
     }
 
-    .modal-footer {
+    &__modal-footer {
         display: flex;
         gap: 10px;
+    }
 
-        button {
-            flex: 1;
-            padding: 12px;
-            border-radius: var(--border-radius-modal);
-            font-weight: 700;
-            cursor: pointer;
-            border: none;
-            transition: all 0.2s;
+    &__btn-cancel {
+        flex: 1;
+        padding: 12px;
+        border-radius: var(--border-radius-modal);
+        font-weight: 700;
+        cursor: pointer;
+        border: none;
+        transition: all 0.2s;
+        background: var(--bg-secondary);
+        color: var(--carrito-text-main);
+
+        &:hover {
+            background: var(--bg-tertiary);
         }
+    }
 
-        .btn-cancel {
-            background: var(--bg-secondary);
-            color: var(--carrito-text-main);
+    &__btn-confirm {
+        flex: 1;
+        padding: 12px;
+        border-radius: var(--border-radius-modal);
+        font-weight: 700;
+        cursor: pointer;
+        border: none;
+        transition: all 0.2s;
+        background: var(--price-offer);
+        color: var(--carrito-card-bg);
 
-            &:hover {
-                background: var(--bg-tertiary);
-            }
-        }
-
-        .btn-confirm {
-            background: var(--price-offer);
-            color: var(--carrito-card-bg);
-
-            &:hover {
-                background: var(--price-offer-dark);
-            }
+        &:hover {
+            background: var(--price-offer-dark);
         }
     }
 }
