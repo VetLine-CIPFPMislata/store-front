@@ -1,91 +1,82 @@
 <div class="inicio">
-    <div class="inicio__filters">
-        <div class="category-select">
-            <select (change)="onCategoryChange($event)" class="category-select__input">
-                <option value="all">Categorías</option>
-                @for (category of categories; track category.id) {
-                <option [value]="category.id">{{ category.name }}</option>
-                }
-            </select>
-            <div class="category-select__icon">
-                <i class="bi bi-chevron-down"></i>
-            </div>
-        </div>
-    </div>
 
-    <main class="inicio__content">
+    <section class="hero">
+        <div class="hero__content">
+            <h1 class="hero__title">Cuidamos de los que más quieres</h1>
+            <p class="hero__subtitle">Todo lo que tu mascota necesita, avalado por expertos veterinarios.</p>
+            <button class="hero__cta" routerLink="/tienda">Ver Catálogo Completo</button>
+        </div>
+        <div class="hero__overlay"></div>
+    </section>
+
+    <section class="trust-section">
+        <div class="trust-item">
+            <i class="fa-solid fa-user-doctor trust-item__icon"></i>
+            <h3 class="trust-item__title">Asesoramiento Profesional</h3>
+            <p class="trust-item__desc">Consulta con nuestro chatbot para pedir información sobre nuestros productos.</p>
+        </div>
+        <div class="trust-item">
+            <i class="fa-solid fa-truck-fast trust-item__icon"></i>
+            <h3 class="trust-item__title">Envío Rápido</h3>
+            <p class="trust-item__desc">Recíbelo cómodamente en 24/48h.</p>
+        </div>
+        <div class="trust-item">
+            <i class="fa-solid fa-shield-halved trust-item__icon"></i>
+            <h3 class="trust-item__title">Pago seguro</h3>
+            <p class="trust-item__desc">Pago 100% Seguro. Aceptamos tarjetas de crédito/débito y tu información está protegida.</p>
+        </div>
+    </section>
+
+    <section class="categories-section">
+        <h2 class="section-title">Encuentra por Categoría</h2>
+
+        <div class="categories-grid categories-grid--main">
+            @for (category of categories | slice:0:4; track category.id) {
+            <div class="category-item category-item--featured" (click)="navigateToCategory(category.id)">
+                <div class="category-item__circle">
+                    @switch (category.name.toLowerCase()) {
+                    @case ('juguetes para perros') { <i class="fa-solid fa-dog"></i> }
+                    @case ('juguetes para gatos') { <i class="fa-solid fa-cat"></i> }
+                    @case ('pienso para perros') { <i class="fa-solid fa-drumstick-bite"></i> }
+                    @case ('pienso para gatos') { <i class="fa-solid fa-bowl-food"></i> }
+                    @default { <i class="fa-solid fa-paw"></i> }
+                    }
+                </div>
+                <span class="category-item__name">{{ category.name }}</span>
+            </div>
+            }
+        </div>
+
+        <div class="categories-grid categories-grid--secondary">
+            @for (category of categories | slice:4; track category.id) {
+            <div class="category-item" (click)="navigateToCategory(category.id)">
+                <div class="category-item__circle small">
+                    @switch (category.name.toLowerCase()) {
+                    @case ('ropa para perros') { <i class="fa-solid fa-paw"></i> }
+                    @case ('ropa para gatos') { <i class="fa-solid fa-fish"></i> }
+                    @case ('accesorios') { <i class="fa-solid fa-pump-soap"></i> }
+                    @case ('higiene y cuidado') { <i class="fa-solid fa-heart-pulse"></i> }
+                    @case ('camas y transportines') { <i class="fa-solid fa-vest"></i> }
+                    @case ('snacks y premios') { <i class="fa-solid fa-bone"></i> }
+                    @default { <i class="fa-solid fa-paw"></i> }
+                    }
+                </div>
+                <span class="category-item__name">{{ category.name }}</span>
+            </div>
+            }
+        </div>
+    </section>
+
+    <section class="recommended-section">
+        <h2 class="section-title">Favoritos de nuestros clientes <span> <i class="fa-solid fa-fire"></i></span></h2>
         @if (isLoading) {
-        <div class="inicio__loading">Cargando productos...</div>
+        <div class="loading-spinner">Cargando recomendaciones...</div>
         } @else {
         <div class="product-grid">
             @for (articulo of articulos; track articulo.id) {
-            <div class="product-card" (click)="viewProduct(articulo.id)">
-                <div class="product-card__image-container">
-                    <img [src]="articulo.pictureProduct" [alt]="articulo.name" class="product-card__image">
-                </div>
-
-                <div class="product-card__body">
-                    <h3 class="product-card__title">{{ articulo.name }}</h3>
-
-                    <div class="product-card__rating">
-                        @for (star of getStars(articulo.rating || 5); track $index) {
-                        <i class="bi bi-star-fill"></i>
-                        }
-                        @for (star of getStars(5 - (articulo.rating || 5)); track $index) {
-                        <i class="bi bi-star"></i>
-                        }
-                        <span class="product-card__rating-value">({{ articulo.rating || 5 }}.0)</span>
-                    </div>
-
-                    <p class="product-card__description">{{ articulo.productDescription }}</p>
-
-                    <div class="product-card__pricing">
-                        @if (articulo.basePrice && articulo.basePrice > articulo.price) {
-                        <span class="product-card__price--offer">{{ articulo.price | number:'1.2-2' }} €</span>
-                        <span class="product-card__price--original">{{ articulo.basePrice | number:'1.2-2' }} €</span>
-                        } @else {
-                        <span class="product-card__price">{{ articulo.price | number:'1.2-2' }} €</span>
-                        }
-                    </div>
-                </div>
-
-                <button class="product-card__button" (click)="addToCart(articulo); $event.stopPropagation()">
-                    Añadir al carrito <i class="bi bi-cart2"></i>
-                </button>
-            </div>
-            } @empty {
-            <div class="inicio__empty">No hay productos disponibles en esta categoría.</div>
+            <app-product-card [articulo]="articulo"></app-product-card>
             }
         </div>
-        
-
-        @if (totalPages > 1) {
-        <div class="pagination">
-            <button class="pagination__button" [disabled]="currentPage === 0" (click)="changePage(0)"
-                title="Primera página">
-                <i class="bi bi-chevron-double-left"></i>
-            </button>
-
-            <button class="pagination__button" [disabled]="currentPage === 0" (click)="changePage(currentPage - 1)"
-                title="Anterior">
-                <i class="bi bi-chevron-left"></i>
-            </button>
-
-            <span class="pagination__info">
-                Página {{ currentPage + 1 }} de {{ totalPages }}
-            </span>
-
-            <button class="pagination__button" [disabled]="currentPage === totalPages - 1"
-                (click)="changePage(currentPage + 1)" title="Siguiente">
-                <i class="bi bi-chevron-right"></i>
-            </button>
-
-            <button class="pagination__button" [disabled]="currentPage === totalPages - 1"
-                (click)="changePage(totalPages - 1)" title="Última página">
-                <i class="bi bi-chevron-double-right"></i>
-            </button>
-        </div>
         }
-        }
-    </main>
+    </section>
 </div>

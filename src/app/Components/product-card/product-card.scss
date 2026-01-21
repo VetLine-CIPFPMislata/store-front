@@ -1,0 +1,149 @@
+:host {
+    --card-bg: var(--mls-sys-color-gris-1);
+    --card-shadow: var(--mls-sys-box-shadow-2);
+    --card-shadow-hover: var(--mls-sys-box-shadow-4);
+    --card-radius: var(--mls-sys-border-radius-3);
+    --card-primary-color: var(--mls-sys-color-secundario-6);
+    --card-accent-color: var(--mls-sys-color-primario-6);
+    --card-text-main: var(--mls-sys-color-gris-13);
+    --card-text-muted: var(--mls-sys-color-gris-9);
+    --card-price-offer: var(--mls-sys-color-rojo-7);
+    --card-star-color: #ffc107;
+    --card-font-article: var(--mls-sys-font-Article);
+    --card-padding: var(--mls-sys-padding-3);
+    --card-gap-small: var(--mls-sys-gap-2);
+    --card-image-height: var(--mls-sys-height-7);
+    --card-badge-bg: var(--mls-sys-color-rojo-6);
+    --card-badge-text: #fff;
+
+    display: block;
+}
+
+.product-card {
+    background-color: var(--card-bg);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    height: 100%; // Ensure it takes full height of host
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--card-shadow-hover);
+    }
+
+    &__image-container {
+        height: var(--card-image-height);
+        padding: var(--card-padding);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--card-bg);
+        position: relative; // For badge positioning
+    }
+
+    &__image {
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+    }
+
+    &__offer-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: var(--card-badge-bg);
+        color: var(--card-badge-text);
+        padding: 4px 8px;
+        border-radius: 12px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        font-family: var(--card-font-article);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    &__body {
+        padding: var(--card-padding);
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        gap: var(--card-gap-small);
+    }
+
+    &__title {
+        font-size: var(--mls-sys-font-size-3);
+        color: var(--card-text-main);
+        margin: 0;
+        font-family: var(--card-font-article);
+    }
+
+    &__rating {
+        display: flex;
+        align-items: center;
+        gap: var(--card-gap-small);
+        margin: var(--card-gap-small) 0;
+        color: var(--card-star-color);
+        font-size: var(--mls-sys-font-size-2);
+
+        &-value {
+            color: var(--card-text-muted);
+            font-size: var(--mls-sys-font-size-1);
+            margin-left: var(--card-gap-small);
+        }
+    }
+
+    &__description {
+        font-size: var(--mls-sys-font-size-1);
+        font-family: var(--card-font-article);
+        color: var(--card-text-muted);
+        margin: 0;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        overflow: hidden;
+    }
+
+    &__pricing {
+        margin-top: auto;
+        display: flex;
+        align-items: baseline;
+        gap: var(--card-gap-small);
+    }
+
+    &__price {
+        font-weight: bold;
+        font-size: var(--mls-sys-font-size-3);
+        font-family: var(--card-font-article);
+
+        &--offer {
+            color: var(--card-price-offer);
+            font-weight: bold;
+            font-size: var(--mls-sys-font-size-4);
+            font-family: var(--card-font-article);
+        }
+
+        &--original {
+            text-decoration: line-through;
+            color: var(--card-text-muted);
+            font-size: var(--mls-sys-font-size-1);
+        }
+    }
+
+    &__button {
+        background-color: var(--card-accent-color);
+        color: var(--card-bg);
+        border: none;
+        padding: var(--mls-sys-padding-2);
+        font-weight: bold;
+        font-family: var(--card-font-article);
+        cursor: pointer;
+        transition: background 0.3s ease;
+        font-size: var(--mls-sys-font-size-2);
+
+        &:hover {
+            background-color: var(--card-primary-color);
+        }
+    }
+}

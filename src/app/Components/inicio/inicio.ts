@@ -1,41 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, inject} from '@angular/core';
 import { Articulo } from '../../Modelos/Articulo';
 import { Category } from '../../Modelos/Category';
 import { Http } from '../../Services/http';
-import { DecimalPipe } from '@angular/common';
-import { AuthService } from '../../Services/auth.service';
-import { Router } from '@angular/router';
-import { CarritoService } from '../../Services/carrito.service';
+import { Router, RouterLink } from '@angular/router';
+import { ProductCard } from '../product-card/product-card';
+import { SlicePipe } from '@angular/common';
 
 @Component({
   selector: 'app-inicio',
-  imports: [DecimalPipe],
+
+  imports: [RouterLink, ProductCard, SlicePipe],
   templateUrl: './inicio.html',
   styleUrl: './inicio.scss'
 })
 export class Inicio {
   articulos: Articulo[] = [];
   categories: Category[] = [];
-
   isLoading: boolean = false;
-  selectedCategoryId: number | null = null;
 
-  currentPage: number = 0;
-  totalPages: number = 0;
-  pageSize: number = 10;
-  currentCategoryName: string | null = null;
-
-  constructor(
-    private http: Http,
-    private authService: AuthService,
-    private router: Router,
-    private carritoService: CarritoService
-  ) { }
+  private http = inject(Http);
+  private router = inject(Router);
 
   ngOnInit(): void {
     this.cargarCategories();
-    this.cargarArticulos();
+    this.cargarDestacados();
   }
+
   cargarCategories(): void {
     this.http.getCategories().subscribe({
       next: (response: any) => {
@@ -43,70 +33,29 @@ export class Inicio {
       },
       error: (err) => console.error('Error al cargar categorías:', err)
     });
-    this.cargarArticulos();
   }
 
-  cargarArticulos(categoriaNombre?: string, page: number = 0): void {
+  cargarDestacados(): void {
     this.isLoading = true;
-    this.currentPage = page;
 
-    if (categoriaNombre) {
-      this.http.getArticulosByCategoria(categoriaNombre).subscribe((response: any) => {
-        this.articulos = response.data || response;
-        this.totalPages = 1;
+    this.http.getArticulos(0,50).subscribe({
+      next: (response: any) => {
+        const allItems = response.data || response;
+        this.articulos = allItems.sort(() => Math.random() - 0.5).slice(0, 4);
         this.isLoading = false;
-      });
-    } else {
-      this.http.getArticulos(page, this.pageSize).subscribe((response: any) => {
-        console.log(response);
-        this.articulos = response.data || response;
-        this.totalPages = response.totalPages || 1;
+      },
+      error: (err) => {
+        console.error('Error loading featured products', err);
         this.isLoading = false;
-      });
-    }
-
-  }
-
-  changePage(newPage: number): void {
-    if (newPage >= 0 && newPage < this.totalPages) {
-      this.cargarArticulos(this.currentCategoryName || undefined, newPage);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  }
-
-  onCategoryChange(event: Event): void {
-    const select = event.target as HTMLSelectElement;
-    const idSeleccionado = select.value;
-
-    if (idSeleccionado === 'all') {
-      this.selectedCategoryId = null;
-      this.cargarArticulos();
-    } else {
-      const catEncontrada = this.categories.find(c => c.id === Number(idSeleccionado));
-      if (catEncontrada) {
-        this.selectedCategoryId = catEncontrada.id;
-        this.cargarArticulos(catEncontrada.name);
       }
-    }
+    });
   }
 
-  addToCart(articulo: Articulo) {
-    if (!this.authService.isAuthenticated()) {
-      alert('Debes iniciar sesión para añadir productos al carrito');
-      this.router.navigate(['/login']);
-      return;
-    }
-    this.carritoService.addToCart(articulo);
+  navigateToCategory(categoryId: number): void {
+    this.router.navigate(['/tienda'], { queryParams: { category: categoryId } });
   }
 
-  viewProduct(id: number): void {
-    this.router.navigate(['/product', id]);
+  navigateToCategoryByName(categoryName: string): void {
+    this.router.navigate(['/tienda'], { queryParams: { search: categoryName } });
   }
-
-  getStars(cantidad: number = 0): number[] {
-    return Array(Math.floor(cantidad)).fill(0);
-  }
-  
 }
-
-

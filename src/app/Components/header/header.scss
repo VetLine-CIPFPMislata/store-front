@@ -74,6 +74,43 @@
     }
   }
 
+  &__search {
+    position: relative;
+    width: 350px;
+    margin-left: var(--mls-sys-margin-3);
+
+    @media (max-width: 768px) {
+      display: none; 
+    }
+
+    &-input {
+      width: 100%;
+      padding: var(--mls-sys-padding-2) var(--mls-sys-padding-5) var(--mls-sys-padding-2) var(--mls-sys-padding-3);
+      border-radius: var(--mls-sys-border-radius-pill);
+      border: 1px solid transparent;
+      background-color: rgba(255, 255, 255, 0.9);
+      color: var(--mls-sys-color-neutral-90);
+      font-family: var(--header-font-family);
+      font-size: var(--mls-sys-font-size-2);
+      transition: all 0.3s ease;
+
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px var(--mls-sys-color-primario-5);
+        background-color: #fff;
+      }
+    }
+
+    &-icon {
+      position: absolute;
+      right: var(--mls-sys-padding-3);
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--mls-sys-color-neutral-60);
+      cursor: pointer;
+    }
+  }
+
   &__exit-icon {
     cursor: pointer;
     transition: transform 0.3s ease;
