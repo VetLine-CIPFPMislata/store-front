@@ -98,6 +98,7 @@ export class Tienda {
     }
 
     onSearch(event: Event): void {
+        //se utilza el HTMLInputElement para obtener el valor del input y usalo para filtrar los articulos
         const input = event.target as HTMLInputElement;
         const query = input.value.toLowerCase().trim();
 

@@ -49,7 +49,7 @@ export class Login {
         this.authService.getCurrentUser().subscribe({
           next: (user) => {
             this.isLoading = false;
-            this.router.navigate(['/inicio']);
+            this.router.navigate(['/tienda']);
           },
           error: (error) => {
             this.isLoading = false;
