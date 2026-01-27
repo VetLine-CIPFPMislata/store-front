@@ -54,8 +54,4 @@ export class Inicio {
   navigateToCategory(categoryId: number): void {
     this.router.navigate(['/tienda'], { queryParams: { category: categoryId } });
   }
-
-  navigateToCategoryByName(categoryName: string): void {
-    this.router.navigate(['/tienda'], { queryParams: { search: categoryName } });
-  }
 }

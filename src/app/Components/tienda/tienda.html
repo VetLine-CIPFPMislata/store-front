@@ -21,7 +21,7 @@
 
     <main class="tienda__content">
         <div class="tienda__search">
-            <input type="text" placeholder="Buscar en esta página..." class="tienda__search-input"
+            <input type="text" placeholder="Buscar productos..." class="tienda__search-input"
                 (input)="onSearch($event)">
             <i class="bi bi-search tienda__search-icon"></i>
         </div>
@@ -38,7 +38,7 @@
         </div>
 
 
-        @if (totalPages > 1) {
+        @if (!isSearching && totalPages > 1) {
         <div class="pagination">
             <button class="pagination__button" [disabled]="currentPage === 0" (click)="changePage(0)"
                 title="Primera página">

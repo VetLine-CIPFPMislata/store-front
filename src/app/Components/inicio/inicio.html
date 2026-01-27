@@ -1,39 +1,39 @@
 <div class="inicio">
 
-    <section class="hero">
-        <div class="hero__content">
-            <h1 class="hero__title">Cuidamos de los que más quieres</h1>
-            <p class="hero__subtitle">Todo lo que tu mascota necesita, avalado por expertos veterinarios.</p>
-            <button class="hero__cta" routerLink="/tienda">Ver Catálogo Completo</button>
+    <section class="inicio__hero">
+        <div class="inicio__hero-content">
+            <h1 class="inicio__hero-title">Cuidamos de los que más quieres</h1>
+            <p class="inicio__hero-subtitle">Todo lo que tu mascota necesita, avalado por expertos veterinarios.</p>
+            <button class="inicio__hero-cta" routerLink="/tienda">Ver Catálogo Completo</button>
         </div>
-        <div class="hero__overlay"></div>
+        <div class="inicio__hero-overlay"></div>
     </section>
 
-    <section class="trust-section">
-        <div class="trust-item">
-            <i class="fa-solid fa-user-doctor trust-item__icon"></i>
-            <h3 class="trust-item__title">Asesoramiento Profesional</h3>
-            <p class="trust-item__desc">Consulta con nuestro chatbot para pedir información sobre nuestros productos.</p>
+    <section class="inicio__trust">
+        <div class="inicio__trust-item">
+            <i class="fa-solid fa-user-doctor inicio__trust-item-icon"></i>
+            <h3 class="inicio__trust-item-title">Asesoramiento Profesional</h3>
+            <p class="inicio__trust-item-desc">Consulta con nuestro chatbot para pedir información sobre nuestros productos.</p>
         </div>
-        <div class="trust-item">
-            <i class="fa-solid fa-truck-fast trust-item__icon"></i>
-            <h3 class="trust-item__title">Envío Rápido</h3>
-            <p class="trust-item__desc">Recíbelo cómodamente en 24/48h.</p>
+        <div class="inicio__trust-item">
+            <i class="fa-solid fa-truck-fast inicio__trust-item-icon"></i>
+            <h3 class="inicio__trust-item-title">Envío Rápido</h3>
+            <p class="inicio__trust-item-desc">Recíbelo cómodamente en 24/48h.</p>
         </div>
-        <div class="trust-item">
-            <i class="fa-solid fa-shield-halved trust-item__icon"></i>
-            <h3 class="trust-item__title">Pago seguro</h3>
-            <p class="trust-item__desc">Pago 100% Seguro. Aceptamos tarjetas de crédito/débito y tu información está protegida.</p>
+        <div class="inicio__trust-item">
+            <i class="fa-solid fa-shield-halved inicio__trust-item-icon"></i>
+            <h3 class="inicio__trust-item-title">Pago seguro</h3>
+            <p class="inicio__trust-item-desc">Pago 100% Seguro. Aceptamos tarjetas de crédito/débito y tu información está protegida.</p>
         </div>
     </section>
 
-    <section class="categories-section">
-        <h2 class="section-title">Encuentra por Categoría</h2>
+    <section class="inicio__categories">
+        <h2 class="inicio__section-title">Encuentra por Categoría</h2>
 
-        <div class="categories-grid categories-grid--main">
+        <div class="inicio__categories-grid inicio__categories-grid--main">
             @for (category of categories | slice:0:4; track category.id) {
-            <div class="category-item category-item--featured" (click)="navigateToCategory(category.id)">
-                <div class="category-item__circle">
+            <div class="inicio__category-item inicio__category-item--featured" (click)="navigateToCategory(category.id)">
+                <div class="inicio__category-item-circle">
                     @switch (category.name.toLowerCase()) {
                     @case ('juguetes para perros') { <i class="fa-solid fa-dog"></i> }
                     @case ('juguetes para gatos') { <i class="fa-solid fa-cat"></i> }
@@ -42,15 +42,15 @@
                     @default { <i class="fa-solid fa-paw"></i> }
                     }
                 </div>
-                <span class="category-item__name">{{ category.name }}</span>
+                <span class="inicio__category-item-name">{{ category.name }}</span>
             </div>
             }
         </div>
 
-        <div class="categories-grid categories-grid--secondary">
+        <div class="inicio__categories-grid inicio__categories-grid--secondary">
             @for (category of categories | slice:4; track category.id) {
-            <div class="category-item" (click)="navigateToCategory(category.id)">
-                <div class="category-item__circle small">
+            <div class="inicio__category-item" (click)="navigateToCategory(category.id)">
+                <div class="inicio__category-item-circle">
                     @switch (category.name.toLowerCase()) {
                     @case ('ropa para perros') { <i class="fa-solid fa-paw"></i> }
                     @case ('ropa para gatos') { <i class="fa-solid fa-fish"></i> }
@@ -61,18 +61,18 @@
                     @default { <i class="fa-solid fa-paw"></i> }
                     }
                 </div>
-                <span class="category-item__name">{{ category.name }}</span>
+                <span class="inicio__category-item-name">{{ category.name }}</span>
             </div>
             }
         </div>
     </section>
 
-    <section class="recommended-section">
-        <h2 class="section-title">Favoritos de nuestros clientes <span> <i class="fa-solid fa-fire"></i></span></h2>
+    <section class="inicio__recommended">
+        <h2 class="inicio__section-title">Favoritos de nuestros clientes <span> <i class="fa-solid fa-fire"></i></span></h2>
         @if (isLoading) {
-        <div class="loading-spinner">Cargando recomendaciones...</div>
+        <div class="inicio__loading">Cargando recomendaciones...</div>
         } @else {
-        <div class="product-grid">
+        <div class="inicio__product-grid">
             @for (articulo of articulos; track articulo.id) {
             <app-product-card [articulo]="articulo"></app-product-card>
             }

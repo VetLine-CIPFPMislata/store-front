@@ -40,8 +40,6 @@
     --register-container-max-width: var(--mls-sys-width-13);
 
     --register-bg-image: url("/imagenFondoVetLine.avif");
-    --register-bg-overlay: rgba(24, 24, 24, 0.223);
-    --register-available-height: 600px;
 
 
     display: flex;
@@ -54,8 +52,7 @@
 
 
     background:
-        linear-gradient(var(--register-bg-overlay), var(--register-bg-overlay)),
-        var(--register-bg-image);
+    var(--register-bg-image);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -171,17 +168,5 @@
             box-shadow: var(--register-shadow);
         }
 
-        &:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-    }
-}
-
-@media (max-height: 600px) {
-    .register {
-        height: auto;
-        min-height: var(--register-available-height);
-        padding: var(--register-padding-sm);
     }
 }

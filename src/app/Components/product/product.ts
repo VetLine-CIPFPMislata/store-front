@@ -81,7 +81,6 @@ export class Product implements OnInit {
       for (let i = 0; i < this.quantity; i++) {
         this.carritoService.addToCart(this.product);
       }
-      alert(`${this.quantity} ${this.quantity > 1 ? 'unidades añadidas' : 'unidad añadida'} al carrito`);
     }
   }
 

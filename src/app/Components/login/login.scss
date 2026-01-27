@@ -42,7 +42,6 @@
 
 
   --login-bg-image: url("/imagenFondoVetLine.avif");
-  --login-bg-overlay: rgba(24, 24, 24, 0.223);
 
 
   display: flex;
@@ -54,9 +53,7 @@
   position: relative;
 
 
-  background:
-    linear-gradient(var(--login-bg-overlay), var(--login-bg-overlay)),
-    var(--login-bg-image);
+  background:var(--login-bg-image);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -189,13 +186,5 @@
       opacity: 0.6;
       cursor: not-allowed;
     }
-  }
-}
-
-@media (max-height: 600px) {
-  .login {
-    height: auto;
-    min-height: var(--login-available-height);
-    padding: var(--login-padding-sm);
   }
 }

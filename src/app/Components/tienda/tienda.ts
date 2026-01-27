@@ -15,9 +15,11 @@ export class Tienda {
     articulos: Articulo[] = [];
     filteredArticulos: Articulo[] = []; 
     categories: Category[] = [];
+    allArticulos: Articulo[] = []; 
 
     isLoading: boolean = false;
     selectedCategoryId: number | null = null;
+    isSearching: boolean = false; 
 
     currentPage: number = 0;
     totalPages: number = 0;
@@ -32,6 +34,15 @@ export class Tienda {
     }
 
     cargarData(): void {
+        this.http.getArticulos(0, 100).subscribe({
+            next: (response: any) => {
+                this.allArticulos = response.data || response;
+            },
+            error: (err) => {
+                console.error('Error al cargar todos los artículos:', err);
+            }
+        });
+
         this.http.getCategories().subscribe({
             next: (response: any) => {
                 this.categories = response.data || response;
@@ -79,6 +90,7 @@ export class Tienda {
     cargarArticulos(categoriaNombre?: string, page: number = 0): void {
         this.isLoading = true;
         this.currentPage = page;
+        this.isSearching = false;
 
         if (categoriaNombre) {
             this.http.getArticulosByCategoria(categoriaNombre).subscribe((response: any) => {
@@ -104,13 +116,15 @@ export class Tienda {
 
         if (!query) {
             this.filteredArticulos = this.articulos;
+            this.isSearching = false;
             return;
         }
 
-        this.filteredArticulos = this.articulos.filter(articulo =>
+        this.filteredArticulos = this.allArticulos.filter(articulo =>
             articulo.name.toLowerCase().includes(query) ||
             articulo.productDescription?.toLowerCase().includes(query)
         );
+        this.isSearching = true;
     }
 
     changePage(newPage: number): void {

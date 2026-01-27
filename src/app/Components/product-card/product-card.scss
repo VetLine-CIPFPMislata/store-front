@@ -1,48 +1,57 @@
 :host {
-    --card-bg: var(--mls-sys-color-gris-1);
-    --card-shadow: var(--mls-sys-box-shadow-2);
-    --card-shadow-hover: var(--mls-sys-box-shadow-4);
-    --card-radius: var(--mls-sys-border-radius-3);
-    --card-primary-color: var(--mls-sys-color-secundario-6);
-    --card-accent-color: var(--mls-sys-color-primario-6);
-    --card-text-main: var(--mls-sys-color-gris-13);
-    --card-text-muted: var(--mls-sys-color-gris-9);
-    --card-price-offer: var(--mls-sys-color-rojo-7);
-    --card-star-color: #ffc107;
-    --card-font-article: var(--mls-sys-font-Article);
-    --card-padding: var(--mls-sys-padding-3);
-    --card-gap-small: var(--mls-sys-gap-2);
-    --card-image-height: var(--mls-sys-height-7);
-    --card-badge-bg: var(--mls-sys-color-rojo-6);
-    --card-badge-text: #fff;
+    --product-card-bg: var(--mls-sys-color-gris-1);
+    --product-card-shadow: var(--mls-sys-box-shadow-2);
+    --product-card-shadow-hover: var(--mls-sys-box-shadow-4);
+    --product-card-radius: var(--mls-sys-border-radius-3);
+    --product-card-badge-radius: var(--mls-sys-border-radius-5);
+    --product-card-primary-color: var(--mls-sys-color-secundario-6);
+    --product-card-accent-color: var(--mls-sys-color-primario-6);
+    --product-card-text-main: var(--mls-sys-color-gris-13);
+    --product-card-text-muted: var(--mls-sys-color-gris-9);
+    --product-card-price-offer: var(--mls-sys-color-rojo-7);
+    --product-card-star-color: var(--mls-sys-color-amarillo-7);
+    --product-card-badge-bg: var(--mls-sys-color-rojo-6);
+    --product-card-badge-text:var(--mls-sys-color-gris-1);
+    --product-card-font-article: var(--mls-sys-font-Article);
+    --product-card-font-size-xsmall: var(--mls-sys-font-size-1);
+    --product-card-font-size-small: var(--mls-sys-font-size-2);
+    --product-card-font-size-medium: var(--mls-sys-font-size-3);
+    --product-card-font-size-large: var(--mls-sys-font-size-4);
+    --product-card-padding: var(--mls-sys-padding-3);
+    --product-card-padding-button: var(--mls-sys-padding-2);
+    --product-card-padding-badge: var(--mls-sys-padding-2);
+    --product-card-gap-small: var(--mls-sys-gap-2);
+    --product-card-image-height: var(--mls-sys-height-7);
+    --product-card-badge-position: var(--mls-sys-padding-4);
+    --product-card-badge-shadow: var(--mls-sys-box-shadow-4); 
 
     display: block;
 }
 
 .product-card {
-    background-color: var(--card-bg);
-    border-radius: var(--card-radius);
-    box-shadow: var(--card-shadow);
+    background-color: var(--product-card-bg);
+    border-radius: var(--product-card-radius);
+    box-shadow: var(--product-card-shadow);
     display: flex;
     flex-direction: column;
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
-    height: 100%; // Ensure it takes full height of host
+    height: 100%;
 
     &:hover {
         transform: translateY(-5px);
-        box-shadow: var(--card-shadow-hover);
+        box-shadow: var(--product-card-shadow-hover);
     }
 
     &__image-container {
-        height: var(--card-image-height);
-        padding: var(--card-padding);
+        height: var(--product-card-image-height);
+        padding: var(--product-card-padding);
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: var(--card-bg);
-        position: relative; // For badge positioning
+        background-color: var(--product-card-bg);
+        position: relative; 
     }
 
     &__image {
@@ -53,55 +62,53 @@
 
     &__offer-badge {
         position: absolute;
-        top: 10px;
-        right: 10px;
-        background-color: var(--card-badge-bg);
-        color: var(--card-badge-text);
-        padding: 4px 8px;
-        border-radius: 12px;
-        font-size: 0.8rem;
+        top: var(--product-card-badge-position);
+        right: var(--product-card-badge-position);
+        background-color: var(--product-card-badge-bg);
+        color: var(--product-card-badge-text);
+        padding: var(--product-card-padding-badge);
+        border-radius: var(--product-card-badge-radius);
+        font-size: var(--product-card-font-size-xsmall);
         font-weight: bold;
-        font-family: var(--card-font-article);
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        font-family: var(--product-card-font-article);
+        box-shadow: var(--product-card-badge-shadow);
     }
 
     &__body {
-        padding: var(--card-padding);
+        padding: var(--product-card-padding);
         flex-grow: 1;
         display: flex;
         flex-direction: column;
-        gap: var(--card-gap-small);
+        gap: var(--product-card-gap-small);
     }
 
     &__title {
-        font-size: var(--mls-sys-font-size-3);
-        color: var(--card-text-main);
+        font-size: var(--product-card-font-size-medium);
+        color: var(--product-card-text-main);
         margin: 0;
-        font-family: var(--card-font-article);
+        font-family: var(--product-card-font-article);
     }
 
     &__rating {
         display: flex;
         align-items: center;
-        gap: var(--card-gap-small);
-        margin: var(--card-gap-small) 0;
-        color: var(--card-star-color);
-        font-size: var(--mls-sys-font-size-2);
+        gap: var(--product-card-gap-small);
+        margin: var(--product-card-gap-small);
+        color: var(--product-card-star-color);
+        font-size: var(--product-card-font-size-small);
 
         &-value {
-            color: var(--card-text-muted);
-            font-size: var(--mls-sys-font-size-1);
-            margin-left: var(--card-gap-small);
+            color: var(--product-card-text-muted);
+            font-size: var(--product-card-font-size-xsmall);
+            margin-left: var(--product-card-gap-small);
         }
     }
 
     &__description {
-        font-size: var(--mls-sys-font-size-1);
-        font-family: var(--card-font-article);
-        color: var(--card-text-muted);
+        font-size: var(--product-card-font-size-xsmall);
+        font-family: var(--product-card-font-article);
+        color: var(--product-card-text-muted);
         margin: 0;
-        -webkit-line-clamp: 2;
-        line-clamp: 2;
         overflow: hidden;
     }
 
@@ -109,41 +116,41 @@
         margin-top: auto;
         display: flex;
         align-items: baseline;
-        gap: var(--card-gap-small);
+        gap: var(--product-card-gap-small);
     }
 
     &__price {
         font-weight: bold;
-        font-size: var(--mls-sys-font-size-3);
-        font-family: var(--card-font-article);
+        font-size: var(--product-card-font-size-medium);
+        font-family: var(--product-card-font-article);
 
         &--offer {
-            color: var(--card-price-offer);
+            color: var(--product-card-price-offer);
             font-weight: bold;
-            font-size: var(--mls-sys-font-size-4);
-            font-family: var(--card-font-article);
+            font-size: var(--product-card-font-size-large);
+            font-family: var(--product-card-font-article);
         }
 
         &--original {
             text-decoration: line-through;
-            color: var(--card-text-muted);
-            font-size: var(--mls-sys-font-size-1);
+            color: var(--product-card-text-muted);
+            font-size: var(--product-card-font-size-xsmall);
         }
     }
 
     &__button {
-        background-color: var(--card-accent-color);
-        color: var(--card-bg);
+        background-color: var(--product-card-accent-color);
+        color: var(--product-card-bg);
         border: none;
-        padding: var(--mls-sys-padding-2);
+        padding: var(--product-card-padding-button);
         font-weight: bold;
-        font-family: var(--card-font-article);
+        font-family: var(--product-card-font-article);
         cursor: pointer;
         transition: background 0.3s ease;
-        font-size: var(--mls-sys-font-size-2);
+        font-size: var(--product-card-font-size-small);
 
         &:hover {
-            background-color: var(--card-primary-color);
+            background-color: var(--product-card-primary-color);
         }
     }
 }
