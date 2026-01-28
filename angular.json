@@ -66,8 +66,7 @@
               "buildTarget": "store-front:build:production"
             },
             "development": {
-              "buildTarget": "store-front:build:development",
-              "proxyConfig": "src/proxy.conf.json"
+              "buildTarget": "store-front:build:development"
             }
           },
           "defaultConfiguration": "development"
