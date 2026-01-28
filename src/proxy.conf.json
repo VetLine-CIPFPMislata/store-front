@@ -1,8 +1,0 @@
-{
-    "/api": {
-        "target": "http://store-back-vetline.producciondaw.cip.fpmislata.com/",
-        "secure": false,
-        "changeOrigin": true,
-        "logLevel": "debug"
-    }
-}
