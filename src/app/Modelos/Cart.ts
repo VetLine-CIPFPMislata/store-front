@@ -38,16 +38,18 @@ export interface UpdateQuantityRequest {
 }
 
 export interface CheckoutRequest {
-    shippingAddress: string;
+    address: string;
 }
 
 export interface Order {
     id: number;
-    orderDate: string;
-    totalAmount: number;
-    status: string;
-    shippingAddress: string;
+    totalProducts: number;
+    totalPrice: number;
+    state: string;
     user: User;
+    createdAt: string;
+    orderAt: string;
+    address: string;
     items: OrderItem[];
 }
 

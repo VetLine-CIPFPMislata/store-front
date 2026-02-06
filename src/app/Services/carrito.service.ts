@@ -172,7 +172,7 @@ export class CarritoService {
         this.loading.next(true);
         this.error.next(null);
 
-        const request: CheckoutRequest = { shippingAddress };
+        const request: CheckoutRequest = { address: shippingAddress };
 
         return this.http.post<Order>(`${this.urlOrders}/${userId}/checkout`, request, { headers: this.getHeaders() })
             .pipe(

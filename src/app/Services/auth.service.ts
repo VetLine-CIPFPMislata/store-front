@@ -72,8 +72,12 @@ export class AuthService {
     return localStorage.getItem('userName');
   }
 
-  saveUserId(id: number): void {
-    localStorage.setItem('userId', id.toString());
+  saveUserId(id: number | undefined | null): void {
+    if (id !== undefined && id !== null) {
+      localStorage.setItem('userId', id.toString());
+    } else {
+      console.warn('Intentando guardar userId undefined/null');
+    }
   }
 
   getUserId(): number | null {
