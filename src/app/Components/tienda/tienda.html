@@ -2,15 +2,15 @@
     <aside class="tienda__sidebar">
         <h3 class="tienda__sidebar-title">Filtros</h3>
 
-        <div class="filter-group">
-            <h4 class="filter-group__title">Categorías</h4>
-            <ul class="filter-list">
-                <li class="filter-list__item" [class.active]="selectedCategoryId === null"
+        <div class="tienda__filters">
+            <h4 class="tienda__filters-title">Categorías</h4>
+            <ul class="tienda__filter-list">
+                <li class="tienda__filter-item" [class.tienda__filter-item--active]="selectedCategoryId === null"
                     (click)="onCategorySelect(null)">
                     Todas
                 </li>
                 @for (category of categories; track category.id) {
-                <li class="filter-list__item" [class.active]="selectedCategoryId === category.id"
+                <li class="tienda__filter-item" [class.tienda__filter-item--active]="selectedCategoryId === category.id"
                     (click)="onCategorySelect(category.id)">
                     {{ category.name }}
                 </li>
@@ -29,7 +29,7 @@
         @if (isLoading) {
         <div class="tienda__loading">Cargando productos...</div>
         } @else {
-        <div class="product-grid">
+        <div class="tienda__products">
             @for (articulo of filteredArticulos; track articulo.id) {
             <app-product-card [articulo]="articulo"></app-product-card>
             } @empty {
@@ -39,27 +39,27 @@
 
 
         @if (!isSearching && totalPages > 1) {
-        <div class="pagination">
-            <button class="pagination__button" [disabled]="currentPage === 0" (click)="changePage(0)"
+        <div class="tienda__pagination">
+            <button class="tienda__pagination-button" [disabled]="currentPage === 0" (click)="changePage(0)"
                 title="Primera página">
                 <i class="bi bi-chevron-double-left"></i>
             </button>
 
-            <button class="pagination__button" [disabled]="currentPage === 0" (click)="changePage(currentPage - 1)"
+            <button class="tienda__pagination-button" [disabled]="currentPage === 0" (click)="changePage(currentPage - 1)"
                 title="Anterior">
                 <i class="bi bi-chevron-left"></i>
             </button>
 
-            <span class="pagination__info">
+            <span class="tienda__pagination-info">
                 Página {{ currentPage + 1 }} de {{ totalPages }}
             </span>
 
-            <button class="pagination__button" [disabled]="currentPage === totalPages - 1"
+            <button class="tienda__pagination-button" [disabled]="currentPage === totalPages - 1"
                 (click)="changePage(currentPage + 1)" title="Siguiente">
                 <i class="bi bi-chevron-right"></i>
             </button>
 
-            <button class="pagination__button" [disabled]="currentPage === totalPages - 1"
+            <button class="tienda__pagination-button" [disabled]="currentPage === totalPages - 1"
                 (click)="changePage(totalPages - 1)" title="Última página">
                 <i class="bi bi-chevron-double-right"></i>
             </button>

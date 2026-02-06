@@ -72,10 +72,24 @@ export class AuthService {
     return localStorage.getItem('userName');
   }
 
+  saveUserId(id: number | undefined | null): void {
+    if (id !== undefined && id !== null) {
+      localStorage.setItem('userId', id.toString());
+    } else {
+      console.warn('Intentando guardar userId undefined/null');
+    }
+  }
+
+  getUserId(): number | null {
+    const id = localStorage.getItem('userId');
+    return id ? parseInt(id, 10) : null;
+  }
+
   clearAuth(): void {
     localStorage.removeItem('authToken');
     localStorage.removeItem('userEmail');
     localStorage.removeItem('userName');
+    localStorage.removeItem('userId');
     this.authStatus.next(false);
   }
 
