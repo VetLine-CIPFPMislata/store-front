@@ -74,8 +74,12 @@
                     </button>
                 </div>
                 <button class="product__add-to-cart" (click)="addToCart()"
-                    [disabled]="!product.quantity || product.quantity === 0">
+                    [disabled]="!product.quantity || product.quantity === 0 || isAddingToCart">
+                    @if (isAddingToCart) {
+                    <span class="spinner"></span> Añadiendo...
+                    } @else {
                     Añadir al carrito
+                    }
                 </button>
             </div>
         </div>

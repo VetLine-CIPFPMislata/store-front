@@ -46,8 +46,16 @@ export class Login {
         this.authService.saveUserEmail(response.email);
         this.authService.saveUserName(response.name);
 
+        if (response.id) {
+          this.authService.saveUserId(response.id);
+        }
+
         this.authService.getCurrentUser().subscribe({
           next: (user) => {
+
+            if (!response.id && user.id) {
+              this.authService.saveUserId(user.id);
+            }
             this.isLoading = false;
             this.router.navigate(['/tienda']);
           },

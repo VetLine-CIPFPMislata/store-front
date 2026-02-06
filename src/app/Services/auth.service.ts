@@ -14,7 +14,7 @@ import { User } from '../Modelos/User';
   providedIn: 'root',
 })
 export class AuthService {
-  private urlAuth = 'http://store-back-vetline.producciondaw.cip.fpmislata.com/api/auth';
+  private urlAuth = '/api/auth';
   private authStatus = new BehaviorSubject<boolean>(this.isAuthenticated());
   public authStatus$ = this.authStatus.asObservable();
 
@@ -72,10 +72,24 @@ export class AuthService {
     return localStorage.getItem('userName');
   }
 
+  saveUserId(id: number | undefined | null): void {
+    if (id !== undefined && id !== null) {
+      localStorage.setItem('userId', id.toString());
+    } else {
+      console.warn('Intentando guardar userId undefined/null');
+    }
+  }
+
+  getUserId(): number | null {
+    const id = localStorage.getItem('userId');
+    return id ? parseInt(id, 10) : null;
+  }
+
   clearAuth(): void {
     localStorage.removeItem('authToken');
     localStorage.removeItem('userEmail');
     localStorage.removeItem('userName');
+    localStorage.removeItem('userId');
     this.authStatus.next(false);
   }
 

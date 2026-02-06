@@ -1,0 +1,41 @@
+<div class="perfil">
+  <div class="perfil__container">
+    <div class="perfil__header">
+      <h1 class="perfil__title">Mi Perfil</h1>
+    </div>
+
+    @if (loading) {
+    <div class="perfil__loading">
+      <div class="perfil__spinner"></div>
+      <p class="perfil__loading-text">Cargando datos del usuario...</p>
+    </div>
+    }
+
+    @if (error && !loading) {
+    <div class="perfil__error">
+      <i class="perfil__error-icon bi bi-exclamation-circle"></i>
+      <p class="perfil__error-text">{{ error }}</p>
+    </div>
+    }
+
+    @if (user && !loading) {
+    <div class="perfil__content">
+      <div class="perfil__avatar">
+        <i class="perfil__avatar-icon bi bi-person-circle"></i>
+      </div>
+
+      <div class="perfil__info">
+        <div class="perfil__item">
+          <label class="perfil__label">Nombre</label>
+          <div class="perfil__value">{{ user.name }}</div>
+        </div>
+
+        <div class="perfil__item">
+          <label class="perfil__label">Email</label>
+          <div class="perfil__value">{{ user.email }}</div>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+</div>

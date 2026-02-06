@@ -17,7 +17,33 @@
             }
         </div>
         @if (isLoggedIn) {
-        <i class="bi bi-box-arrow-right header__exit-icon" (click)="onLogout()"></i>
+        <div class="header__user-menu">
+            <div class="header__user-icon" (click)="toggleUserDropdown()">
+                <i class="bi bi-person-circle"></i>
+            </div>
+
+            @if (showUserDropdown) {
+            <div class="header__dropdown">
+                <div class="header__dropdown-header">
+                    <span class="header__user-name">{{ userName || 'Usuario' }}</span>
+                </div>
+                <div class="header__dropdown-divider"></div>
+                <div class="header__dropdown-item" (click)="navigateToProfile()">
+                    <i class="bi bi-person"></i>
+                    <span>Mi Perfil</span>
+                </div>
+                <div class="header__dropdown-item" (click)="navigateToOrders()">
+                    <i class="bi bi-box-seam"></i>
+                    <span>Mis Pedidos</span>
+                </div>
+                <div class="header__dropdown-divider"></div>
+                <div class="header__dropdown-item header__dropdown-item--logout" (click)="onLogout()">
+                    <i class="bi bi-box-arrow-right"></i>
+                    <span>Cerrar Sesión</span>
+                </div>
+            </div>
+            }
+        </div>
         }@else {
         <div class="header__login-container--iniciar-sesion">
             <a routerLink="/login"><i class="bi bi-person-circle"></i> Iniciar sesión</a>

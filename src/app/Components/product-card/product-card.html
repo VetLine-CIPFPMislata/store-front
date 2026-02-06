@@ -33,7 +33,11 @@
         </div>
     </div>
 
-    <button class="product-card__button" (click)="addToCart($event, articulo)">
+    <button class="product-card__button" (click)="addToCart($event, articulo)" [disabled]="isAddingToCart">
+        @if (isAddingToCart) {
+        <span class="spinner"></span> Añadiendo...
+        } @else {
         Añadir al carrito <i class="bi bi-cart2"></i>
+        }
     </button>
 </div>
