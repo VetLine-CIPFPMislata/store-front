@@ -135,7 +135,7 @@ export class CarritoService {
         this.error.next(null);
 
         return new Observable<boolean>(observer => {
-            this.http.delete(`${this.urlCarts}/${userId}/items/${cartItemId}`, { 
+            this.http.delete(`${this.urlCarts}/${userId}/items/${cartItemId}`, {
                 headers: this.getHeaders(),
                 observe: 'response'
             }).subscribe({
@@ -189,6 +189,23 @@ export class CarritoService {
                     this.loading.next(false);
                     this.handleError(error);
                     return of(null);
+                })
+            );
+    }
+
+    getUserOrders(userId: number): Observable<Order[]> {
+        this.loading.next(true);
+        this.error.next(null);
+
+        return this.http.get<Order[]>(`${this.urlOrders}/user/${userId}`, { headers: this.getHeaders() })
+            .pipe(
+                tap(() => {
+                    this.loading.next(false);
+                }),
+                catchError(error => {
+                    this.loading.next(false);
+                    this.handleError(error);
+                    return of([]);
                 })
             );
     }

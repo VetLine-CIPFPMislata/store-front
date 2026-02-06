@@ -1,12 +1,13 @@
-import { Component, inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { CommonModule } from '@angular/common';
 import { AuthService } from '../../Services/auth.service';
 import { CarritoService } from '../../Services/carrito.service';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink],
+  imports: [RouterLink, CommonModule],
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })
@@ -18,9 +19,11 @@ export class Header implements OnInit, OnDestroy {
 
   isLoggedIn = false;
   cartCount = 0;
+  userName: string | null = null;
+  showUserDropdown = false;
 
   constructor() {
-    
+
   }
 
   ngOnInit() {
@@ -30,6 +33,10 @@ export class Header implements OnInit, OnDestroy {
         if (status) {
           // Cargar el carrito cuando el usuario inicia sesión
           this.carritoService.loadCart().subscribe();
+          // Cargar el nombre del usuario
+          this.userName = this.authService.getUserName();
+        } else {
+          this.userName = null;
         }
       })
     );
@@ -45,7 +52,34 @@ export class Header implements OnInit, OnDestroy {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
+  toggleUserDropdown() {
+    this.showUserDropdown = !this.showUserDropdown;
+  }
+
+  closeUserDropdown() {
+    this.showUserDropdown = false;
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    if (!target.closest('.header__user-menu')) {
+      this.showUserDropdown = false;
+    }
+  }
+
+  navigateToProfile() {
+    this.closeUserDropdown();
+    this.router.navigate(['/perfil']);
+  }
+
+  navigateToOrders() {
+    this.closeUserDropdown();
+    this.router.navigate(['/mis-pedidos']);
+  }
+
   onLogout() {
+    this.closeUserDropdown();
     this.authService.logout().subscribe({
       next: () => {
         this.authService.clearAuth();

@@ -1,0 +1,137 @@
+<div class="mis-pedidos">
+  <div class="mis-pedidos__container">
+    <div class="mis-pedidos__header">
+      <h1 class="mis-pedidos__title">Mis Pedidos</h1>
+    </div>
+
+    @if (loading) {
+    <div class="mis-pedidos__loading">
+      <div class="mis-pedidos__spinner"></div>
+      <p class="mis-pedidos__loading-text">Cargando tus pedidos...</p>
+    </div>
+    }
+
+    @if (error && !loading) {
+    <div class="mis-pedidos__error">
+      <i class="mis-pedidos__error-icon bi bi-exclamation-circle"></i>
+      <p class="mis-pedidos__error-text">{{ error }}</p>
+    </div>
+    }
+
+    @if (!loading && !error && orders.length === 0) {
+    <div class="mis-pedidos__empty">
+      <i class="mis-pedidos__empty-icon bi bi-box-seam"></i>
+      <h2 class="mis-pedidos__empty-title">No tienes pedidos</h2>
+      <p class="mis-pedidos__empty-text">Aún no has realizado ningún pedido</p>
+    </div>
+    }
+
+    @if (!loading && !error && orders.length > 0) {
+    <div class="mis-pedidos__content">
+      <div class="mis-pedidos__list">
+        @for (order of orders; track order.id) {
+        <div class="mis-pedidos__card" (click)="viewOrderDetails(order)">
+          <div class="mis-pedidos__card-header">
+            <div class="mis-pedidos__card-info">
+              <span class="mis-pedidos__card-id">Pedido #{{ order.id }}</span>
+              <span class="mis-pedidos__card-date">{{ formatDate(order.createdAt) }}</span>
+            </div>
+            <span class="mis-pedidos__card-state mis-pedidos__card-state--{{ getStateColor(order.state) }}">
+              {{ getStateLabel(order.state) }}
+            </span>
+          </div>
+
+          <div class="mis-pedidos__card-body">
+            <div class="mis-pedidos__card-summary">
+              <div class="mis-pedidos__card-summary-item">
+                <i class="mis-pedidos__card-summary-icon bi bi-box-seam"></i>
+                <span class="mis-pedidos__card-summary-text">{{ order.totalProducts }} productos</span>
+              </div>
+              <div class="mis-pedidos__card-summary-item">
+                <i class="mis-pedidos__card-summary-icon bi bi-geo-alt"></i>
+                <span class="mis-pedidos__card-summary-text">{{ order.address }}</span>
+              </div>
+            </div>
+
+            <div class="mis-pedidos__card-total">
+              <span class="mis-pedidos__card-total-label">Total:</span>
+              <span class="mis-pedidos__card-total-amount">{{ order.totalPrice | number:'1.2-2' }}€</span>
+            </div>
+          </div>
+
+          <div class="mis-pedidos__card-footer">
+            <button class="mis-pedidos__card-btn">
+              <span class="mis-pedidos__card-btn-text">Ver detalles</span>
+              <i class="mis-pedidos__card-btn-icon bi bi-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+    }
+  </div>
+
+  @if (selectedOrder) {
+  <div class="mis-pedidos__modal-overlay" (click)="closeOrderDetails()">
+    <div class="mis-pedidos__modal" (click)="$event.stopPropagation()">
+      <div class="mis-pedidos__modal-header">
+        <h2 class="mis-pedidos__modal-title">Detalles del Pedido #{{ selectedOrder.id }}</h2>
+        <button class="mis-pedidos__modal-close" (click)="closeOrderDetails()">
+          <i class="mis-pedidos__modal-close-icon bi bi-x-lg"></i>
+        </button>
+      </div>
+
+      <div class="mis-pedidos__modal-body">
+        <div class="mis-pedidos__modal-section">
+          <h3 class="mis-pedidos__modal-section-title">Información del Pedido</h3>
+          <div class="mis-pedidos__modal-section-content">
+            <div class="mis-pedidos__modal-info-row">
+              <span class="mis-pedidos__modal-info-label">Estado:</span>
+              <span class="mis-pedidos__card-state mis-pedidos__card-state--{{ getStateColor(selectedOrder.state) }}">
+                {{ getStateLabel(selectedOrder.state) }}
+              </span>
+            </div>
+            <div class="mis-pedidos__modal-info-row">
+              <span class="mis-pedidos__modal-info-label">Fecha:</span>
+              <span class="mis-pedidos__modal-info-value">{{ formatDate(selectedOrder.createdAt) }}</span>
+            </div>
+            <div class="mis-pedidos__modal-info-row">
+              <span class="mis-pedidos__modal-info-label">Dirección:</span>
+              <span class="mis-pedidos__modal-info-value">{{ selectedOrder.address }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mis-pedidos__modal-section">
+          <h3 class="mis-pedidos__modal-section-title">Productos</h3>
+          <div class="mis-pedidos__modal-section-content">
+            @for (item of selectedOrder.items; track item.id) {
+            <div class="mis-pedidos__modal-product">
+              <img [src]="item.product.pictureProduct" [alt]="item.product.name" class="mis-pedidos__modal-product-image">
+              <div class="mis-pedidos__modal-product-details">
+                <h4 class="mis-pedidos__modal-product-name">{{ item.product.name }}</h4>
+                <p class="mis-pedidos__modal-product-description">{{ item.product.productDescription }}</p>
+                <div class="mis-pedidos__modal-product-quantity">
+                  {{ item.quantity }} x {{ (item.unitPrice || item.product.price) | number:'1.2-2' }}€ = {{ (item.quantity * (item.unitPrice || item.product.price)) | number:'1.2-2' }}€
+                </div>
+              </div>
+              <div class="mis-pedidos__modal-product-total">
+                {{ (item.quantity * (item.unitPrice || item.product.price)) | number:'1.2-2' }}€
+              </div>
+            </div>
+            }
+          </div>
+        </div>
+
+        <div class="mis-pedidos__modal-footer">
+          <div class="mis-pedidos__modal-total">
+            <span class="mis-pedidos__modal-total-label">Total del Pedido:</span>
+            <span class="mis-pedidos__modal-total-amount">{{ selectedOrder.totalPrice | number:'1.2-2' }}€</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  }
+</div>
