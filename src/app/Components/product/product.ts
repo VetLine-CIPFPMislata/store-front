@@ -71,16 +71,32 @@ export class Product implements OnInit {
     }
   }
 
+  isAddingToCart: boolean = false;
+
   addToCart(): void {
+
+    if (this.isAddingToCart) {
+      return;
+    }
+
     if (!this.authService.isAuthenticated()) {
       this.router.navigate(['/login']);
       return;
     }
 
     if (this.product) {
-      for (let i = 0; i < this.quantity; i++) {
-        this.carritoService.addToCart(this.product);
-      }
+      this.isAddingToCart = true;
+      this.carritoService.addToCart(this.product.id, this.quantity).subscribe({
+        next: (cart) => {
+          this.isAddingToCart = false;
+          if (cart) {
+            this.quantity = 1; // Reset quantity after adding
+          }
+        },
+        error: () => {
+          this.isAddingToCart = false;
+        }
+      });
     }
   }
 

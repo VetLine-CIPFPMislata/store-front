@@ -4,9 +4,28 @@
             <h1 class="carrito__title">Mi Cesta</h1>
         </div>
 
+        <!-- Error Banner -->
+        @if (error) {
+        <div class="carrito__error-banner">
+            <i class="bi bi-exclamation-triangle-fill"></i>
+            <span>{{ error }}</span>
+            <button class="carrito__error-close" (click)="clearError()">
+                <i class="bi bi-x"></i>
+            </button>
+        </div>
+        }
+
+        <!-- Loading State -->
+        @if (loading) {
+        <div class="carrito__loading">
+            <div class="carrito__spinner"></div>
+            <p>Cargando carrito...</p>
+        </div>
+        }
+
         <div class="carrito__content">
-            @if (items.length > 0) {
-            @if (subtotal >= 20) {
+            @if (items.length > 0 && !loading) {
+            @if (isEnvioGratis && subtotal > 0) {
             <div class="carrito__free-ship-banner">
                 <i class="bi bi-check-circle-fill"></i>
                 <span>¡Enhorabuena! Has alcanzado el envío gratuito</span>
@@ -15,43 +34,45 @@
 
             <div class="carrito__layout">
                 <div class="carrito__items">
-                    @for (item of items; track item.articulo.id) {
+                    @for (item of items; track item.id) {
                     <div class="cart-item">
-                        <div class="cart-item__checkbox">
-                            <input type="checkbox" [checked]="item.selected"
-                                (change)="toggleSelection(item.articulo.id)" class="cart-item__checkbox-input">
-                        </div>
-
                         <div class="cart-item__image">
-                            <img [src]="item.articulo.pictureProduct" [alt]="item.articulo.name">
+                            <img [src]="item.product.pictureProduct" [alt]="item.product.name">
                         </div>
 
                         <div class="cart-item__details">
-                            <h3 class="cart-item__name">{{ item.articulo.name }}</h3>
-                            <p class="cart-item__description">{{ item.articulo.productDescription }}</p>
+                            <h3 class="cart-item__name">{{ item.product.name }}</h3>
+                            <p class="cart-item__description">{{ item.product.productDescription }}</p>
 
                             <div class="cart-item__pricing">
-                                @if (item.articulo.basePrice && item.articulo.basePrice > item.articulo.price) {
-                                <span class="cart-item__price--offer">{{ item.articulo.price | number:'1.2-2' }}
+                                @if (item.product.discountPercentage > 0) {
+                                <span class="cart-item__price--offer">{{ item.product.price | number:'1.2-2' }} €</span>
+                                <span class="cart-item__price--original">{{ item.product.basePrice | number:'1.2-2' }}
                                     €</span>
-                                <span class="cart-item__price--original">{{ item.articulo.basePrice | number:'1.2-2' }}
-                                    €</span>
+                                <span class="cart-item__discount-badge">-{{ item.product.discountPercentage }}%</span>
                                 } @else {
-                                <span class="cart-item__price">{{ item.articulo.price | number:'1.2-2' }} €</span>
+                                <span class="cart-item__price">{{ item.product.price | number:'1.2-2' }} €</span>
                                 }
                             </div>
 
                             <div class="cart-item__controls">
                                 <div class="cart-item__quantity-pill">
                                     <button class="cart-item__quantity-btn"
-                                        (click)="decreaseQuantity(item.articulo.id, item.cantidad)">-</button>
-                                    <span class="cart-item__quantity-value">{{ item.cantidad }}</span>
+                                        (click)="decreaseQuantity(item.id, item.quantity)"
+                                        [disabled]="loading">-</button>
+                                    <span class="cart-item__quantity-value">{{ item.quantity }}</span>
                                     <button class="cart-item__quantity-btn"
-                                        (click)="increaseQuantity(item.articulo.id, item.cantidad)">+</button>
+                                        (click)="increaseQuantity(item.id, item.quantity)"
+                                        [disabled]="loading">+</button>
                                 </div>
+
+                                <span class="cart-item__subtotal">
+                                    Subtotal: {{ (item.product.price * item.quantity) | number:'1.2-2' }} €
+                                </span>
                             </div>
                         </div>
-                        <button class="cart-item__remove" (click)="removeItem(item.articulo.id)" title="Eliminar">
+                        <button class="cart-item__remove" (click)="removeItem(item.id)" title="Eliminar"
+                            [disabled]="loading">
                             <i class="bi bi-trash3"></i>
                         </button>
                     </div>
@@ -62,23 +83,29 @@
                     <div class="summary">
                         <h2 class="summary__title">Resumen del pedido</h2>
                         <div class="summary__row">
-                            <span class="summary__label">Subtotal</span>
+                            <span class="summary__label">Productos ({{ cart?.totalProducts || 0 }})</span>
                             <span class="summary__value">{{ subtotal | number:'1.2-2' }} €</span>
                         </div>
                         <div class="summary__row">
                             <span class="summary__label">Gastos de envío</span>
-                            @if (costeEnvio === 0) {
+                            @if (isEnvioGratis) {
                             <span class="summary__value summary__value--free">GRATIS</span>
                             } @else {
-                            <span class="summary__value">{{ costeEnvio | number:'1.2-2' }} €</span>
+                            <span class="summary__value">{{ costeEnvioCalculado | number:'1.2-2' }} €</span>
                             }
                         </div>
+                        @if (!isEnvioGratis) {
+                        <div class="summary__free-shipping-hint">
+                            <i class="bi bi-info-circle"></i>
+                            <span>Añade {{ (20 - subtotal) | number:'1.2-2' }} € más para envío gratis</span>
+                        </div>
+                        }
                         <div class="summary__row summary__row--total">
                             <span class="summary__label">Total</span>
-                            <span class="summary__value">{{ total | number:'1.2-2' }} €</span>
+                            <span class="summary__value">{{ totalConEnvio | number:'1.2-2' }} €</span>
                         </div>
 
-                        <button class="summary__checkout-btn">
+                        <button class="summary__checkout-btn" (click)="openCheckoutModal()" [disabled]="loading">
                             <span>Realizar pedido</span>
                             <i class="bi bi-arrow-right"></i>
                         </button>
@@ -95,15 +122,16 @@
                 </aside>
             </div>
 
-            } @else {
+            } @else if (!loading) {
             <div class="carrito__empty">
                 <i class="bi bi-bag-x"></i>
                 <p>Tu cesta está vacía ahora mismo.</p>
-                <button class="carrito__shop-button" routerLink="/inicio">Volver a la tienda</button>
+                <button class="carrito__shop-button" (click)="goToShop()">Volver a la tienda</button>
             </div>
             }
         </div>
     </div>
+
 
     @if (showConfirmModal) {
     <div class="carrito__modal-overlay" (click)="closeConfirmModal()">
@@ -116,8 +144,78 @@
             </div>
             <div class="carrito__modal-footer">
                 <button class="carrito__btn-cancel" (click)="closeConfirmModal()">Mantener</button>
-                <button class="carrito__btn-confirm" (click)="confirmDelete()">Eliminar</button>
+                <button class="carrito__btn-confirm" (click)="confirmDelete()" [disabled]="loading">
+                    @if (loading) {
+                    <span class="carrito__btn-spinner"></span>
+                    } @else {
+                    Eliminar
+                    }
+                </button>
             </div>
+        </div>
+    </div>
+    }
+
+    @if (showCheckoutModal) {
+    <div class="carrito__modal-overlay" (click)="closeCheckoutModal()">
+        <div class="carrito__modal-content carrito__modal-content--checkout" (click)="$event.stopPropagation()">
+            @if (!checkoutSuccess) {
+            <div class="carrito__modal-header">
+                <i class="bi bi-truck carrito__modal-icon carrito__modal-icon--primary"></i>
+            </div>
+            <div class="carrito__modal-body">
+                <h3 class="carrito__modal-title">Dirección de envío</h3>
+                <p class="carrito__modal-subtitle">Introduce la dirección donde quieres recibir tu pedido</p>
+                <textarea 
+                    class="carrito__address-input" 
+                    [(ngModel)]="shippingAddress"
+                    placeholder="Ej: Calle Principal 123, 28001 Madrid, España"
+                    rows="3"
+                    [disabled]="loading">
+                </textarea>
+                
+                <div class="carrito__checkout-summary">
+                    <div class="carrito__checkout-row">
+                        <span>Subtotal:</span>
+                        <span>{{ subtotal | number:'1.2-2' }} €</span>
+                    </div>
+                    <div class="carrito__checkout-row">
+                        <span>Envío:</span>
+                        <span>{{ isEnvioGratis ? 'GRATIS' : (costeEnvioCalculado | number:'1.2-2') + ' €' }}</span>
+                    </div>
+                    <div class="carrito__checkout-row carrito__checkout-row--total">
+                        <span>Total a pagar:</span>
+                        <span>{{ totalConEnvio | number:'1.2-2' }} €</span>
+                    </div>
+                </div>
+            </div>
+            <div class="carrito__modal-footer">
+                <button class="carrito__btn-cancel" (click)="closeCheckoutModal()">Cancelar</button>
+                <button class="carrito__btn-confirm carrito__btn-confirm--primary" (click)="confirmCheckout()" [disabled]="loading || !shippingAddress.trim()">
+                    @if (loading) {
+                    <span class="carrito__btn-spinner"></span>
+                    Procesando...
+                    } @else {
+                    <i class="bi bi-check-lg"></i>
+                    Confirmar pedido
+                    }
+                </button>
+            </div>
+            } @else {
+            <div class="carrito__modal-header">
+                <i class="bi bi-check-circle-fill carrito__modal-icon carrito__modal-icon--success"></i>
+            </div>
+            <div class="carrito__modal-body">
+                <h3 class="carrito__modal-title">¡Pedido realizado!</h3>
+                <p class="carrito__modal-subtitle">Tu pedido #{{ orderId }} ha sido procesado correctamente.</p>
+                <p class="carrito__modal-text">Recibirás un email con los detalles de tu pedido.</p>
+            </div>
+            <div class="carrito__modal-footer">
+                <button class="carrito__btn-confirm carrito__btn-confirm--primary" (click)="closeCheckoutModal()">
+                    Aceptar
+                </button>
+            </div>
+            }
         </div>
     </div>
     }

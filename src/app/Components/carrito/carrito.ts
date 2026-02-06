@@ -1,72 +1,110 @@
-import { Component, OnInit } from '@angular/core';
-import { DecimalPipe } from '@angular/common';
-import { RouterLink } from '@angular/router';
-import { CarritoService, CarritoItem } from '../../Services/carrito.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { CommonModule, DecimalPipe } from '@angular/common';
+import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { CarritoService } from '../../Services/carrito.service';
+import { AuthService } from '../../Services/auth.service';
+import { Cart, CartItem } from '../../Modelos/Cart';
 
 @Component({
   selector: 'app-carrito',
-  imports: [DecimalPipe, RouterLink],
+  imports: [CommonModule, DecimalPipe, FormsModule],
   templateUrl: './carrito.html',
   styleUrl: './carrito.scss',
 })
-export class Carrito {
-  items: CarritoItem[] = [];
-  subtotal: number = 0;
-  total: number = 0;
+export class Carrito implements OnInit, OnDestroy {
+  cart: Cart | null = null;
+  loading: boolean = false;
+  error: string | null = null;
   costeEnvio: number = 4.99;
 
   showConfirmModal = false;
   itemToDeleteId: number | null = null;
 
-  constructor(private carritoService: CarritoService) { }
+  showCheckoutModal = false;
+  shippingAddress: string = '';
+  checkoutSuccess = false;
+  orderId: number | null = null;
+
+  private subscriptions: Subscription[] = [];
+
+  constructor(
+    private carritoService: CarritoService,
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
-    this.carritoService.carritoItems$.subscribe(data => {
-      this.items = data;
-      this.actualizarTotales();
-    });
-  }
+    this.subscriptions.push(
+      this.carritoService.cart$.subscribe(cart => {
+        this.cart = cart;
+      })
+    );
 
-  actualizarTotales() {
-    this.subtotal = 0;
+    this.subscriptions.push(
+      this.carritoService.loading$.subscribe(loading => {
+        this.loading = loading;
+      })
+    );
 
-    for (let item of this.items) {
-      if (item.selected) {
-        this.subtotal = this.subtotal + (item.articulo.price * item.cantidad);
-      }
+    this.subscriptions.push(
+      this.carritoService.error$.subscribe(error => {
+        this.error = error;
+      })
+    );
+
+    if (this.authService.isAuthenticated()) {
+      this.carritoService.loadCart().subscribe();
     }
-
-    if (this.subtotal >= 20 || this.subtotal === 0) {
-      this.costeEnvio = 0;
-    } else {
-      this.costeEnvio = 4.99;
-    }
-
-    this.total = this.subtotal + this.costeEnvio;
   }
 
-  toggleSelection(articuloId: number) {
-    this.carritoService.toggleSelection(articuloId);
+  ngOnDestroy() {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
-  increaseQuantity(articuloId: number, currentQuantity: number) {
-    this.carritoService.updateQuantity(articuloId, currentQuantity + 1);
+  get subtotal(): number {
+    return this.cart?.totalPrice ?? 0;
   }
 
-  decreaseQuantity(articuloId: number, currentQuantity: number) {
+  get total(): number {
+    return this.subtotal + this.costeEnvio;
+  }
+
+  get items(): CartItem[] {
+    return this.cart?.items ?? [];
+  }
+
+  get isEnvioGratis(): boolean {
+    return this.subtotal >= 20 || this.subtotal === 0;
+  }
+
+  get costeEnvioCalculado(): number {
+    return this.isEnvioGratis ? 0 : this.costeEnvio;
+  }
+
+  get totalConEnvio(): number {
+    return this.subtotal + this.costeEnvioCalculado;
+  }
+
+  increaseQuantity(cartItemId: number, currentQuantity: number) {
+    this.carritoService.updateQuantity(cartItemId, currentQuantity + 1).subscribe();
+  }
+
+  decreaseQuantity(cartItemId: number, currentQuantity: number) {
     if (currentQuantity > 1) {
-      this.carritoService.updateQuantity(articuloId, currentQuantity - 1);
+      this.carritoService.updateQuantity(cartItemId, currentQuantity - 1).subscribe();
     } else if (currentQuantity === 1) {
-      this.openConfirmModal(articuloId);
+      this.openConfirmModal(cartItemId);
     }
   }
 
-  removeItem(articuloId: number) {
-    this.openConfirmModal(articuloId);
+  removeItem(cartItemId: number) {
+    this.openConfirmModal(cartItemId);
   }
 
-  openConfirmModal(articuloId: number) {
-    this.itemToDeleteId = articuloId;
+  openConfirmModal(cartItemId: number) {
+    this.itemToDeleteId = cartItemId;
     this.showConfirmModal = true;
   }
 
@@ -77,8 +115,48 @@ export class Carrito {
 
   confirmDelete() {
     if (this.itemToDeleteId !== null) {
-      this.carritoService.removeFromCart(this.itemToDeleteId);
-      this.closeConfirmModal();
+      this.carritoService.removeItem(this.itemToDeleteId).subscribe(() => {
+        this.closeConfirmModal();
+      });
     }
+  }
+
+  openCheckoutModal() {
+    if (this.items.length === 0) {
+      return;
+    }
+    this.showCheckoutModal = true;
+    this.checkoutSuccess = false;
+    this.shippingAddress = '';
+  }
+
+  closeCheckoutModal() {
+    this.showCheckoutModal = false;
+    this.shippingAddress = '';
+    if (this.checkoutSuccess) {
+      this.carritoService.loadCart().subscribe();
+    }
+  }
+
+  confirmCheckout() {
+    if (!this.shippingAddress.trim()) {
+      this.error = 'Por favor, ingresa una dirección de envío';
+      return;
+    }
+
+    this.carritoService.checkout(this.shippingAddress).subscribe(order => {
+      if (order) {
+        this.checkoutSuccess = true;
+        this.orderId = order.id;
+      }
+    });
+  }
+
+  clearError() {
+    this.carritoService.clearError();
+  }
+
+  goToShop() {
+    this.router.navigate(['/tienda']);
   }
 }

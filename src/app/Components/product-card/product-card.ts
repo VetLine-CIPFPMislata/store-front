@@ -13,6 +13,7 @@ import { CarritoService } from '../../Services/carrito.service';
 })
 export class ProductCard {
     @Input() articulo!: Articulo;
+    isAddingToCart = false;
 
     private authService = inject(AuthService);
     private router = inject(Router);
@@ -20,12 +21,28 @@ export class ProductCard {
 
     addToCart(event: Event, articulo: Articulo) {
         event.stopPropagation();
+        
+        if (this.isAddingToCart) {
+            return;
+        }
+        
         if (!this.authService.isAuthenticated()) {
             alert('Debes iniciar sesión para añadir productos al carrito');
             this.router.navigate(['/login']);
             return;
         }
-        this.carritoService.addToCart(articulo);
+        
+        this.isAddingToCart = true;
+        this.carritoService.addToCart(articulo.id, 1).subscribe({
+            next: (cart) => {
+                this.isAddingToCart = false;
+                if (cart) {
+                }
+            },
+            error: () => {
+                this.isAddingToCart = false;
+            }
+        });
     }
 
     viewProduct() {

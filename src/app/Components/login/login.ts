@@ -45,6 +45,7 @@ export class Login {
         this.authService.saveToken(response.token);
         this.authService.saveUserEmail(response.email);
         this.authService.saveUserName(response.name);
+        this.authService.saveUserId(response.id);
 
         this.authService.getCurrentUser().subscribe({
           next: (user) => {

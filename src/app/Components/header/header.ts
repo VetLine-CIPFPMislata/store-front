@@ -1,5 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AuthService } from '../../Services/auth.service';
 import { CarritoService } from '../../Services/carrito.service';
 
@@ -9,10 +10,11 @@ import { CarritoService } from '../../Services/carrito.service';
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })
-export class Header {
+export class Header implements OnInit, OnDestroy {
   private authService = inject(AuthService);
   private router = inject(Router);
   private carritoService = inject(CarritoService);
+  private subscriptions: Subscription[] = [];
 
   isLoggedIn = false;
   cartCount = 0;
@@ -22,17 +24,26 @@ export class Header {
   }
 
   ngOnInit() {
-    this.authService.authStatus$.subscribe(status => {
-      this.isLoggedIn = status;
-    });
+    this.subscriptions.push(
+      this.authService.authStatus$.subscribe(status => {
+        this.isLoggedIn = status;
+        if (status) {
+          // Cargar el carrito cuando el usuario inicia sesión
+          this.carritoService.loadCart().subscribe();
+        }
+      })
+    );
 
-    this.carritoService.carritoItems$.subscribe(items => {
-      let total = 0;
-      for (let item of items) {
-        total += item.cantidad;
-      }
-      this.cartCount = total;
-    }); }
+    this.subscriptions.push(
+      this.carritoService.cart$.subscribe(cart => {
+        this.cartCount = cart?.totalProducts ?? 0;
+      })
+    );
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
 
   onLogout() {
     this.authService.logout().subscribe({
