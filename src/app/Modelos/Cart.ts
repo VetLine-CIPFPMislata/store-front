@@ -37,6 +37,13 @@ export interface UpdateQuantityRequest {
     quantity: number;
 }
 
+export interface PaymentCardData {
+    numeroTarjeta: string;
+    fechaCaducidad: string;
+    cvc: string;
+    nombreCompleto: string;
+}
+
 export interface CheckoutRequest {
     address: string;
 }
@@ -58,4 +65,20 @@ export interface OrderItem {
     quantity: number;
     unitPrice: number;
     product: Product;
+}
+
+// Interfaces para pagos
+export interface PaymentRequest {
+    cardData: PaymentCardData;
+    amount: number;
+    concept: string;
+}
+
+export interface PaymentResultDto {
+    success: boolean;
+    message: string;
+    referenceNumber: string | null;
+    paidAmount: number;
+    dateTime: string | null;
+    errorCode: string | null;
 }

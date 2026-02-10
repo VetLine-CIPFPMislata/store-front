@@ -482,6 +482,28 @@
         display: flex;
         flex-direction: column;
         gap: 15px;
+        max-height: 70vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding-right: 5px;
+
+        &::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+            border-radius: 4px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: var(--brand-primary);
+            border-radius: 4px;
+
+            &:hover {
+                background: var(--brand-primary-hover);
+            }
+        }
     }
 
     &__modal-text {
@@ -571,6 +593,81 @@
 
         &::placeholder {
             color: var(--carrito-text-muted);
+        }
+    }
+
+    &__payment-section {
+        margin-top: 14px;
+        padding: 20px;
+        background: var(--bg-secondary);
+        border-radius: var(--carrito-border-radius-3);
+        border: 1px solid var(--border-color);
+    }
+
+    &__payment-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--carrito-text-main);
+        margin: 6px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        i {
+            font-size: 18px;
+            color: var(--brand-primary);
+        }
+    }
+
+    &__payment-form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    &__form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+
+        &--half {
+            width: 100%;
+        }
+    }
+
+    &__form-label {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--carrito-text-sec);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    &__form-input {
+        width: 100%;
+        padding: 12px 14px;
+        border: 2px solid var(--border-color);
+        border-radius: var(--carrito-border-radius-3);
+        font-size: 14px;
+        font-family: inherit;
+        background: var(--carrito-card-bg);
+        color: var(--carrito-text-main);
+        transition: all 0.2s ease;
+
+        &:focus {
+            outline: none;
+            border-color: var(--brand-primary);
+            box-shadow: 0 0 0 3px rgba(81, 167, 210, 0.1);
+        }
+
+        &::placeholder {
+            color: var(--carrito-text-muted);
+        }
+
+        &:disabled {
+            background: var(--bg-tertiary);
+            cursor: not-allowed;
+            opacity: 0.6;
         }
     }
 
@@ -764,6 +861,27 @@
             right: 10px;
             border: none;
             padding: 0;
+        }
+    }
+
+    .carrito {
+        &__modal-content {
+            &--checkout {
+                max-width: 95%;
+            }
+        }
+
+        &__modal-body {
+            max-height: 60vh;
+        }
+
+        &__payment-section {
+            padding: 16px;
+        }
+
+        &__form-row {
+            grid-template-columns: 1fr;
+            gap: 16px;
         }
     }
 }
