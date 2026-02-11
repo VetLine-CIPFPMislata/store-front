@@ -8,8 +8,8 @@ import { Cart, CartItem, AddToCartRequest, UpdateQuantityRequest, CheckoutReques
     providedIn: 'root'
 })
 export class CarritoService {
-    private urlCarts = '/api/carts';
-    private urlOrders = '/api/orders';
+    private urlCarts = 'http://store-back-vetline.producciondaw.cip.fpmislata.com/api/carts';
+    private urlOrders = 'http://store-back-vetline.producciondaw.cip.fpmislata.com/api/orders';
 
     private cart = new BehaviorSubject<Cart | null>(null);
     public cart$ = this.cart.asObservable();

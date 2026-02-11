@@ -8,7 +8,7 @@ import { PaymentRequest, PaymentResultDto } from '../Modelos/Cart';
     providedIn: 'root'
 })
 export class PaymentService {
-    private urlPayments = '/api/payments';
+    private urlPayments = 'http://store-back-vetline.producciondaw.cip.fpmislata.com/api/payments';
 
     constructor(
         private http: HttpClient,

@@ -14,7 +14,7 @@ import { User } from '../Modelos/User';
   providedIn: 'root',
 })
 export class AuthService {
-  private urlAuth = '/api/auth';
+  private urlAuth = 'http://store-back-vetline.producciondaw.cip.fpmislata.com/api/auth';
   private authStatus = new BehaviorSubject<boolean>(this.isAuthenticated());
   public authStatus$ = this.authStatus.asObservable();
 

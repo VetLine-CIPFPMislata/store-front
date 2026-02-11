@@ -9,8 +9,8 @@ import { Articulo } from '../Modelos/Articulo';
     providedIn: 'root'
 })
 export class Http {
-    private urlProducts = '/api/products';
-    private urlCategories = '/api/categories/public';
+    private urlProducts = 'http://store-back-vetline.producciondaw.cip.fpmislata.com/api/products';
+    private urlCategories = 'http://store-back-vetline.producciondaw.cip.fpmislata.com/api/categories/public';
 
     constructor(
         private http: HttpClient,
