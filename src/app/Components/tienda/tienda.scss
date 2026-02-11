@@ -35,24 +35,39 @@
     --tienda-grid-min-width: var(--mls-sys-width-9);
     --tienda-box-shadow: var(--mls-sys-box-shadow-1);
 
+    --tienda-zero: 0;
+    --tienda-one: 1;
+    --tienda-full: 100%;
+    --tienda-auto: auto;
+    --tienda-border-thin: 1px;
+    --tienda-border-medium: var(--mls-sys-padding-0);
+    --tienda-transition-fast: 0.2s;
+    --tienda-transition-base: 0.3s;
+    --tienda-scale-hover: 1.1;
+    --tienda-y-center: -50%;
+    --tienda-half: 50%;
+    --tienda-none: none;
+
+    --tienda-fit-content: fit-content;
+
     display: flex;
     gap: var(--tienda-gap-large);
     padding: var(--tienda-padding-large);
     max-width: var(--tienda-max-width);
-    margin: 0 auto;
+    margin: var(--tienda-zero) var(--tienda-auto);
 
     &__sidebar {
         width: var(--tienda-sidebar-width);
         position: sticky;
         top: var(--tienda-padding-large);
-        height: fit-content;
+        height: var(--tienda-fit-content);
 
         &-title {
             font-size: var(--tienda-font-size-large);
             color: var(--tienda-color-text);
             margin-bottom: var(--tienda-spacing-25);
             font-family: var(--tienda-font-header);
-            border-bottom: 2px solid var(--tienda-color-primary);
+            border-bottom: var(--tienda-border-medium) solid var(--tienda-color-primary);
             padding-bottom: var(--tienda-spacing-12);
         }
     }
@@ -70,9 +85,9 @@
     }
 
     &__filter-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
+        list-style: var(--tienda-none);
+        padding: var(--tienda-zero);
+        margin: var(--tienda-zero);
     }
 
     &__filter-item {
@@ -81,7 +96,7 @@
         color: var(--tienda-color-text-muted);
         font-family: var(--tienda-font-body);
         border-radius: var(--tienda-border-radius);
-        transition: all 0.2s;
+        transition: all var(--tienda-transition-fast);
         margin-bottom: var(--tienda-spacing-5);
 
         &:hover {
@@ -97,7 +112,7 @@
     }
 
     &__content {
-        flex: 1;
+        flex: var(--tienda-one);
     }
 
     &__search {
@@ -106,16 +121,16 @@
         max-width: var(--tienda-search-max-width);
 
         &-input {
-            width: 100%;
+            width: var(--tienda-full);
             padding: var(--tienda-spacing-12) var(--tienda-button-size) var(--tienda-spacing-12) var(--tienda-spacing-15);
-            border: 1px solid var(--tienda-color-border);
+            border: var(--tienda-border-thin) solid var(--tienda-color-border);
             border-radius: var(--tienda-border-radius-full);
             font-family: var(--tienda-font-body);
             font-size: var(--tienda-font-size-small);
-            transition: box-shadow 0.3s, border-color 0.3s;
+            transition: box-shadow var(--tienda-transition-base), border-color var(--tienda-transition-base);
 
             &:focus {
-                outline: none;
+                outline: var(--tienda-none);
                 border-color: var(--tienda-color-primary);
                 box-shadow: var(--tienda-box-shadow);
             }
@@ -124,10 +139,10 @@
         &-icon {
             position: absolute;
             right: var(--tienda-spacing-15);
-            top: 50%;
-            transform: translateY(-50%);
+            top: var(--tienda-half);
+            transform: translateY(var(--tienda-y-center));
             color: var(--tienda-color-text-muted);
-            pointer-events: none;
+            pointer-events: var(--tienda-none);
         }
     }
 
@@ -156,7 +171,7 @@
         &-button {
             background-color: var(--tienda-color-primary);
             color: var(--tienda-color-white);
-            border: none;
+            border: var(--tienda-none);
             width: var(--tienda-button-size);
             height: var(--tienda-button-size);
             border-radius: var(--tienda-border-radius-full);
@@ -164,10 +179,10 @@
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: transform var(--tienda-transition-fast);
 
             &:hover:not(:disabled) {
-                transform: scale(1.1);
+                transform: scale(var(--tienda-scale-hover));
             }
 
             &:disabled {
@@ -180,7 +195,7 @@
             font-weight: var(--tienda-font-weight-bold);
             font-family: var(--tienda-font-body);
             color: var(--tienda-color-text);
-            margin: 0 var(--tienda-spacing-15);
+            margin: var(--tienda-zero) var(--tienda-spacing-15);
         }
     }
 }

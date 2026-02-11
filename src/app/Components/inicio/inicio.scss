@@ -1,7 +1,7 @@
 .inicio {
     --inicio-bg-primary: var(--mls-sys-color-gris-0);
     --inicio-bg-white: var(--mls-sys-color-gris-1);
-    --inicio-bg-secondary: var(--mls-sys-color-gris-1);
+    --inicio-bg-secondary: var(--inicio-bg-white);
     --inicio-color-primary: var(--mls-sys-color-secundario-6);
     --inicio-color-text: var(--mls-sys-color-gris-13);
     --inicio-color-text-light: var(--mls-sys-color-gris-8);
@@ -33,11 +33,20 @@
     --inicio-width-min-trust: var(--mls-sys-width-8);
     --inicio-width-grid-min: var(--inicio-width-min-trust);
     --inicio-width-line: var(--mls-sys-width-3);
+    --inicio-width-grid-min: var(--inicio-width-min-trust);
+    --inicio-width-hero-content: var(--mls-sys-width-15);
+    --inicio-width-categories-grid: 1000px;
     --inicio-height-category-large: var(--mls-sys-height-5);
     --inicio-height-icon: var(--mls-sys-height-4);
     --inicio-height-line: var(--mls-sys-height-0);
+    --inicio-zero: 0;
+    --inicio-full: 100%;
+    --inicio-transition-base: all 0.3s ease;
+    --inicio-opacity-muted: 0.9;
+    --inicio-letter-spacing: 0.5px;
+    --inicio-line-height-base: 1.6;
 
-    width: 100%;
+    width: var(--inicio-full);
 
     &__hero {
         position: relative;
@@ -53,7 +62,7 @@
 
         &-overlay {
             position: absolute;
-            inset: 0;
+            inset: var(--inicio-zero);
             background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6));
             z-index: 1;
         }
@@ -62,7 +71,7 @@
             position: relative;
             z-index: 2;
             padding: var(--inicio-padding-item);
-            max-width: 800px;
+            max-width: var(--inicio-width-hero-content);
         }
 
         &-title {
@@ -78,13 +87,13 @@
             font-size: var(--inicio-font-size-xlarge);
             margin-bottom: var(--inicio-gap-large);
             font-family: var(--inicio-font-body);
-            transition: all 0.3s ease;
+            transition: var(--inicio-transition-base);
             color: var(--inicio-bg-white);
-            opacity: 0.9;
-            line-height: 1.6;
+            opacity: var(--inicio-opacity-muted);
+            line-height: var(--inicio-line-height-base);
             text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
             font-weight: var(--inicio-font-weight-normal);
-            letter-spacing: 0.5px;
+            letter-spacing: var(--inicio-letter-spacing);
         }
 
         &-cta {
@@ -101,7 +110,7 @@
             &:hover {
                 background-color: var(--inicio-bg-white);
                 transform: translateY(-5px);
-                transition: all 0.3s ease;
+                transition: var(--inicio-transition-base);
             }
         }
     }
@@ -120,7 +129,7 @@
             width: var(--inicio-width-line);
             height: var(--inicio-height-line);
             background-color: var(--inicio-color-primary);
-            margin: var(--inicio-gap-small) auto 0;
+            margin: var(--inicio-gap-small) auto var(--inicio-zero);
             border-radius: var(--inicio-border-radius);
         }
 
@@ -186,15 +195,8 @@
             justify-content: center;
             gap: var(--inicio-gap-medium);
             flex-wrap: wrap;
-
-            &--main {
-                margin-bottom: var(--inicio-gap-large);
-            }
-
-            &--secondary {
-                border-top: 1px solid var(--inicio-color-border);
-                padding-top: var(--inicio-padding-section);
-            }
+            max-width: var(--inicio-width-categories-grid);
+            margin: var(--inicio-zero) auto;
         }
     }
 
@@ -227,7 +229,7 @@
             font-size: var(--inicio-font-size-xlarge);
             color: var(--inicio-color-text);
             box-shadow: var(--inicio-shadow-soft);
-            transition: all 0.3s ease;
+            transition: var(--inicio-transition-base);
 
             &:hover {
                 transform: translateY(-5px);

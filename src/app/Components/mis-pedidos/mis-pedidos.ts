@@ -4,9 +4,11 @@ import { AuthService } from '../../Services/auth.service';
 import { CarritoService } from '../../Services/carrito.service';
 import { Order } from '../../Modelos/Cart';
 
+import { OrderDetailComponent } from '../order-detail/order-detail';
+
 @Component({
   selector: 'app-mis-pedidos',
-  imports: [CommonModule, DecimalPipe],
+  imports: [CommonModule, DecimalPipe, OrderDetailComponent],
   templateUrl: './mis-pedidos.html',
   styleUrl: './mis-pedidos.scss',
 })
@@ -19,7 +21,7 @@ export class MisPedidos implements OnInit {
   constructor(
     private authService: AuthService,
     private carritoService: CarritoService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.loadOrders();

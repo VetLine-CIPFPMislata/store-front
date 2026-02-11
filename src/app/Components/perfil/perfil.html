@@ -1,6 +1,7 @@
 <div class="perfil">
   <div class="perfil__container">
     <div class="perfil__header">
+      <div class="perfil__header-pattern"></div>
       <h1 class="perfil__title">Mi Perfil</h1>
     </div>
 
@@ -20,22 +21,75 @@
 
     @if (user && !loading) {
     <div class="perfil__content">
-      <div class="perfil__avatar">
-        <i class="perfil__avatar-icon bi bi-person-circle"></i>
-      </div>
+      <!-- Sección Superior: Avatar y Datos Personales -->
+      <div class="perfil__grid">
+        <!-- Columna Izquierda: Avatar y Acciones -->
+        <div class="perfil__sidebar">
+          <div class="perfil__avatar-wrapper">
+            <div class="perfil__avatar">
+              <i class="perfil__avatar-icon bi bi-person-circle"></i>
+            </div>
+            <h2 class="perfil__user-name">{{ user.name }}</h2>
+            <p class="perfil__user-email">{{ user.email }}</p>
+          </div>
 
-      <div class="perfil__info">
-        <div class="perfil__item">
-          <label class="perfil__label">Nombre</label>
-          <div class="perfil__value">{{ user.name }}</div>
+          <div class="perfil__actions">
+            <button class="perfil__btn perfil__btn--logout" (click)="logout()">
+              <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+            </button>
+          </div>
         </div>
 
-        <div class="perfil__item">
-          <label class="perfil__label">Email</label>
-          <div class="perfil__value">{{ user.email }}</div>
+        <!-- Columna Derecha: Datos Detallados -->
+        <div class="perfil__details">
+          <section class="perfil__section">
+            <h3 class="perfil__section-title"><i class="bi bi-person-bounding-box"></i> Datos Personales</h3>
+            <div class="perfil__info-group">
+              <div class="perfil__item">
+                <label class="perfil__label">Nombre Completo</label>
+                <div class="perfil__value">{{ user.name }}</div>
+              </div>
+
+              <div class="perfil__item">
+                <label class="perfil__label">Correo Electrónico</label>
+                <div class="perfil__value">{{ user.email }}</div>
+              </div>
+
+              <div class="perfil__item">
+                <label class="perfil__label">Teléfono</label>
+                <div class="perfil__value">{{ user.phone || 'No especificado' }}</div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- Sección Inferior: Dashboard / Accesos Rápidos -->
+      <div class="perfil__dashboard">
+        <h3 class="perfil__section-title">Mi Actividad</h3>
+        <div class="perfil__cards">
+          <!-- Card: Último Pedido -->
+          <div class="perfil__card" [class.perfil__card--disabled]="!lastOrder"
+            (click)="lastOrder && viewOrderDetails(lastOrder)">
+            <div class="perfil__card-icon">
+              <i class="bi bi-bag-check"></i>
+            </div>
+            <div class="perfil__card-content">
+              <h4>Ver mi último pedido</h4>
+              @if (lastOrder) {
+              <p>Pedido #{{ lastOrder.id }} • {{ formatDate(lastOrder.createdAt) }}</p>
+              } @else {
+              <p>Aún no has realizado pedidos</p>
+              }
+            </div>
+            <i class="bi bi-chevron-right ms-auto" style="color: var(--perfil-text-muted); font-size: 0.8rem;"></i>
+          </div>
         </div>
       </div>
     </div>
     }
+
+
+    <app-order-detail [order]="selectedOrder" (close)="closeOrderDetails()"></app-order-detail>
   </div>
 </div>

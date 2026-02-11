@@ -1,15 +1,14 @@
-import { Component, inject} from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Articulo } from '../../Modelos/Articulo';
 import { Category } from '../../Modelos/Category';
 import { Http } from '../../Services/http';
 import { Router, RouterLink } from '@angular/router';
 import { ProductCard } from '../product-card/product-card';
-import { SlicePipe } from '@angular/common';
 
 @Component({
   selector: 'app-inicio',
 
-  imports: [RouterLink, ProductCard, SlicePipe],
+  imports: [RouterLink, ProductCard],
   templateUrl: './inicio.html',
   styleUrl: './inicio.scss'
 })
@@ -29,7 +28,11 @@ export class Inicio {
   cargarCategories(): void {
     this.http.getCategories().subscribe({
       next: (response: any) => {
-        this.categories = response.data || response;
+        const allCategories: Category[] = response.data || response;
+        const targetNames = ['juguetes para perros', 'accesorios', 'higiene y cuidado', 'snacks y premios'];
+        this.categories = allCategories.filter(cat =>
+          targetNames.includes(cat.name.toLowerCase())
+        );
       },
       error: (err) => console.error('Error al cargar categorías:', err)
     });
@@ -38,7 +41,7 @@ export class Inicio {
   cargarDestacados(): void {
     this.isLoading = true;
 
-    this.http.getArticulos(0,50).subscribe({
+    this.http.getArticulos(0, 50).subscribe({
       next: (response: any) => {
         const allItems = response.data || response;
         this.articulos = allItems.sort(() => Math.random() - 0.5).slice(0, 4);

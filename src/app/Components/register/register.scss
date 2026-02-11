@@ -3,56 +3,71 @@
     --register-container-bg: var(--mls-sys-color-gris-1);
     --register-title-color: var(--mls-sys-color-primario-10);
     --register-label-color: var(--mls-sys-color-primario-9);
-    --register-input-bg: var(--mls-sys-color-gris-1);
+
+    --register-input-focus-border: var(--register-label-color);
+    --register-btn-hover-bg: var(--register-label-color);
+
+    --register-input-bg: var(--register-container-bg);
+    --register-btn-color: var(--register-container-bg);
+
     --register-input-border-color: var(--mls-sys-color-primario-5);
-    --register-input-focus-border: var(--mls-sys-color-primario-9);
     --register-input-focus-shadow: var(--mls-sys-color-primario-3);
     --register-btn-bg: var(--mls-sys-color-primario-7);
-    --register-btn-color: var(--mls-sys-color-gris-1);
-    --register-btn-hover-bg: var(--mls-sys-color-primario-9);
+
     --register-error-bg: var(--mls-sys-color-rojo-2);
     --register-error-color: var(--mls-sys-color-rojo-9);
     --register-error-border: var(--mls-sys-color-rojo-7);
-    --register-header-border-color: var(--mls-sys-color-primario-5);
+
+    --register-header-border-color: var(--register-input-border-color);
+    --register-text-error: var(--register-error-color);
+
     --register-padding-sm: var(--mls-sys-padding-2);
     --register-padding-md: var(--mls-sys-padding-3);
     --register-padding-lg: var(--mls-sys-padding-4);
+
     --register-gap-sm: var(--mls-sys-gap-1);
     --register-gap-md: var(--mls-sys-gap-2);
     --register-gap-lg: var(--mls-sys-gap-3);
-    --register-font-family: var(--mls-sys-font-Article, sans-serif);
+
+    --register-font-family: var(--mls-sys-font-Article);
     --register-title-font-size: var(--mls-sys-font-size-7);
     --register-label-font-size: var(--mls-sys-font-size-4);
     --register-label-font-weight: var(--mls-sys-font-weight-4);
-    --register-input-font-size: var(--mls-sys-font-size-4);
+
+    --register-input-font-size: var(--register-label-font-size);
     --register-btn-font-size: var(--mls-sys-font-size-5);
-    --register-btn-font-weight: var(--mls-sys-font-weight-4);
+    --register-btn-font-weight: var(--register-label-font-weight);
+
     --register-border-radius-sm: var(--mls-sys-border-radius-2);
     --register-border-radius-md: var(--mls-sys-border-radius-3);
     --register-shadow: var(--mls-sys-box-shadow-3);
     --register-container-shadow: var(--mls-sys-box-shadow-5);
+
     --register-margin-error: var(--mls-sys-margin-1);
     --register-margin-form: var(--mls-sys-margin-3);
     --register-font-size-error: var(--mls-sys-font-size-1);
-    --register-text-error: var(--mls-sys-color-rojo-9);
 
     --register-logo-width: var(--mls-sys-width-6);
     --register-container-max-width: var(--mls-sys-width-13);
 
-    --register-bg-image: url("/imagenFondoVetLine.avif");
+    --register-border-width: var(--mls-sys-padding-0);
+    --register-height-full: 100vh;
+    --register-width-full: 100%;
+    --register-zero: 0;
+    --register-transition-base: all 0.3s ease;
+    --register-transform-hover: translateY(-2px);
 
+    --register-bg-image: url("/imagenFondoVetLine.avif");
 
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
+    min-height: var(--register-height-full);
     padding: var(--register-padding-md);
     box-sizing: border-box;
     position: relative;
 
-
-    background:
-    var(--register-bg-image);
+    background: var(--register-bg-image);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -60,15 +75,14 @@
 
     &__container {
         max-width: var(--register-container-max-width);
-        width: 100%;
+        width: var(--register-width-full);
         background-color: var(--register-container-bg);
         border-radius: var(--register-border-radius-md);
         box-shadow: var(--register-container-shadow);
         padding: var(--register-padding-lg);
+        display: flex;
+        flex-direction: column;
     }
-
-    /* display: flex; -> Esto estaba duplicado fuera del container pero dentro de .register, eliminando redundancia */
-    flex-direction: column;
 
     &__header {
         display: flex;
@@ -77,7 +91,7 @@
         gap: var(--register-gap-md);
         margin-bottom: var(--register-gap-md);
         padding-bottom: var(--register-padding-md);
-        border-bottom: 2px solid var(--register-header-border-color);
+        border-bottom: var(--register-border-width) solid var(--register-header-border-color);
         font-family: var(--register-font-family);
     }
 
@@ -86,7 +100,7 @@
     }
 
     &__title {
-        margin: 0;
+        margin: var(--register-zero);
         font-size: var(--register-title-font-size);
         color: var(--register-title-color);
         text-align: center;
@@ -103,7 +117,7 @@
         padding: var(--register-padding-sm);
         background-color: var(--register-error-bg);
         color: var(--register-error-color);
-        border: 2px solid var(--register-error-border);
+        border: var(--register-border-width) solid var(--register-error-border);
         border-radius: var(--register-border-radius-sm);
         font-size: var(--register-input-font-size);
         text-align: center;
@@ -123,23 +137,22 @@
 
     &__error-message {
         display: flex;
-        justify-content: start;
+        justify-content: flex-start;
         color: var(--register-text-error);
         font-size: var(--register-font-size-error);
         margin: var(--register-margin-error);
         text-align: center;
-        margin-top: 0;
+        margin-top: var(--register-zero);
         margin-bottom: var(--register-margin-form);
-
     }
 
     &__input {
         padding: var(--register-padding-md);
-        border: 2px solid var(--register-input-border-color);
+        border: var(--register-border-width) solid var(--register-input-border-color);
         border-radius: var(--register-border-radius-sm);
         background-color: var(--register-input-bg);
         font-size: var(--register-input-font-size);
-        transition: all 0.3s ease;
+        transition: var(--register-transition-base);
 
         &:focus {
             outline: none;
@@ -160,13 +173,12 @@
         border: none;
         border-radius: var(--register-border-radius-md);
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: var(--register-transition-base);
 
         &:hover:not(:disabled) {
             background-color: var(--register-btn-hover-bg);
-            transform: translateY(-2px);
+            transform: var(--register-transform-hover);
             box-shadow: var(--register-shadow);
         }
-
     }
 }

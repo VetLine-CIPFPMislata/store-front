@@ -2,6 +2,12 @@
     <div class="carrito__container">
         <div class="carrito__header">
             <h1 class="carrito__title">Mi Cesta</h1>
+            @if (isEnvioGratis && subtotal > 0) {
+            <div class="carrito__free-ship-banner">
+                <i class="bi bi-check-circle-fill"></i>
+                <span>¡Enhorabuena! Has alcanzado el envío gratuito</span>
+            </div>
+            }
         </div>
 
         <!-- Error Banner -->
@@ -25,12 +31,6 @@
 
         <div class="carrito__content">
             @if (items.length > 0 && !loading) {
-            @if (isEnvioGratis && subtotal > 0) {
-            <div class="carrito__free-ship-banner">
-                <i class="bi bi-check-circle-fill"></i>
-                <span>¡Enhorabuena! Has alcanzado el envío gratuito</span>
-            </div>
-            }
 
             <div class="carrito__layout">
                 <div class="carrito__items">

@@ -1,5 +1,10 @@
-.footer {
+:host {
+    display: block;
+    margin-top: auto;
+    width: 100%;
+}
 
+.footer {
     --footer-bg: var(--mls-sys-color-secundario-7);
     --footer-text: var(--mls-sys-color-gris-11);
     --footer-pad-y: var(--mls-sys-padding-1);
@@ -7,18 +12,22 @@
     --footer-gap: var(--mls-sys-gap-3);
     --footer-logo-width: var(--mls-sys-width-4);
     --footer-font-size: var(--mls-sys-font-size-3);
-    --footer-font-family-Article: var(--mls-sys-font-Article, sans-serif);
+    --footer-font-family: var(--mls-sys-font-Article);
+    --footer-full: 100%;
+    --footer-auto: auto;
+    --footer-zero: 0;
+    --footer-z-index: 10;
 
     background: var(--footer-bg);
     color: var(--footer-text);
     padding: var(--footer-pad-y) var(--footer-pad-x);
-    width: 100%;
+    width: var(--footer-full);
     box-sizing: border-box;
-    margin-top: auto;
-    z-index: 10;
+    margin-top: var(--footer-auto);
+    z-index: var(--footer-z-index);
 
     &__inner {
-        margin: 0 auto;
+        margin: var(--footer-zero) var(--footer-auto);
         display: flex;
         align-items: center;
         gap: var(--footer-gap);
@@ -29,10 +38,9 @@
         width: var(--footer-logo-width);
     }
 
-
     &__text {
-        margin: 0;
+        margin: var(--footer-zero);
         font-size: var(--footer-font-size);
-        font-family: var(--footer-font-family-Article);
+        font-family: var(--footer-font-family);
     }
 }
