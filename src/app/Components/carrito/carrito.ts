@@ -1,19 +1,16 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CommonModule, DecimalPipe } from '@angular/common';
+import { CommonModule} from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { CarritoService } from '../../Services/carrito.service';
-<<<<<<< HEAD
-=======
 import { PaymentService } from '../../Services/payment.service';
->>>>>>> local
 import { AuthService } from '../../Services/auth.service';
 import { Cart, CartItem } from '../../Modelos/Cart';
 
 @Component({
   selector: 'app-carrito',
-  imports: [CommonModule, DecimalPipe, FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './carrito.html',
   styleUrl: './carrito.scss',
 })
@@ -31,8 +28,6 @@ export class Carrito implements OnInit, OnDestroy {
   checkoutSuccess = false;
   orderId: number | null = null;
 
-<<<<<<< HEAD
-=======
   cardData = {
     numeroTarjeta: '',
     fechaCaducidad: '',
@@ -40,15 +35,11 @@ export class Carrito implements OnInit, OnDestroy {
     nombreCompleto: ''
   };
 
->>>>>>> local
   private subscriptions: Subscription[] = [];
 
   constructor(
     private carritoService: CarritoService,
-<<<<<<< HEAD
-=======
     private paymentService: PaymentService,
->>>>>>> local
     private authService: AuthService,
     private router: Router
   ) { }
@@ -146,15 +137,12 @@ export class Carrito implements OnInit, OnDestroy {
     this.showCheckoutModal = true;
     this.checkoutSuccess = false;
     this.shippingAddress = '';
-<<<<<<< HEAD
-=======
     this.cardData = {
       numeroTarjeta: '',
       fechaCaducidad: '',
       cvc: '',
       nombreCompleto: ''
     };
->>>>>>> local
   }
 
   closeCheckoutModal() {
@@ -171,12 +159,6 @@ export class Carrito implements OnInit, OnDestroy {
       return;
     }
 
-<<<<<<< HEAD
-    this.carritoService.checkout(this.shippingAddress).subscribe(order => {
-      if (order) {
-        this.checkoutSuccess = true;
-        this.orderId = order.id;
-=======
     if (!this.cardData.numeroTarjeta.trim()) {
       this.error = 'Por favor, ingresa el número de tarjeta';
       return;
@@ -197,11 +179,9 @@ export class Carrito implements OnInit, OnDestroy {
       return;
     }
 
-    // Activar loading
     this.loading = true;
     this.error = null;
 
-    // Primero procesar el pago
     const paymentRequest = {
       cardData: this.cardData,
       amount: this.totalConEnvio,
@@ -216,7 +196,6 @@ export class Carrito implements OnInit, OnDestroy {
           return;
         }
 
-        // Si el pago fue exitoso, proceder con el checkout
         this.carritoService.checkout(this.shippingAddress).subscribe(order => {
           this.loading = false;
           if (order) {
@@ -231,7 +210,6 @@ export class Carrito implements OnInit, OnDestroy {
         this.loading = false;
         console.error('Payment Error:', error);
         this.error = 'Error al procesar el pago. Por favor, intenta nuevamente.';
->>>>>>> local
       }
     });
   }

@@ -38,7 +38,6 @@ export class MisPedidos implements OnInit {
     this.carritoService.getUserOrders(userId).subscribe({
       next: (orders) => {
         this.orders = orders.sort((a, b) => {
-          // Ordenar por fecha descendente (más reciente primero)
           return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
         });
         this.loading = false;

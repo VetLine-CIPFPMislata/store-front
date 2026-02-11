@@ -475,8 +475,6 @@
         font-size: 14px;
         color: var(--carrito-text-sec);
         margin-bottom: 20px;
-<<<<<<< HEAD
-=======
     }
 
     &__modal-body {
@@ -506,7 +504,6 @@
                 background: var(--brand-primary-hover);
             }
         }
->>>>>>> local
     }
 
     &__modal-text {
@@ -598,8 +595,6 @@
             color: var(--carrito-text-muted);
         }
     }
-<<<<<<< HEAD
-=======
     
     &__address-input {
         width: 100%;
@@ -684,7 +679,6 @@
             opacity: 0.6;
         }
     }
->>>>>>> local
 
     &__checkout-summary {
         background: var(--bg-secondary);
@@ -834,14 +828,10 @@
     }
 
     .cart-item {
-<<<<<<< HEAD
-        grid-template-columns: var(--image-size-mobile) 1fr auto;
-=======
         grid-template-columns: var(--image-size-mobile) 1fr;
         grid-template-rows: auto auto;
         gap: var(--carrito-gap-3);
         padding: var(--carrito-padding-3);
->>>>>>> local
 
         &__image {
             width: var(--image-size-mobile);

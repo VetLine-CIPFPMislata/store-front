@@ -187,16 +187,6 @@
             <div class="carrito__modal-body">
                 <h3 class="carrito__modal-title">Dirección de envío</h3>
                 <p class="carrito__modal-subtitle">Introduce la dirección donde quieres recibir tu pedido</p>
-<<<<<<< HEAD
-                <textarea 
-                    class="carrito__address-input" 
-                    [(ngModel)]="shippingAddress"
-                    placeholder="Ej: Calle Principal 123, 28001 Madrid, España"
-                    rows="3"
-                    [disabled]="loading">
-                </textarea>
-                
-=======
                 <textarea class="carrito__address-input" [(ngModel)]="shippingAddress"
                     placeholder="Ej: Calle Principal 123, 28001 Madrid, España" rows="5" [disabled]="loading">
                 </textarea>
@@ -255,7 +245,6 @@
                     </div>
                 </div>
 
->>>>>>> local
                 <div class="carrito__checkout-summary">
                     <div class="carrito__checkout-row">
                         <span>Subtotal:</span>
@@ -273,12 +262,8 @@
             </div>
             <div class="carrito__modal-footer">
                 <button class="carrito__btn-cancel" (click)="closeCheckoutModal()">Cancelar</button>
-<<<<<<< HEAD
-                <button class="carrito__btn-confirm carrito__btn-confirm--primary" (click)="confirmCheckout()" [disabled]="loading || !shippingAddress.trim()">
-=======
                 <button class="carrito__btn-confirm carrito__btn-confirm--primary" (click)="confirmCheckout()"
                     [disabled]="loading || !shippingAddress.trim() || !cardData.numeroTarjeta.trim() || !cardData.fechaCaducidad.trim() || !cardData.cvc.trim() || !cardData.nombreCompleto.trim()">
->>>>>>> local
                     @if (loading) {
                     <span class="carrito__btn-spinner"></span>
                     Procesando...
