@@ -43,6 +43,7 @@
                         <div class="cart-item__details">
                             <h3 class="cart-item__name">{{ item.product.name }}</h3>
                             <p class="cart-item__description">{{ item.product.productDescription }}</p>
+<<<<<<< HEAD
 
                             <div class="cart-item__pricing">
                                 @if (item.product.discountPercentage > 0) {
@@ -54,6 +55,8 @@
                                 <span class="cart-item__price">{{ item.product.price | number:'1.2-2' }} €</span>
                                 }
                             </div>
+=======
+>>>>>>> local
 
                             <div class="cart-item__controls">
                                 <div class="cart-item__quantity-pill">
@@ -65,12 +68,30 @@
                                         (click)="increaseQuantity(item.id, item.quantity)"
                                         [disabled]="loading">+</button>
                                 </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> local
                                 <span class="cart-item__subtotal">
                                     Subtotal: {{ (item.product.price * item.quantity) | number:'1.2-2' }} €
                                 </span>
                             </div>
                         </div>
+<<<<<<< HEAD
+=======
+
+                        <div class="cart-item__pricing">
+                            @if (item.product.discountPercentage > 0) {
+                            <span class="cart-item__price--offer">{{ item.product.price | number:'1.2-2' }} €</span>
+                            <span class="cart-item__price--original">{{ item.product.basePrice | number:'1.2-2' }}
+                                €</span>
+                            <span class="cart-item__discount-badge">-{{ item.product.discountPercentage }}%</span>
+                            } @else {
+                            <span class="cart-item__price">{{ item.product.price | number:'1.2-2' }} €</span>
+                            }
+                        </div>
+
+>>>>>>> local
                         <button class="cart-item__remove" (click)="removeItem(item.id)" title="Eliminar"
                             [disabled]="loading">
                             <i class="bi bi-trash3"></i>
@@ -166,6 +187,7 @@
             <div class="carrito__modal-body">
                 <h3 class="carrito__modal-title">Dirección de envío</h3>
                 <p class="carrito__modal-subtitle">Introduce la dirección donde quieres recibir tu pedido</p>
+<<<<<<< HEAD
                 <textarea 
                     class="carrito__address-input" 
                     [(ngModel)]="shippingAddress"
@@ -174,6 +196,66 @@
                     [disabled]="loading">
                 </textarea>
                 
+=======
+                <textarea class="carrito__address-input" [(ngModel)]="shippingAddress"
+                    placeholder="Ej: Calle Principal 123, 28001 Madrid, España" rows="5" [disabled]="loading">
+                </textarea>
+
+                <div class="carrito__payment-section">
+                    <h4 class="carrito__payment-title">
+                        <i class="bi bi-credit-card"></i>
+                        Datos de pago
+                    </h4>
+
+                    <div class="carrito__payment-form">
+                        <div class="carrito__form-group">
+                            <label class="carrito__form-label">Número de tarjeta</label>
+                            <input
+                                type="text"
+                                class="carrito__form-input"
+                                [(ngModel)]="cardData.numeroTarjeta"
+                                placeholder="1234 5678 9012 3456"
+                                maxlength="19"
+                                [disabled]="loading">
+                        </div>
+
+                        <div class="carrito__form-group">
+                            <label class="carrito__form-label">Nombre del titular</label>
+                            <input
+                                type="text"
+                                class="carrito__form-input"
+                                [(ngModel)]="cardData.nombreCompleto"
+                                placeholder="Nombre completo como aparece en la tarjeta"
+                                [disabled]="loading">
+                        </div>
+
+                        <div class="carrito__form-row">
+                            <div class="carrito__form-group carrito__form-group--half">
+                                <label class="carrito__form-label">Fecha de caducidad</label>
+                                <input
+                                    type="text"
+                                    class="carrito__form-input"
+                                    [(ngModel)]="cardData.fechaCaducidad"
+                                    placeholder="AAAA-MM"
+                                    maxlength="7"
+                                    [disabled]="loading">
+                            </div>
+
+                            <div class="carrito__form-group carrito__form-group--half">
+                                <label class="carrito__form-label">CVC</label>
+                                <input
+                                    type="text"
+                                    class="carrito__form-input"
+                                    [(ngModel)]="cardData.cvc"
+                                    placeholder="123"
+                                    maxlength="4"
+                                    [disabled]="loading">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+>>>>>>> local
                 <div class="carrito__checkout-summary">
                     <div class="carrito__checkout-row">
                         <span>Subtotal:</span>
@@ -191,7 +273,12 @@
             </div>
             <div class="carrito__modal-footer">
                 <button class="carrito__btn-cancel" (click)="closeCheckoutModal()">Cancelar</button>
+<<<<<<< HEAD
                 <button class="carrito__btn-confirm carrito__btn-confirm--primary" (click)="confirmCheckout()" [disabled]="loading || !shippingAddress.trim()">
+=======
+                <button class="carrito__btn-confirm carrito__btn-confirm--primary" (click)="confirmCheckout()"
+                    [disabled]="loading || !shippingAddress.trim() || !cardData.numeroTarjeta.trim() || !cardData.fechaCaducidad.trim() || !cardData.cvc.trim() || !cardData.nombreCompleto.trim()">
+>>>>>>> local
                     @if (loading) {
                     <span class="carrito__btn-spinner"></span>
                     Procesando...

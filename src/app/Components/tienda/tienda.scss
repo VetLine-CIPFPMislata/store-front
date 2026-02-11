@@ -43,6 +43,9 @@
 
     &__sidebar {
         width: var(--tienda-sidebar-width);
+        position: sticky;
+        top: var(--tienda-padding-large);
+        height: fit-content;
 
         &-title {
             font-size: var(--tienda-font-size-large);

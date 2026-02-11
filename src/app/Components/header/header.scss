@@ -11,11 +11,17 @@
   --header-badge-text: var(--mls-sys-color-gris-1);
   --header-dropdown-bg: var(--mls-sys-color-gris-1);
   --header-dropdown-item-hover: var(--mls-sys-color-primario-1);
+<<<<<<< HEAD
   --header-dropdown-item-color: var(--mls-sys-color-primario-5);
   --header-dropdown-divider-color: var(--mls-sys-color-gris-3);
   --header-logout-color: var(--mls-sys-color-error-1);
 
   // Paddings
+=======
+  --header-dropdown-item-color: var(--mls-sys-color-primario-11);
+  --header-dropdown-divider-color: var(--mls-sys-color-gris-3);
+  --header-logout-color: var(--mls-sys-color-rojo-7);
+>>>>>>> local
   --header-padding: var(--mls-sys-padding-2);
   --header-padding-right: var(--mls-sys-padding-5);
   --header-link-padding-y: var(--mls-sys-padding-1);
@@ -23,6 +29,7 @@
   --header-dropdown-header-padding: var(--mls-sys-padding-3);
   --header-dropdown-item-padding-y: var(--mls-sys-padding-2);
   --header-dropdown-item-padding-x: var(--mls-sys-padding-3);
+<<<<<<< HEAD
 
   // Margins
   --header-icon-margin-right: var(--mls-sys-margin-4);
@@ -43,6 +50,18 @@
   --header-dropdown-shadow: var(--mls-sys-box-shadow-3);
 
   // Fonts
+=======
+  --header-icon-margin-right: var(--mls-sys-margin-4);
+  --header-divider-margin: var(--mls-sys-margin-1);
+  --header-gap: var(--mls-sys-gap-6);
+  --header-login-gap: var(--mls-sys-gap-2);
+  --header-dropdown-item-gap: var(--mls-sys-gap-3);
+  --header-border-radius: var(--mls-sys-border-radius-3);
+  --header-badge-radius: var(--mls-sys-border-radius-8);
+  --header-shadow: var(--mls-sys-box-shadow-2);
+  --header-badge-shadow: var(--mls-sys-box-shadow-1);
+  --header-dropdown-shadow: var(--mls-sys-box-shadow-3);
+>>>>>>> local
   --header-font-family: var(--mls-sys-font-header, sans-serif);
   --header-font-family-cart: var(--mls-sys-font-Article, sans-serif);
   --header-link-font-size: var(--mls-sys-font-size-5);
@@ -51,16 +70,22 @@
   --header-user-name-font-size: var(--mls-sys-font-size-4);
   --header-dropdown-item-font-size: var(--mls-sys-font-size-4);
   --header-dropdown-icon-font-size: var(--mls-sys-font-size-5);
+<<<<<<< HEAD
 
   // Sizes
+=======
+>>>>>>> local
   --header-logo-height: var(--mls-sys-height-4);
   --header-icon-height: var(--mls-sys-height-3);
   --header-badge-size: var(--mls-sys-width-2);
   --header-badge-offset: -8px;
   --header-dropdown-min-width: 200px;
   --header-divider-height: 1px;
+<<<<<<< HEAD
 
   // Transitions
+=======
+>>>>>>> local
   --header-transition: 0.3s ease;
   --header-transition-fast: 0.2s ease;
 
@@ -71,6 +96,11 @@
   background-color: var(--header-bg-color);
   box-shadow: var(--header-shadow);
   font-family: var(--header-font-family);
+  position: relative;
+  z-index: 1000;
+  width: 100%;
+  flex-shrink: 0;
+
 
   &__left {
     display: flex;
@@ -256,8 +286,16 @@
     opacity: 0;
     transform: translateY(-10px);
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> local
   to {
     opacity: 1;
     transform: translateY(0);
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> local

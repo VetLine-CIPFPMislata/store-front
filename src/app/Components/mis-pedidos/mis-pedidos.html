@@ -76,12 +76,24 @@
   <div class="mis-pedidos__modal-overlay" (click)="closeOrderDetails()">
     <div class="mis-pedidos__modal" (click)="$event.stopPropagation()">
       <div class="mis-pedidos__modal-header">
+<<<<<<< HEAD
         <h2 class="mis-pedidos__modal-title">Detalles del Pedido #{{ selectedOrder.id }}</h2>
+=======
+        <div class="mis-pedidos__modal-header-left">
+          <h2 class="mis-pedidos__modal-title">Detalles del Pedido</h2>
+          <span class="mis-pedidos__modal-order-number">#{{ selectedOrder.id }}</span>
+          <span
+            class="mis-pedidos__modal-status-pill mis-pedidos__modal-status-pill--{{ getStateColor(selectedOrder.state) }}">
+            {{ getStateLabel(selectedOrder.state) }}
+          </span>
+        </div>
+>>>>>>> local
         <button class="mis-pedidos__modal-close" (click)="closeOrderDetails()">
           <i class="mis-pedidos__modal-close-icon bi bi-x-lg"></i>
         </button>
       </div>
 
+<<<<<<< HEAD
       <div class="mis-pedidos__modal-body">
         <div class="mis-pedidos__modal-section">
           <h3 class="mis-pedidos__modal-section-title">Información del Pedido</h3>
@@ -117,16 +129,76 @@
                 </div>
               </div>
               <div class="mis-pedidos__modal-product-total">
+=======
+      <div class="mis-pedidos__modal-status-banner">
+        <i class="bi bi-check-circle-fill"></i>
+        <span>Tu pedido ha sido {{ getStateLabel(selectedOrder.state).toLowerCase() }} con éxito</span>
+      </div>
+
+      <div class="mis-pedidos__modal-body">
+        <div class="mis-pedidos__modal-info-grid">
+          <div class="mis-pedidos__modal-info-block">
+            <h3 class="mis-pedidos__modal-block-title"><i class="bi bi-geo-alt"></i> Envío a</h3>
+            <p class="mis-pedidos__modal-block-value">{{ selectedOrder.address }}</p>
+          </div>
+          <div class="mis-pedidos__modal-info-block">
+            <h3 class="mis-pedidos__modal-block-title"><i class="bi bi-calendar3"></i> Realizado el</h3>
+            <p class="mis-pedidos__modal-block-value">{{ formatDate(selectedOrder.createdAt) }}</p>
+          </div>
+        </div>
+
+        <div class="mis-pedidos__modal-products">
+          <h3 class="mis-pedidos__modal-products-title">Resumen de Productos</h3>
+          <div class="mis-pedidos__modal-products-list">
+            @for (item of selectedOrder.items; track item.id) {
+            <div class="mis-pedidos__modal-product">
+              <div class="mis-pedidos__modal-product-left">
+                <img [src]="item.product.pictureProduct" [alt]="item.product.name"
+                  class="mis-pedidos__modal-product-image">
+                <div class="mis-pedidos__modal-product-info">
+                  <h4 class="mis-pedidos__modal-product-name">{{ item.product.name }}</h4>
+                  <p class="mis-pedidos__modal-product-quantity">
+                    {{ item.quantity }} x {{ (item.unitPrice || item.product.price) | number:'1.2-2' }}€
+                  </p>
+                </div>
+              </div>
+              <div class="mis-pedidos__modal-product-total-price">
+>>>>>>> local
                 {{ (item.quantity * (item.unitPrice || item.product.price)) | number:'1.2-2' }}€
               </div>
             </div>
             }
           </div>
         </div>
+<<<<<<< HEAD
 
         <div class="mis-pedidos__modal-footer">
           <div class="mis-pedidos__modal-total">
             <span class="mis-pedidos__modal-total-label">Total del Pedido:</span>
+=======
+      </div>
+
+      <div class="mis-pedidos__modal-footer">
+        <div class="mis-pedidos__modal-summary">
+          <div class="mis-pedidos__modal-summary-line">
+            <span>Subtotal</span>
+            <span>{{ selectedOrder.totalPrice | number:'1.2-2' }}€</span>
+          </div>
+          <div class="mis-pedidos__modal-summary-line">
+            <span>Gastos de envío</span>
+            <span class="mis-pedidos__text-free">Gratis (0.00€)</span>
+          </div>
+        </div>
+
+        <div class="mis-pedidos__modal-footer-bottom">
+          <div class="mis-pedidos__modal-footer-actions">
+            <button class="mis-pedidos__modal-btn-close" (click)="closeOrderDetails()">
+              Cerrar
+            </button>
+          </div>
+          <div class="mis-pedidos__modal-total">
+            <span class="mis-pedidos__modal-total-label">Total</span>
+>>>>>>> local
             <span class="mis-pedidos__modal-total-amount">{{ selectedOrder.totalPrice | number:'1.2-2' }}€</span>
           </div>
         </div>
@@ -134,4 +206,8 @@
     </div>
   </div>
   }
+<<<<<<< HEAD
 </div>
+=======
+</div>
+>>>>>>> local

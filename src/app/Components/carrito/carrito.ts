@@ -4,6 +4,10 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { CarritoService } from '../../Services/carrito.service';
+<<<<<<< HEAD
+=======
+import { PaymentService } from '../../Services/payment.service';
+>>>>>>> local
 import { AuthService } from '../../Services/auth.service';
 import { Cart, CartItem } from '../../Modelos/Cart';
 
@@ -27,10 +31,24 @@ export class Carrito implements OnInit, OnDestroy {
   checkoutSuccess = false;
   orderId: number | null = null;
 
+<<<<<<< HEAD
+=======
+  cardData = {
+    numeroTarjeta: '',
+    fechaCaducidad: '',
+    cvc: '',
+    nombreCompleto: ''
+  };
+
+>>>>>>> local
   private subscriptions: Subscription[] = [];
 
   constructor(
     private carritoService: CarritoService,
+<<<<<<< HEAD
+=======
+    private paymentService: PaymentService,
+>>>>>>> local
     private authService: AuthService,
     private router: Router
   ) { }
@@ -128,6 +146,15 @@ export class Carrito implements OnInit, OnDestroy {
     this.showCheckoutModal = true;
     this.checkoutSuccess = false;
     this.shippingAddress = '';
+<<<<<<< HEAD
+=======
+    this.cardData = {
+      numeroTarjeta: '',
+      fechaCaducidad: '',
+      cvc: '',
+      nombreCompleto: ''
+    };
+>>>>>>> local
   }
 
   closeCheckoutModal() {
@@ -144,10 +171,67 @@ export class Carrito implements OnInit, OnDestroy {
       return;
     }
 
+<<<<<<< HEAD
     this.carritoService.checkout(this.shippingAddress).subscribe(order => {
       if (order) {
         this.checkoutSuccess = true;
         this.orderId = order.id;
+=======
+    if (!this.cardData.numeroTarjeta.trim()) {
+      this.error = 'Por favor, ingresa el número de tarjeta';
+      return;
+    }
+
+    if (!this.cardData.fechaCaducidad.trim()) {
+      this.error = 'Por favor, ingresa la fecha de caducidad';
+      return;
+    }
+
+    if (!this.cardData.cvc.trim()) {
+      this.error = 'Por favor, ingresa el CVC';
+      return;
+    }
+
+    if (!this.cardData.nombreCompleto.trim()) {
+      this.error = 'Por favor, ingresa el nombre del titular';
+      return;
+    }
+
+    // Activar loading
+    this.loading = true;
+    this.error = null;
+
+    // Primero procesar el pago
+    const paymentRequest = {
+      cardData: this.cardData,
+      amount: this.totalConEnvio,
+      concept: `Pedido de ${this.cart?.totalProducts || 0} productos`
+    };
+
+    this.paymentService.processCardPayment(paymentRequest).subscribe({
+      next: (paymentResult) => {
+        if (!paymentResult.success) {
+          this.loading = false;
+          this.error = paymentResult.message || 'El pago fue rechazado. Verifica los datos de tu tarjeta.';
+          return;
+        }
+
+        // Si el pago fue exitoso, proceder con el checkout
+        this.carritoService.checkout(this.shippingAddress).subscribe(order => {
+          this.loading = false;
+          if (order) {
+            this.checkoutSuccess = true;
+            this.orderId = order.id;
+          } else {
+            this.error = 'Error al crear el pedido. Por favor, contacta con soporte.';
+          }
+        });
+      },
+      error: (error) => {
+        this.loading = false;
+        console.error('Payment Error:', error);
+        this.error = 'Error al procesar el pago. Por favor, intenta nuevamente.';
+>>>>>>> local
       }
     });
   }
