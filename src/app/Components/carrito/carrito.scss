@@ -595,6 +595,15 @@
             color: var(--carrito-text-muted);
         }
     }
+    
+    &__address-input {
+        width: 100%;
+        padding: 20px 18px;             
+        border-radius: var(--carrito-border-radius-3);
+        font-size: 13px;                           
+        min-height: 70px;              
+        transition: all 0.2s ease;
+}
 
     &__payment-section {
         margin-top: 14px;

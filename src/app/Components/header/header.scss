@@ -1,5 +1,4 @@
 .header {
-  // Colores
   --header-bg-color: var(--mls-sys-color-secundario-7);
   --header-text-color: var(--mls-sys-color-gris-1);
   --header-link-color-title: var(--mls-sys-color-gris-11);
@@ -14,8 +13,6 @@
   --header-dropdown-item-color: var(--mls-sys-color-primario-11);
   --header-dropdown-divider-color: var(--mls-sys-color-gris-3);
   --header-logout-color: var(--mls-sys-color-rojo-7);
-
-  // Paddings
   --header-padding: var(--mls-sys-padding-2);
   --header-padding-right: var(--mls-sys-padding-5);
   --header-link-padding-y: var(--mls-sys-padding-1);
@@ -23,26 +20,16 @@
   --header-dropdown-header-padding: var(--mls-sys-padding-3);
   --header-dropdown-item-padding-y: var(--mls-sys-padding-2);
   --header-dropdown-item-padding-x: var(--mls-sys-padding-3);
-
-  // Margins
   --header-icon-margin-right: var(--mls-sys-margin-4);
   --header-divider-margin: var(--mls-sys-margin-1);
-
-  // Gaps
   --header-gap: var(--mls-sys-gap-6);
   --header-login-gap: var(--mls-sys-gap-2);
   --header-dropdown-item-gap: var(--mls-sys-gap-3);
-
-  // Borders
   --header-border-radius: var(--mls-sys-border-radius-3);
   --header-badge-radius: var(--mls-sys-border-radius-8);
-
-  // Shadows
   --header-shadow: var(--mls-sys-box-shadow-2);
   --header-badge-shadow: var(--mls-sys-box-shadow-1);
   --header-dropdown-shadow: var(--mls-sys-box-shadow-3);
-
-  // Fonts
   --header-font-family: var(--mls-sys-font-header, sans-serif);
   --header-font-family-cart: var(--mls-sys-font-Article, sans-serif);
   --header-link-font-size: var(--mls-sys-font-size-5);
@@ -51,16 +38,12 @@
   --header-user-name-font-size: var(--mls-sys-font-size-4);
   --header-dropdown-item-font-size: var(--mls-sys-font-size-4);
   --header-dropdown-icon-font-size: var(--mls-sys-font-size-5);
-
-  // Sizes
   --header-logo-height: var(--mls-sys-height-4);
   --header-icon-height: var(--mls-sys-height-3);
   --header-badge-size: var(--mls-sys-width-2);
   --header-badge-offset: -8px;
   --header-dropdown-min-width: 200px;
   --header-divider-height: 1px;
-
-  // Transitions
   --header-transition: 0.3s ease;
   --header-transition-fast: 0.2s ease;
 
