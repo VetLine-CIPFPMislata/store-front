@@ -43,20 +43,6 @@
                         <div class="cart-item__details">
                             <h3 class="cart-item__name">{{ item.product.name }}</h3>
                             <p class="cart-item__description">{{ item.product.productDescription }}</p>
-<<<<<<< HEAD
-
-                            <div class="cart-item__pricing">
-                                @if (item.product.discountPercentage > 0) {
-                                <span class="cart-item__price--offer">{{ item.product.price | number:'1.2-2' }} €</span>
-                                <span class="cart-item__price--original">{{ item.product.basePrice | number:'1.2-2' }}
-                                    €</span>
-                                <span class="cart-item__discount-badge">-{{ item.product.discountPercentage }}%</span>
-                                } @else {
-                                <span class="cart-item__price">{{ item.product.price | number:'1.2-2' }} €</span>
-                                }
-                            </div>
-=======
->>>>>>> local
 
                             <div class="cart-item__controls">
                                 <div class="cart-item__quantity-pill">
@@ -68,17 +54,11 @@
                                         (click)="increaseQuantity(item.id, item.quantity)"
                                         [disabled]="loading">+</button>
                                 </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> local
                                 <span class="cart-item__subtotal">
                                     Subtotal: {{ (item.product.price * item.quantity) | number:'1.2-2' }} €
                                 </span>
                             </div>
                         </div>
-<<<<<<< HEAD
-=======
 
                         <div class="cart-item__pricing">
                             @if (item.product.discountPercentage > 0) {
@@ -91,7 +71,6 @@
                             }
                         </div>
 
->>>>>>> local
                         <button class="cart-item__remove" (click)="removeItem(item.id)" title="Eliminar"
                             [disabled]="loading">
                             <i class="bi bi-trash3"></i>
