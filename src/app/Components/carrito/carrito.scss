@@ -95,16 +95,20 @@
     --carrito-modal-content-width: 90%;
     --carrito-modal-content-shadow: var(--mls-sys-box-shadow-5);
     --carrito-modal-content-checkout-max-width: var(--mls-sys-width-13);
-    --carrito-modal-icon-size: var(--mls-sys-height-4);
-    --carrito-modal-icon-margin: var(--mls-sys-margin-4);
+    --carrito-modal-icon-size: var(--mls-sys-height-3);
+    --carrito-modal-icon-margin: var(--mls-sys-margin-2);
+    --carrito-modal-header-gap: var(--mls-sys-gap-3);
+    --carrito-modal-header-padding: var(--mls-sys-padding-3);
+    --carrito-modal-main-title-font: var(--mls-sys-font-size-6);
+    --carrito-modal-main-title-weight: var(--carrito-font-weight-bold);
     --carrito-modal-title-font: var(--mls-sys-font-size-6);
-    --carrito-modal-title-margin: var(--mls-sys-margin-2);
+    --carrito-modal-title-margin: var(--mls-sys-margin-1);
     --carrito-modal-subtitle-font: var(--mls-sys-font-size-2);
-    --carrito-modal-subtitle-margin: var(--mls-sys-margin-5);
-    --carrito-modal-body-gap: var(--mls-sys-gap-4);
-    --carrito-modal-text-font: var(--mls-sys-font-size-4);
+    --carrito-modal-subtitle-margin: var(--mls-sys-margin-3);
+    --carrito-modal-body-gap: var(--mls-sys-gap-2);
+    --carrito-modal-text-font: var(--mls-sys-font-size-3);
     --carrito-modal-text-margin: var(--mls-sys-margin-6);
-    --carrito-modal-footer-gap: var(--mls-sys-gap-2);
+    --carrito-modal-footer-gap: var(--mls-sys-gap-3);
     --carrito-modal-btn-padding: var(--mls-sys-padding-3);
     --carrito-modal-btn-spinner-size: var(--mls-sys-padding-4);
     --carrito-modal-btn-spinner-border: var(--mls-sys-padding-1);
@@ -181,6 +185,12 @@
         grid-template-columns: var(--carrito-one-fr) var(--sidebar-width);
         gap: var(--carrito-gap-5);
         align-items: start;
+    }
+
+    &__items {
+        display: flex;
+        flex-direction: column;
+        gap: var(--carrito-gap-4);
     }
 
     &__free-ship-banner {
@@ -524,8 +534,7 @@
         left: var(--carrito-zero);
         right: var(--carrito-zero);
         bottom: var(--carrito-zero);
-        background: var(--carrito-modal-overlay-bg);
-        opacity: var(--carrito-modal-overlay-opacity);
+        background: rgba(0, 0, 0, 0.6);
         backdrop-filter: blur(var(--carrito-modal-overlay-blur));
         display: flex;
         align-items: center;
@@ -539,18 +548,39 @@
         border-radius: var(--carrito-border-radius);
         max-width: var(--carrito-modal-content-max-width);
         width: var(--carrito-modal-content-width);
+        max-height: 90vh;
+        overflow-y: auto;
         text-align: center;
         box-shadow: var(--carrito-modal-content-shadow);
+        display: flex;
+        flex-direction: column;
 
         &--checkout {
             max-width: var(--carrito-modal-content-checkout-max-width);
         }
     }
 
+    &__modal-header {
+        display: flex;
+        align-items: center;
+        gap: var(--carrito-modal-header-gap);
+        padding-bottom: var(--carrito-modal-header-padding);
+        border-bottom: var(--border-width) solid var(--border-color);
+        margin-bottom: var(--carrito-modal-body-gap);
+    }
+
+    &__modal-main-title {
+        margin: var(--carrito-zero);
+        font-size: var(--carrito-modal-main-title-font);
+        font-weight: var(--carrito-modal-main-title-weight);
+        color: var(--carrito-text-main);
+        font-family: var(--carrito-font-family);
+    }
+
     &__modal-icon {
         font-size: var(--carrito-modal-icon-size);
         color: var(--text-warning);
-        margin-bottom: var(--carrito-modal-icon-margin);
+        margin: var(--carrito-zero);
 
         &--primary {
             color: var(--brand-primary);
@@ -563,22 +593,20 @@
 
     &__modal-title {
         font-size: var(--carrito-modal-title-font);
-        font-weight: var(--carrito-font-weight-bold);
+        font-weight: var(--carrito-font-weight-medium);
         color: var(--carrito-text-main);
         margin-bottom: var(--carrito-modal-title-margin);
     }
 
-    &__modal-subtitle {
-        font-size: var(--carrito-modal-subtitle-font);
-        color: var(--carrito-text-sec);
-        margin-bottom: var(--carrito-modal-subtitle-margin);
-    }
-
     &__modal-body {
         padding: var(--carrito-zero);
+        color: var(--carrito-text-main);
         display: flex;
         flex-direction: column;
         gap: var(--carrito-modal-body-gap);
+        flex: 1;
+        overflow-y: auto;
+        min-height: var(--carrito-zero);
     }
 
     &__modal-text {
@@ -670,15 +698,15 @@
             color: var(--carrito-text-muted);
         }
     }
-    
+
     &__address-input {
         width: 100%;
-        padding: 20px 18px;             
+        padding: 20px 18px;
         border-radius: var(--carrito-border-radius-3);
-        font-size: 13px;                           
-        min-height: 70px;              
+        font-size: 13px;
+        min-height: 70px;
         transition: all 0.2s ease;
-}
+    }
 
     &__payment-section {
         margin-top: 14px;
@@ -903,4 +931,33 @@
     100% {
         transform: rotate(360deg);
     }
+}
+
+// Estilos personalizados para la barra de scroll del modal
+.carrito__modal-content,
+.carrito__modal-body {
+
+    // Para navegadores WebKit (Chrome, Safari, Edge)
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: var(--bg-secondary);
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: var(--bg-quaternary);
+        border-radius: 10px;
+        transition: background 0.2s ease;
+
+        &:hover {
+            background: var(--bg-quinary);
+        }
+    }
+
+    // Para Firefox
+    scrollbar-width: thin;
+    scrollbar-color: var(--bg-quaternary) var(--bg-secondary);
 }

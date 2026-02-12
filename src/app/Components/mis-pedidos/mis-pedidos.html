@@ -55,7 +55,8 @@
 
             <div class="mis-pedidos__card-total">
               <span class="mis-pedidos__card-total-label">Total:</span>
-              <span class="mis-pedidos__card-total-amount">{{ order.totalPrice | number:'1.2-2' }}€</span>
+              <span class="mis-pedidos__card-total-amount">{{ getTotalWithShipping(order.totalPrice) | number:'1.2-2'
+                }}€</span>
             </div>
           </div>
 

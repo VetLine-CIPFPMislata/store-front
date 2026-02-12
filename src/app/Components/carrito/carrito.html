@@ -138,6 +138,7 @@
         <div class="carrito__modal-content" (click)="$event.stopPropagation()">
             <div class="carrito__modal-header">
                 <i class="bi bi-exclamation-circle carrito__modal-icon"></i>
+                <h2 class="carrito__modal-main-title carrito__modal-main-title--warning">Confirmar borrado</h2>
             </div>
             <div class="carrito__modal-body">
                 <p class="carrito__modal-text">¿Seguro que quieres eliminar este producto?</p>
@@ -162,6 +163,7 @@
             @if (!checkoutSuccess) {
             <div class="carrito__modal-header">
                 <i class="bi bi-truck carrito__modal-icon carrito__modal-icon--primary"></i>
+                <h2 class="carrito__modal-main-title carrito__modal-main-title--primary">Finalizar Compra</h2>
             </div>
             <div class="carrito__modal-body">
                 <h3 class="carrito__modal-title">Dirección de envío</h3>
@@ -179,46 +181,27 @@
                     <div class="carrito__payment-form">
                         <div class="carrito__form-group">
                             <label class="carrito__form-label">Número de tarjeta</label>
-                            <input
-                                type="text"
-                                class="carrito__form-input"
-                                [(ngModel)]="cardData.numeroTarjeta"
-                                placeholder="1234 5678 9012 3456"
-                                maxlength="19"
-                                [disabled]="loading">
+                            <input type="text" class="carrito__form-input" [(ngModel)]="cardData.numeroTarjeta"
+                                placeholder="1234 5678 9012 3456" maxlength="19" [disabled]="loading">
                         </div>
 
                         <div class="carrito__form-group">
                             <label class="carrito__form-label">Nombre del titular</label>
-                            <input
-                                type="text"
-                                class="carrito__form-input"
-                                [(ngModel)]="cardData.nombreCompleto"
-                                placeholder="Nombre completo como aparece en la tarjeta"
-                                [disabled]="loading">
+                            <input type="text" class="carrito__form-input" [(ngModel)]="cardData.nombreCompleto"
+                                placeholder="Nombre completo como aparece en la tarjeta" [disabled]="loading">
                         </div>
 
                         <div class="carrito__form-row">
                             <div class="carrito__form-group carrito__form-group--half">
                                 <label class="carrito__form-label">Fecha de caducidad</label>
-                                <input
-                                    type="text"
-                                    class="carrito__form-input"
-                                    [(ngModel)]="cardData.fechaCaducidad"
-                                    placeholder="AAAA-MM"
-                                    maxlength="7"
-                                    [disabled]="loading">
+                                <input type="text" class="carrito__form-input" [(ngModel)]="cardData.fechaCaducidad"
+                                    placeholder="AAAA-MM" maxlength="7" [disabled]="loading">
                             </div>
 
                             <div class="carrito__form-group carrito__form-group--half">
                                 <label class="carrito__form-label">CVC</label>
-                                <input
-                                    type="text"
-                                    class="carrito__form-input"
-                                    [(ngModel)]="cardData.cvc"
-                                    placeholder="123"
-                                    maxlength="4"
-                                    [disabled]="loading">
+                                <input type="text" class="carrito__form-input" [(ngModel)]="cardData.cvc"
+                                    placeholder="123" maxlength="4" [disabled]="loading">
                             </div>
                         </div>
                     </div>

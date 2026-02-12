@@ -52,4 +52,12 @@ export class OrderDetailComponent {
                 return state;
         }
     }
+
+    getShippingCost(total: number): number {
+        return total >= 20 ? 0 : 4.99;
+    }
+
+    getTotalWithShipping(total: number): number {
+        return total + this.getShippingCost(total);
+    }
 }

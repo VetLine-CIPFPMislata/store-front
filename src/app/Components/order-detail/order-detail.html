@@ -63,7 +63,11 @@
                 </div>
                 <div class="order-detail-summary-line">
                     <span>Gastos de envío</span>
+                    @if (getShippingCost(order.totalPrice) === 0) {
                     <span class="order-detail-text-free">Gratis (0.00€)</span>
+                    } @else {
+                    <span>{{ getShippingCost(order.totalPrice) | number:'1.2-2' }}€</span>
+                    }
                 </div>
             </div>
 
@@ -75,7 +79,8 @@
                 </div>
                 <div class="order-detail-total">
                     <span class="order-detail-total-label">Total</span>
-                    <span class="order-detail-total-amount">{{ order.totalPrice | number:'1.2-2' }}€</span>
+                    <span class="order-detail-total-amount">{{ getTotalWithShipping(order.totalPrice) | number:'1.2-2'
+                        }}€</span>
                 </div>
             </div>
         </div>
