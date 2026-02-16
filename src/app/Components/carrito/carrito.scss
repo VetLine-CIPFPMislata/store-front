@@ -933,11 +933,9 @@
     }
 }
 
-// Estilos personalizados para la barra de scroll del modal
 .carrito__modal-content,
 .carrito__modal-body {
 
-    // Para navegadores WebKit (Chrome, Safari, Edge)
     &::-webkit-scrollbar {
         width: 8px;
     }
@@ -957,7 +955,6 @@
         }
     }
 
-    // Para Firefox
     scrollbar-width: thin;
     scrollbar-color: var(--bg-quaternary) var(--bg-secondary);
 }

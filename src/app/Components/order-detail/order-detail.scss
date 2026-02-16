@@ -216,10 +216,6 @@
         gap: var(--order-padding-2xl);
         margin-bottom: var(--order-margin-xl);
 
-        @media (max-width: 600px) {
-            grid-template-columns: var(--order-one-fr);
-            gap: var(--order-gap-lg);
-        }
     }
 
     .order-detail-info-block {

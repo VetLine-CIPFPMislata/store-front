@@ -11,7 +11,7 @@ import { CarritoService } from '../../Services/carrito.service';
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })
-export class Header implements OnInit, OnDestroy {
+export class Header {
   private authService = inject(AuthService);
   private router = inject(Router);
   private carritoService = inject(CarritoService);
@@ -31,9 +31,7 @@ export class Header implements OnInit, OnDestroy {
       this.authService.authStatus$.subscribe(status => {
         this.isLoggedIn = status;
         if (status) {
-          // Cargar el carrito cuando el usuario inicia sesión
           this.carritoService.loadCart().subscribe();
-          // Cargar el nombre del usuario
           this.userName = this.authService.getUserName();
         } else {
           this.userName = null;

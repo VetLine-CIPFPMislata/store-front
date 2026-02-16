@@ -21,9 +21,7 @@
 
     @if (user && !loading) {
     <div class="perfil__content">
-      <!-- Sección Superior: Avatar y Datos Personales -->
       <div class="perfil__grid">
-        <!-- Columna Izquierda: Avatar y Acciones -->
         <div class="perfil__sidebar">
           <div class="perfil__avatar-wrapper">
             <div class="perfil__avatar">
@@ -40,7 +38,6 @@
           </div>
         </div>
 
-        <!-- Columna Derecha: Datos Detallados -->
         <div class="perfil__details">
           <section class="perfil__section">
             <h3 class="perfil__section-title"><i class="bi bi-person-bounding-box"></i> Datos Personales</h3>
@@ -64,11 +61,9 @@
         </div>
       </div>
 
-      <!-- Sección Inferior: Dashboard / Accesos Rápidos -->
       <div class="perfil__dashboard">
         <h3 class="perfil__section-title">Mi Actividad</h3>
         <div class="perfil__cards">
-          <!-- Card: Último Pedido -->
           <div class="perfil__card" [class.perfil__card--disabled]="!lastOrder"
             (click)="lastOrder && viewOrderDetails(lastOrder)">
             <div class="perfil__card-icon">

@@ -67,7 +67,6 @@ export interface OrderItem {
     product: Product;
 }
 
-// Interfaces para pagos
 export interface PaymentRequest {
     cardData: PaymentCardData;
     amount: number;

@@ -14,7 +14,7 @@ import { Cart, CartItem } from '../../Modelos/Cart';
   templateUrl: './carrito.html',
   styleUrl: './carrito.scss',
 })
-export class Carrito implements OnInit, OnDestroy {
+export class Carrito {
   cart: Cart | null = null;
   loading: boolean = false;
   error: string | null = null;
@@ -179,11 +179,9 @@ export class Carrito implements OnInit, OnDestroy {
       return;
     }
 
-    // Activar loading
     this.loading = true;
     this.error = null;
 
-    // Primero procesar el pago
     const paymentRequest = {
       cardData: this.cardData,
       amount: this.totalConEnvio,
@@ -198,7 +196,6 @@ export class Carrito implements OnInit, OnDestroy {
           return;
         }
 
-        // Si el pago fue exitoso, proceder con el checkout
         this.carritoService.checkout(this.shippingAddress).subscribe(order => {
           this.loading = false;
           if (order) {

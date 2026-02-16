@@ -12,7 +12,7 @@ import { Articulo } from '../../Modelos/Articulo';
   templateUrl: './product.html',
   styleUrl: './product.scss',
 })
-export class Product implements OnInit {
+export class Product {
   product: Articulo | null = null;
   quantity: number = 1;
   selectedImage: string = '';
@@ -29,7 +29,6 @@ export class Product implements OnInit {
 
 
   ngOnInit(): void {
-    //arreglar esto 
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.loadProduct(Number(id));
@@ -90,7 +89,7 @@ export class Product implements OnInit {
         next: (cart) => {
           this.isAddingToCart = false;
           if (cart) {
-            this.quantity = 1; // Reset quantity after adding
+            this.quantity = 1;
           }
         },
         error: () => {
