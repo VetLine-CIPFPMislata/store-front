@@ -1,34 +1,34 @@
-<div class="product">
+<div class="c-product">
     @if (isLoading) {
-    <div class="product__loading">
+    <div class="c-product__loading">
         <p>Cargando producto...</p>
     </div>
     }
 
     @if (error && !isLoading) {
-    <div class="product__error">
+    <div class="c-product__error">
         <p>{{ error }}</p>
-        <button class="product__back-btn" (click)="router.navigate(['/inicio'])">
+        <button class="c-product__back-btn" (click)="router.navigate(['/inicio'])">
             Volver al inicio
         </button>
     </div>
     }
 
     @if (product && !isLoading) {
-    <div class="product__container">
-        <div class="product__gallery">
-            <div class="product__main-image">
+    <div class="c-product__container">
+        <div class="c-product__gallery">
+            <div class="c-product__main-image">
                 <img [src]="selectedImage" [alt]="product.name" />
             </div>
         </div>
 
-        <div class="product__info">
-            <div class="product__category">{{ product.category.name }}</div>
-            <h1 class="product__title">{{ product.name }}</h1>
+        <div class="c-product__info">
+            <div class="c-product__category">{{ product.category.name }}</div>
+            <h1 class="c-product__title">{{ product.name }}</h1>
 
             @if (product.rating) {
-            <div class="product__rating">
-                <span class="product__stars">
+            <div class="c-product__rating">
+                <span class="c-product__stars">
                     @for (star of getStars(product.rating); track $index) {
                     <span>{{ star }}</span>
                     }
@@ -36,47 +36,47 @@
             </div>
             }
 
-            <p class="product__description">{{ product.productDescription }}</p>
+            <p class="c-product__description">{{ product.productDescription }}</p>
 
-            <div class="product__pricing">
-                <span class="product__price">{{ product.price | number:'1.2-2' }}€</span>
+            <div class="c-product__pricing">
+                <span class="c-product__price">{{ product.price | number:'1.2-2' }}€</span>
                 @if (product.basePrice && product.basePrice > product.price) {
-                <span class="product__original-price">
+                <span class="c-product__original-price">
                     {{ product.basePrice | number:'1.2-2' }}€
                 </span>
-                <span class="product__discount">
+                <span class="c-product__discount">
                     -{{ getDiscountPercentage() }}%
                 </span>
                 }
             </div>
 
-            <div class="product__stock">
+            <div class="c-product__stock">
                 @if ((product.quantity || 0) > 0) {
-                <span class="product__stock--available">
+                <span class="c-product__stock--available">
                     ✓ {{ product.quantity || 'Muchas' }} unidades disponibles
                 </span>
                 } @else {
-                <span class="product__stock--unavailable">
+                <span class="c-product__stock--unavailable">
                     ✗ Producto agotado
                 </span>
                 }
             </div>
 
-            <div class="product__actions">
-                <div class="product__quantity">
-                    <button class="product__quantity-btn" (click)="decrementQuantity()" [disabled]="quantity <= 1">
+            <div class="c-product__actions">
+                <div class="c-product__quantity">
+                    <button class="c-product__quantity-btn" (click)="decrementQuantity()" [disabled]="quantity <= 1">
                         −
                     </button>
-                    <span class="product__quantity-value">{{ quantity }}</span>
-                    <button class="product__quantity-btn" (click)="incrementQuantity()"
+                    <span class="c-product__quantity-value">{{ quantity }}</span>
+                    <button class="c-product__quantity-btn" (click)="incrementQuantity()"
                         [disabled]="quantity >= (product.quantity || 100)">
                         +
                     </button>
                 </div>
-                <button class="product__add-to-cart" (click)="addToCart()"
+                <button class="c-product__add-to-cart" (click)="addToCart()"
                     [disabled]="!product.quantity || product.quantity === 0 || isAddingToCart">
                     @if (isAddingToCart) {
-                    <span class="spinner"></span> Añadiendo...
+                    <span class="c-product__spinner"></span> Añadiendo...
                     } @else {
                     Añadir al carrito
                     }
@@ -84,7 +84,7 @@
             </div>
         </div>
     </div>
-    <button class="product__back-btn" (click)="router.navigate(['/tienda'])">
+    <button class="c-product__back-btn" (click)="router.navigate(['/tienda'])">
         Volver al inicio
     </button>
     }

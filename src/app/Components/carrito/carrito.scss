@@ -1,4 +1,4 @@
-.carrito {
+.c-carrito {
     --carrito-bg: var(--mls-sys-color-gris-2);
     --carrito-card-bg: var(--mls-sys-color-gris-1);
     --carrito-text-main: var(--mls-sys-color-gris-10);
@@ -152,6 +152,8 @@
     --carrito-transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --carrito-transition-fast: 0.2s ease;
 
+    --carrito-one-fr: 1fr;
+
     min-height: calc(var(--carrito-height-full) - var(--carrito-height-header-offset));
     background-color: var(--carrito-bg);
     padding: var(--carrito-padding-y) var(--carrito-padding-x);
@@ -178,13 +180,6 @@
         font-weight: var(--carrito-font-weight-extrabold);
         color: var(--carrito-text-main);
         margin: var(--carrito-zero);
-    }
-
-    &__layout {
-        display: grid;
-        grid-template-columns: var(--carrito-one-fr) var(--sidebar-width);
-        gap: var(--carrito-gap-5);
-        align-items: start;
     }
 
     &__items {
@@ -264,7 +259,14 @@
     }
 }
 
-.cart-item {
+.l-carrito-grid {
+    display: grid;
+    grid-template-columns: var(--carrito-one-fr) var(--sidebar-width);
+    gap: var(--carrito-gap-5);
+    align-items: start;
+}
+
+.c-cart-item {
     display: grid;
     grid-template-columns: var(--image-size) 1fr auto auto;
     gap: var(--carrito-gap-5);
@@ -439,7 +441,7 @@
     }
 }
 
-.summary {
+.c-order-summary {
     background: var(--carrito-card-bg);
     border-radius: var(--carrito-border-radius);
     padding: var(--carrito-padding-5);
@@ -515,7 +517,7 @@
             letter-spacing: var(--carrito-summary-trust-p-spacing);
         }
 
-        .badges {
+        &-badges {
             display: flex;
             justify-content: center;
             gap: var(--carrito-summary-trust-badges-gap);
@@ -557,6 +559,31 @@
 
         &--checkout {
             max-width: var(--carrito-modal-content-checkout-max-width);
+        }
+
+        &,
+        &+.c-carrito__modal-body {
+            &::-webkit-scrollbar {
+                width: 8px;
+            }
+
+            &::-webkit-scrollbar-track {
+                background: var(--bg-secondary);
+                border-radius: 10px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background: var(--bg-quaternary);
+                border-radius: 10px;
+                transition: background 0.2s ease;
+
+                &:hover {
+                    background: var(--bg-quinary);
+                }
+            }
+
+            scrollbar-width: thin;
+            scrollbar-color: var(--bg-quaternary) var(--bg-secondary);
         }
     }
 
@@ -680,14 +707,15 @@
     }
 
     &__address-input {
-        width: var(--carrito-full);
-        padding: var(--carrito-address-input-padding-y) var(--carrito-address-input-padding-x);
-        border: var(--border-width) solid var(--border-color);
+        width: 100%;
+        padding: 20px 18px;
         border-radius: var(--carrito-border-radius-3);
-        font-size: var(--carrito-address-input-font);
+        font-size: 13px;
+        min-height: 70px;
+        transition: all 0.2s ease;
+        border: var(--border-width) solid var(--border-color);
         font-family: inherit;
         resize: vertical;
-        transition: border-color var(--carrito-transition-fast);
 
         &:focus {
             outline: none;
@@ -697,15 +725,6 @@
         &::placeholder {
             color: var(--carrito-text-muted);
         }
-    }
-
-    &__address-input {
-        width: 100%;
-        padding: 20px 18px;
-        border-radius: var(--carrito-border-radius-3);
-        font-size: 13px;
-        min-height: 70px;
-        transition: all 0.2s ease;
     }
 
     &__payment-section {
@@ -875,7 +894,7 @@
     }
 }
 
-.cart-item {
+.c-cart-item {
     &__subtotal {
         font-size: var(--carrito-item-subtotal-font);
         color: var(--carrito-text-sec);
@@ -893,7 +912,7 @@
     }
 }
 
-.summary {
+.c-order-summary {
     &__free-shipping-hint {
         background-color: var(--carrito-hint-bg);
         border-radius: var(--carrito-border-radius-3);
@@ -931,30 +950,4 @@
     100% {
         transform: rotate(360deg);
     }
-}
-
-.carrito__modal-content,
-.carrito__modal-body {
-
-    &::-webkit-scrollbar {
-        width: 8px;
-    }
-
-    &::-webkit-scrollbar-track {
-        background: var(--bg-secondary);
-        border-radius: 10px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background: var(--bg-quaternary);
-        border-radius: 10px;
-        transition: background 0.2s ease;
-
-        &:hover {
-            background: var(--bg-quinary);
-        }
-    }
-
-    scrollbar-width: thin;
-    scrollbar-color: var(--bg-quaternary) var(--bg-secondary);
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -85,7 +85,7 @@ export class Carrito {
   }
 
   get isEnvioGratis(): boolean {
-    return this.subtotal >= 20 || this.subtotal === 0;
+    return this.subtotal >= 20;
   }
 
   get costeEnvioCalculado(): number {

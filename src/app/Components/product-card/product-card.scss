@@ -47,7 +47,7 @@
     display: block;
 }
 
-.product-card {
+.c-product-card {
     background-color: var(--product-card-bg);
     border-radius: var(--product-card-radius);
     box-shadow: var(--product-card-shadow);
@@ -181,14 +181,14 @@
             cursor: not-allowed;
         }
     }
-}
 
-.spinner {
-    display: inline-block;
-    width: var(--spinner-size);
-    height: var(--spinner-size);
-    border: var(--spinner-border) solid rgba(255, 255, 255, 0.3);
-    border-top-color: var(--product-card-bg);
-    border-radius: var(--spinner-radius);
-    animation: spin var(--spinner-duration) linear infinite;
+    &__spinner {
+        display: inline-block;
+        width: var(--spinner-size);
+        height: var(--spinner-size);
+        border: var(--spinner-border) solid rgba(255, 255, 255, 0.3);
+        border-top-color: var(--product-card-bg);
+        border-radius: var(--spinner-radius);
+        animation: spin var(--spinner-duration) linear infinite;
+    }
 }

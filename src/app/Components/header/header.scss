@@ -1,4 +1,4 @@
-.header {
+.c-header {
   --header-bg-color: var(--mls-sys-color-secundario-7);
   --header-text-color: var(--mls-sys-color-gris-1);
   --header-link-color-title: var(--mls-sys-color-gris-11);
@@ -206,13 +206,42 @@
     z-index: var(--header-z-index);
     overflow: hidden;
     animation: dropdownFadeIn var(--header-transition-fast) ease-in-out;
-  }
 
-  &__dropdown-header {
-    padding: var(--header-dropdown-header-padding);
-    background-color: var(--header-profile-bg);
-    color: var(--header-link-color);
-    text-align: center;
+    &-header {
+      padding: var(--header-dropdown-header-padding);
+      background-color: var(--header-profile-bg);
+      color: var(--header-link-color);
+      text-align: center;
+    }
+
+    &-divider {
+      height: var(--header-divider-height);
+      background-color: var(--header-dropdown-divider-color);
+      margin: var(--header-divider-margin) var(--header-zero);
+    }
+
+    &-item {
+      padding: var(--header-dropdown-item-padding-y) var(--header-dropdown-item-padding-x);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: var(--header-dropdown-item-gap);
+      color: var(--header-dropdown-item-color);
+      font-size: var(--header-dropdown-item-font-size);
+      transition: background-color var(--header-transition-fast);
+
+      i {
+        font-size: var(--header-dropdown-icon-font-size);
+      }
+
+      &:hover {
+        background-color: var(--header-dropdown-item-hover);
+      }
+
+      &--logout {
+        color: var(--header-logout-color);
+      }
+    }
   }
 
   &__user-name {
@@ -220,35 +249,6 @@
     color: var(--header-link-color-title);
     font-size: var(--header-user-name-font-size);
     font-family: var(--header-font-family-cart);
-  }
-
-  &__dropdown-divider {
-    height: var(--header-divider-height);
-    background-color: var(--header-dropdown-divider-color);
-    margin: var(--header-divider-margin) var(--header-zero);
-  }
-
-  &__dropdown-item {
-    padding: var(--header-dropdown-item-padding-y) var(--header-dropdown-item-padding-x);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: var(--header-dropdown-item-gap);
-    color: var(--header-dropdown-item-color);
-    font-size: var(--header-dropdown-item-font-size);
-    transition: background-color var(--header-transition-fast);
-
-    i {
-      font-size: var(--header-dropdown-icon-font-size);
-    }
-
-    &:hover {
-      background-color: var(--header-dropdown-item-hover);
-    }
-
-    &--logout {
-      color: var(--header-logout-color);
-    }
   }
 }
 
