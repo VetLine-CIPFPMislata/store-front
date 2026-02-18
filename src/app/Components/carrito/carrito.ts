@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CommonModule, DecimalPipe } from '@angular/common';
+import { Component } from '@angular/core';
+import { DecimalPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -10,11 +10,11 @@ import { Cart, CartItem } from '../../Modelos/Cart';
 
 @Component({
   selector: 'app-carrito',
-  imports: [CommonModule, DecimalPipe, FormsModule],
+  imports: [DecimalPipe, FormsModule],
   templateUrl: './carrito.html',
   styleUrl: './carrito.scss',
 })
-export class Carrito implements OnInit, OnDestroy {
+export class Carrito {
   cart: Cart | null = null;
   loading: boolean = false;
   error: string | null = null;
@@ -85,7 +85,7 @@ export class Carrito implements OnInit, OnDestroy {
   }
 
   get isEnvioGratis(): boolean {
-    return this.subtotal >= 20 || this.subtotal === 0;
+    return this.subtotal >= 20;
   }
 
   get costeEnvioCalculado(): number {
@@ -179,11 +179,9 @@ export class Carrito implements OnInit, OnDestroy {
       return;
     }
 
-    // Activar loading
     this.loading = true;
     this.error = null;
 
-    // Primero procesar el pago
     const paymentRequest = {
       cardData: this.cardData,
       amount: this.totalConEnvio,
@@ -198,7 +196,6 @@ export class Carrito implements OnInit, OnDestroy {
           return;
         }
 
-        // Si el pago fue exitoso, proceder con el checkout
         this.carritoService.checkout(this.shippingAddress).subscribe(order => {
           this.loading = false;
           if (order) {

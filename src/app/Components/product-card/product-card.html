@@ -1,41 +1,42 @@
-<div class="product-card" (click)="viewProduct()">
-    <div class="product-card__image-container">
-        <img [src]="articulo.pictureProduct" [alt]="articulo.name" class="product-card__image">
-       
+<div class="c-product-card" (click)="viewProduct()">
+    <div class="c-product-card__image-container">
+        <img [src]="articulo.pictureProduct" [alt]="articulo.name" class="c-product-card__image">
+
         @if (articulo.basePrice && articulo.basePrice > articulo.price) {
-        <span class="product-card__offer-badge">-{{ (100 - (articulo.price / articulo.basePrice * 100)) | number:'1.0-0'
+        <span class="c-product-card__offer-badge">-{{ (100 - (articulo.price / articulo.basePrice * 100)) |
+            number:'1.0-0'
             }}%</span>
         }
     </div>
 
-    <div class="product-card__body">
-        <h3 class="product-card__title">{{ articulo.name }}</h3>
+    <div class="c-product-card__body">
+        <h3 class="c-product-card__title">{{ articulo.name }}</h3>
 
-        <div class="product-card__rating">
+        <div class="c-product-card__rating">
             @for (star of getStars(articulo.rating || 5); track $index) {
             <i class="bi bi-star-fill"></i>
             }
             @for (star of getStars(5 - (articulo.rating || 5)); track $index) {
             <i class="bi bi-star"></i>
             }
-            <span class="product-card__rating-value">({{ articulo.rating || 5 }}.0)</span>
+            <span class="c-product-card__rating-value">({{ articulo.rating || 5 }}.0)</span>
         </div>
 
-        <p class="product-card__description">{{ articulo.productDescription }}</p>
+        <p class="c-product-card__description">{{ articulo.productDescription }}</p>
 
-        <div class="product-card__pricing">
+        <div class="c-product-card__pricing">
             @if (articulo.basePrice && articulo.basePrice > articulo.price) {
-            <span class="product-card__price--offer">{{ articulo.price | number:'1.2-2' }} €</span>
-            <span class="product-card__price--original">{{ articulo.basePrice | number:'1.2-2' }} €</span>
+            <span class="c-product-card__price--offer">{{ articulo.price | number:'1.2-2' }} €</span>
+            <span class="c-product-card__price--original">{{ articulo.basePrice | number:'1.2-2' }} €</span>
             } @else {
-            <span class="product-card__price">{{ articulo.price | number:'1.2-2' }} €</span>
+            <span class="c-product-card__price">{{ articulo.price | number:'1.2-2' }} €</span>
             }
         </div>
     </div>
 
-    <button class="product-card__button" (click)="addToCart($event, articulo)" [disabled]="isAddingToCart">
+    <button class="c-product-card__button" (click)="addToCart($event, articulo)" [disabled]="isAddingToCart">
         @if (isAddingToCart) {
-        <span class="spinner"></span> Añadiendo...
+        <span class="c-product-card__spinner"></span> Añadiendo...
         } @else {
         Añadir al carrito <i class="bi bi-cart2"></i>
         }

@@ -1,11 +1,10 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { CommonModule, DecimalPipe } from '@angular/common';
+import { DecimalPipe } from '@angular/common';
 import { Order } from '../../Modelos/Cart';
 
 @Component({
     selector: 'app-order-detail',
-    standalone: true,
-    imports: [CommonModule, DecimalPipe],
+    imports: [DecimalPipe],
     templateUrl: './order-detail.html',
     styleUrl: './order-detail.scss'
 })

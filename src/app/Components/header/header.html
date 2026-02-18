@@ -1,43 +1,43 @@
-<header class="header">
-    <div class="header__left">
-        <img src="Vetline-Photoroom.png" alt="Vetline Logo" class="header__logo" routerLink="/inicio">
+<header class="c-header">
+    <div class="c-header__left">
+        <img src="Vetline-Photoroom.png" alt="Vetline Logo" class="c-header__logo" routerLink="/inicio">
 
-        <nav class="header__nav">
-            <a routerLink="/inicio" class="header__link">Inicio</a>
-            <a routerLink="/tienda" class="header__link">Tienda</a>
+        <nav class="c-header__nav">
+            <a routerLink="/inicio" class="c-header__link">Inicio</a>
+            <a routerLink="/tienda" class="c-header__link">Tienda</a>
         </nav>
     </div>
-    <div class="header__right">
+    <div class="c-header__right">
 
-        <div class="header__cart-container">
-            @if (isLoggedIn && cartCount > 0) {
-            <i class="bi bi-cart2 header__cart-icon" routerLink="/carrito"></i>
+        <div class="c-header__cart-container">
+            @if (isLoggedIn) {
+            <i class="bi bi-cart2 c-header__cart-icon" routerLink="/carrito"></i>
 
-            <span class="header__cart-badge">{{ cartCount }}</span>
+            <span class="c-header__cart-badge">{{ cartCount }}</span>
             }
         </div>
         @if (isLoggedIn) {
-        <div class="header__user-menu">
-            <div class="header__user-icon" (click)="toggleUserDropdown()">
+        <div class="c-header__user-menu">
+            <div class="c-header__user-icon" (click)="toggleUserDropdown()">
                 <i class="bi bi-person-circle"></i>
             </div>
 
             @if (showUserDropdown) {
-            <div class="header__dropdown">
-                <div class="header__dropdown-header">
-                    <span class="header__user-name">{{ userName || 'Usuario' }}</span>
+            <div class="c-header__dropdown">
+                <div class="c-header__dropdown-header">
+                    <span class="c-header__user-name">{{ userName || 'Usuario' }}</span>
                 </div>
-                <div class="header__dropdown-divider"></div>
-                <div class="header__dropdown-item" (click)="navigateToProfile()">
+                <div class="c-header__dropdown-divider"></div>
+                <div class="c-header__dropdown-item" (click)="navigateToProfile()">
                     <i class="bi bi-person"></i>
                     <span>Mi Perfil</span>
                 </div>
-                <div class="header__dropdown-item" (click)="navigateToOrders()">
+                <div class="c-header__dropdown-item" (click)="navigateToOrders()">
                     <i class="bi bi-box-seam"></i>
                     <span>Mis Pedidos</span>
                 </div>
-                <div class="header__dropdown-divider"></div>
-                <div class="header__dropdown-item header__dropdown-item--logout" (click)="onLogout()">
+                <div class="c-header__dropdown-divider"></div>
+                <div class="c-header__dropdown-item c-header__dropdown-item--logout" (click)="onLogout()">
                     <i class="bi bi-box-arrow-right"></i>
                     <span>Cerrar Sesión</span>
                 </div>
@@ -45,7 +45,7 @@
             }
         </div>
         }@else {
-        <div class="header__login-container--iniciar-sesion">
+        <div class="c-header__login-container--iniciar-sesion">
             <a routerLink="/login"><i class="bi bi-person-circle"></i> Iniciar sesión</a>
         </div>
         }

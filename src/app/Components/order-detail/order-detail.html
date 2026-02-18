@@ -1,52 +1,52 @@
 @if (order) {
-<div class="order-detail-overlay" (click)="closeOrderDetails()">
-    <div class="order-detail-modal" (click)="$event.stopPropagation()">
-        <div class="order-detail-header">
-            <div class="order-detail-header-left">
-                <h2 class="order-detail-title">Detalles del Pedido</h2>
-                <span class="order-detail-order-number">#{{ order.id }}</span>
-                <span class="order-detail-status-pill order-detail-status-pill--{{ getStateColor(order.state) }}">
+<div class="c-order-detail" (click)="closeOrderDetails()">
+    <div class="c-order-detail__modal" (click)="$event.stopPropagation()">
+        <div class="c-order-detail__header">
+            <div class="c-order-detail__header-left">
+                <h2 class="c-order-detail__title">Detalles del Pedido</h2>
+                <span class="c-order-detail__order-number">#{{ order.id }}</span>
+                <span class="c-order-detail__status-pill c-order-detail__status-pill--{{ getStateColor(order.state) }}">
                     {{ getStateLabel(order.state) }}
                 </span>
             </div>
-            <button class="order-detail-close" (click)="closeOrderDetails()">
+            <button class="c-order-detail__close" (click)="closeOrderDetails()">
                 <i class="bi bi-x-lg"></i>
             </button>
         </div>
 
-        <div class="order-detail-status-banner">
+        <div class="c-order-detail__status-banner">
             <i class="bi bi-check-circle-fill"></i>
             <span>Tu pedido ha sido {{ getStateLabel(order.state).toLowerCase() }} con éxito</span>
         </div>
 
-        <div class="order-detail-body">
-            <div class="order-detail-info-grid">
-                <div class="order-detail-info-block">
-                    <h3 class="order-detail-block-title"><i class="bi bi-geo-alt"></i> Envío a</h3>
-                    <p class="order-detail-block-value">{{ order.address }}</p>
+        <div class="c-order-detail__body">
+            <div class="c-order-detail__info-grid">
+                <div class="c-order-detail__info-block">
+                    <h3 class="c-order-detail__block-title"><i class="bi bi-geo-alt"></i> Envío a</h3>
+                    <p class="c-order-detail__block-value">{{ order.address }}</p>
                 </div>
-                <div class="order-detail-info-block">
-                    <h3 class="order-detail-block-title"><i class="bi bi-calendar3"></i> Realizado el</h3>
-                    <p class="order-detail-block-value">{{ formatDate(order.createdAt) }}</p>
+                <div class="c-order-detail__info-block">
+                    <h3 class="c-order-detail__block-title"><i class="bi bi-calendar3"></i> Realizado el</h3>
+                    <p class="c-order-detail__block-value">{{ formatDate(order.createdAt) }}</p>
                 </div>
             </div>
 
-            <div class="order-detail-products">
-                <h3 class="order-detail-products-title">Resumen de Productos</h3>
-                <div class="order-detail-products-list">
+            <div class="c-order-detail__products">
+                <h3 class="c-order-detail__products-title">Resumen de Productos</h3>
+                <div class="c-order-detail__products-list">
                     @for (item of order.items; track item.id) {
-                    <div class="order-detail-product">
-                        <div class="order-detail-product-left">
+                    <div class="c-order-detail__product">
+                        <div class="c-order-detail__product-left">
                             <img [src]="item.product.pictureProduct" [alt]="item.product.name"
-                                class="order-detail-product-image">
-                            <div class="order-detail-product-info">
-                                <h4 class="order-detail-product-name">{{ item.product.name }}</h4>
-                                <p class="order-detail-product-quantity">
+                                class="c-order-detail__product-image">
+                            <div class="c-order-detail__product-info">
+                                <h4 class="c-order-detail__product-name">{{ item.product.name }}</h4>
+                                <p class="c-order-detail__product-quantity">
                                     {{ item.quantity }} x {{ (item.unitPrice || item.product.price) | number:'1.2-2' }}€
                                 </p>
                             </div>
                         </div>
-                        <div class="order-detail-product-total-price">
+                        <div class="c-order-detail__product-total-price">
                             {{ (item.quantity * (item.unitPrice || item.product.price)) | number:'1.2-2' }}€
                         </div>
                     </div>
@@ -55,31 +55,32 @@
             </div>
         </div>
 
-        <div class="order-detail-footer">
-            <div class="order-detail-summary">
-                <div class="order-detail-summary-line">
+        <div class="c-order-detail__footer">
+            <div class="c-order-detail__summary">
+                <div class="c-order-detail__summary-line">
                     <span>Subtotal</span>
                     <span>{{ order.totalPrice | number:'1.2-2' }}€</span>
                 </div>
-                <div class="order-detail-summary-line">
+                <div class="c-order-detail__summary-line">
                     <span>Gastos de envío</span>
                     @if (getShippingCost(order.totalPrice) === 0) {
-                    <span class="order-detail-text-free">Gratis (0.00€)</span>
+                    <span class="c-order-detail__text-free">Gratis (0.00€)</span>
                     } @else {
                     <span>{{ getShippingCost(order.totalPrice) | number:'1.2-2' }}€</span>
                     }
                 </div>
             </div>
 
-            <div class="order-detail-footer-bottom">
-                <div class="order-detail-footer-actions">
-                    <button class="order-detail-btn-close" (click)="closeOrderDetails()">
+            <div class="c-order-detail__footer-bottom">
+                <div class="c-order-detail__footer-actions">
+                    <button class="c-order-detail__btn-close" (click)="closeOrderDetails()">
                         Cerrar
                     </button>
                 </div>
-                <div class="order-detail-total">
-                    <span class="order-detail-total-label">Total</span>
-                    <span class="order-detail-total-amount">{{ getTotalWithShipping(order.totalPrice) | number:'1.2-2'
+                <div class="c-order-detail__total">
+                    <span class="c-order-detail__total-label">Total</span>
+                    <span class="c-order-detail__total-amount">{{ getTotalWithShipping(order.totalPrice) |
+                        number:'1.2-2'
                         }}€</span>
                 </div>
             </div>

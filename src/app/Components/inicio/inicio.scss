@@ -1,4 +1,4 @@
-.inicio {
+.c-inicio {
     --inicio-bg-primary: var(--mls-sys-color-gris-0);
     --inicio-bg-white: var(--mls-sys-color-gris-1);
     --inicio-bg-secondary: var(--inicio-bg-white);
@@ -208,12 +208,12 @@
         cursor: pointer;
 
         &:hover {
-            .inicio__category-item-circle {
+            .c-inicio__category-item-circle {
                 background-color: var(--inicio-color-primary);
                 color: var(--inicio-bg-primary);
             }
 
-            .inicio__category-item-name {
+            .c-inicio__category-item-name {
                 color: var(--inicio-color-primary);
             }
         }

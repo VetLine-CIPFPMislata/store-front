@@ -1,69 +1,69 @@
-<div class="mis-pedidos">
-  <div class="mis-pedidos__container">
-    <div class="mis-pedidos__header">
-      <h1 class="mis-pedidos__title">Mis Pedidos</h1>
+<div class="c-mis-pedidos">
+  <div class="c-mis-pedidos__container">
+    <div class="c-mis-pedidos__header">
+      <h1 class="c-mis-pedidos__title">Mis Pedidos</h1>
     </div>
 
     @if (loading) {
-    <div class="mis-pedidos__loading">
-      <div class="mis-pedidos__spinner"></div>
-      <p class="mis-pedidos__loading-text">Cargando tus pedidos...</p>
+    <div class="c-mis-pedidos__loading">
+      <div class="c-mis-pedidos__spinner"></div>
+      <p class="c-mis-pedidos__loading-text">Cargando tus pedidos...</p>
     </div>
     }
 
     @if (error && !loading) {
-    <div class="mis-pedidos__error">
-      <i class="mis-pedidos__error-icon bi bi-exclamation-circle"></i>
-      <p class="mis-pedidos__error-text">{{ error }}</p>
+    <div class="c-mis-pedidos__error">
+      <i class="c-mis-pedidos__error-icon bi bi-exclamation-circle"></i>
+      <p class="c-mis-pedidos__error-text">{{ error }}</p>
     </div>
     }
 
     @if (!loading && !error && orders.length === 0) {
-    <div class="mis-pedidos__empty">
-      <i class="mis-pedidos__empty-icon bi bi-box-seam"></i>
-      <h2 class="mis-pedidos__empty-title">No tienes pedidos</h2>
-      <p class="mis-pedidos__empty-text">Aún no has realizado ningún pedido</p>
+    <div class="c-mis-pedidos__empty">
+      <i class="c-mis-pedidos__empty-icon bi bi-box-seam"></i>
+      <h2 class="c-mis-pedidos__empty-title">No tienes pedidos</h2>
+      <p class="c-mis-pedidos__empty-text">Aún no has realizado ningún pedido</p>
     </div>
     }
 
     @if (!loading && !error && orders.length > 0) {
-    <div class="mis-pedidos__content">
-      <div class="mis-pedidos__list">
+    <div class="c-mis-pedidos__content">
+      <div class="c-mis-pedidos__list">
         @for (order of orders; track order.id) {
-        <div class="mis-pedidos__card" (click)="viewOrderDetails(order)">
-          <div class="mis-pedidos__card-header">
-            <div class="mis-pedidos__card-info">
-              <span class="mis-pedidos__card-id">Pedido #{{ order.id }}</span>
-              <span class="mis-pedidos__card-date">{{ formatDate(order.createdAt) }}</span>
+        <div class="c-mis-pedidos__card" (click)="viewOrderDetails(order)">
+          <div class="c-mis-pedidos__card-header">
+            <div class="c-mis-pedidos__card-info">
+              <span class="c-mis-pedidos__card-id">Pedido #{{ order.id }}</span>
+              <span class="c-mis-pedidos__card-date">{{ formatDate(order.createdAt) }}</span>
             </div>
-            <span class="mis-pedidos__card-state mis-pedidos__card-state--{{ getStateColor(order.state) }}">
+            <span class="c-mis-pedidos__card-state c-mis-pedidos__card-state--{{ getStateColor(order.state) }}">
               {{ getStateLabel(order.state) }}
             </span>
           </div>
 
-          <div class="mis-pedidos__card-body">
-            <div class="mis-pedidos__card-summary">
-              <div class="mis-pedidos__card-summary-item">
-                <i class="mis-pedidos__card-summary-icon bi bi-box-seam"></i>
-                <span class="mis-pedidos__card-summary-text">{{ order.totalProducts }} productos</span>
+          <div class="c-mis-pedidos__card-body">
+            <div class="c-mis-pedidos__card-summary">
+              <div class="c-mis-pedidos__card-summary-item">
+                <i class="c-mis-pedidos__card-summary-icon bi bi-box-seam"></i>
+                <span class="c-mis-pedidos__card-summary-text">{{ order.totalProducts }} productos</span>
               </div>
-              <div class="mis-pedidos__card-summary-item">
-                <i class="mis-pedidos__card-summary-icon bi bi-geo-alt"></i>
-                <span class="mis-pedidos__card-summary-text">{{ order.address }}</span>
+              <div class="c-mis-pedidos__card-summary-item">
+                <i class="c-mis-pedidos__card-summary-icon bi bi-geo-alt"></i>
+                <span class="c-mis-pedidos__card-summary-text">{{ order.address }}</span>
               </div>
             </div>
 
-            <div class="mis-pedidos__card-total">
-              <span class="mis-pedidos__card-total-label">Total:</span>
-              <span class="mis-pedidos__card-total-amount">{{ getTotalWithShipping(order.totalPrice) | number:'1.2-2'
+            <div class="c-mis-pedidos__card-total">
+              <span class="c-mis-pedidos__card-total-label">Total:</span>
+              <span class="c-mis-pedidos__card-total-amount">{{ getTotalWithShipping(order.totalPrice) | number:'1.2-2'
                 }}€</span>
             </div>
           </div>
 
-          <div class="mis-pedidos__card-footer">
-            <button class="mis-pedidos__card-btn">
-              <span class="mis-pedidos__card-btn-text">Ver detalles</span>
-              <i class="mis-pedidos__card-btn-icon bi bi-chevron-right"></i>
+          <div class="c-mis-pedidos__card-footer">
+            <button class="c-mis-pedidos__card-btn">
+              <span class="c-mis-pedidos__card-btn-text">Ver detalles</span>
+              <i class="c-mis-pedidos__card-btn-icon bi bi-chevron-right"></i>
             </button>
           </div>
         </div>

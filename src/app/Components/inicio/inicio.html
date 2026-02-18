@@ -1,41 +1,41 @@
-<div class="inicio">
+<div class="c-inicio">
 
-    <section class="inicio__hero">
-        <div class="inicio__hero-content">
-            <h1 class="inicio__hero-title">Cuidamos de los que más quieres</h1>
-            <p class="inicio__hero-subtitle">Todo lo que tu mascota necesita, avalado por expertos veterinarios.</p>
-            <button class="inicio__hero-cta" routerLink="/tienda">Ver Catálogo Completo</button>
+    <section class="c-inicio__hero">
+        <div class="c-inicio__hero-content">
+            <h1 class="c-inicio__hero-title">Cuidamos de los que más quieres</h1>
+            <p class="c-inicio__hero-subtitle">Todo lo que tu mascota necesita, avalado por expertos veterinarios.</p>
+            <button class="c-inicio__hero-cta" routerLink="/tienda">Ver Catálogo Completo</button>
         </div>
-        <div class="inicio__hero-overlay"></div>
+        <div class="c-inicio__hero-overlay"></div>
     </section>
 
-    <section class="inicio__trust">
-        <div class="inicio__trust-item">
-            <i class="fa-solid fa-user-doctor inicio__trust-item-icon"></i>
-            <h3 class="inicio__trust-item-title">Asesoramiento Profesional</h3>
-            <p class="inicio__trust-item-desc">Consulta con nuestro chatbot para pedir información sobre nuestros
+    <section class="c-inicio__trust">
+        <div class="c-inicio__trust-item">
+            <i class="fa-solid fa-user-doctor c-inicio__trust-item-icon"></i>
+            <h3 class="c-inicio__trust-item-title">Asesoramiento Profesional</h3>
+            <p class="c-inicio__trust-item-desc">Consulta con nuestro chatbot para pedir información sobre nuestros
                 productos.</p>
         </div>
-        <div class="inicio__trust-item">
-            <i class="fa-solid fa-truck-fast inicio__trust-item-icon"></i>
-            <h3 class="inicio__trust-item-title">Envío Rápido</h3>
-            <p class="inicio__trust-item-desc">Recíbelo cómodamente en 24/48h.</p>
+        <div class="c-inicio__trust-item">
+            <i class="fa-solid fa-truck-fast c-inicio__trust-item-icon"></i>
+            <h3 class="c-inicio__trust-item-title">Envío Rápido</h3>
+            <p class="c-inicio__trust-item-desc">Recíbelo cómodamente en 24/48h.</p>
         </div>
-        <div class="inicio__trust-item">
-            <i class="fa-solid fa-shield-halved inicio__trust-item-icon"></i>
-            <h3 class="inicio__trust-item-title">Pago seguro</h3>
-            <p class="inicio__trust-item-desc">Pago 100% Seguro. Aceptamos tarjetas de crédito/débito y tu información
+        <div class="c-inicio__trust-item">
+            <i class="fa-solid fa-shield-halved c-inicio__trust-item-icon"></i>
+            <h3 class="c-inicio__trust-item-title">Pago seguro</h3>
+            <p class="c-inicio__trust-item-desc">Pago 100% Seguro. Aceptamos tarjetas de crédito/débito y tu información
                 está protegida.</p>
         </div>
     </section>
 
-    <section class="inicio__categories">
-        <h2 class="inicio__section-title">Encuentra por Categoría</h2>
+    <section class="c-inicio__categories">
+        <h2 class="c-inicio__section-title">Encuentra por Categoría</h2>
 
-        <div class="inicio__categories-grid">
+        <div class="c-inicio__categories-grid">
             @for (category of categories; track category.id) {
-            <div class="inicio__category-item" (click)="navigateToCategory(category.id)">
-                <div class="inicio__category-item-circle">
+            <div class="c-inicio__category-item" (click)="navigateToCategory(category.id)">
+                <div class="c-inicio__category-item-circle">
                     @switch (category.name.toLowerCase()) {
                     @case ('juguetes para perros') { <i class="fa-solid fa-dog"></i> }
                     @case ('accesorios') { <i class="fa-solid fa-pump-soap"></i> }
@@ -44,19 +44,20 @@
                     @default { <i class="fa-solid fa-paw"></i> }
                     }
                 </div>
-                <span class="inicio__category-item-name">{{ category.name }}</span>
+                <span class="c-inicio__category-item-name">{{ category.name }}</span>
             </div>
             }
         </div>
     </section>
 
-    <section class="inicio__recommended">
-        <h2 class="inicio__section-title">Favoritos de nuestros clientes <span> <i class="fa-solid fa-fire"></i></span>
+    <section class="c-inicio__recommended">
+        <h2 class="c-inicio__section-title">Favoritos de nuestros clientes <span> <i
+                    class="fa-solid fa-fire"></i></span>
         </h2>
         @if (isLoading) {
-        <div class="inicio__loading">Cargando recomendaciones...</div>
+        <div class="c-inicio__loading">Cargando recomendaciones...</div>
         } @else {
-        <div class="inicio__product-grid">
+        <div class="c-inicio__product-grid">
             @for (articulo of articulos; track articulo.id) {
             <app-product-card [articulo]="articulo"></app-product-card>
             }

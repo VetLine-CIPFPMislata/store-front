@@ -1,39 +1,39 @@
-<div class="login">
-  <div class="login__container">
-    <div class="login__header">
-      <h1 class="login__title">Inicio de Sesión</h1>
+<div class="c-login">
+  <div class="c-login__container">
+    <div class="c-login__header">
+      <h1 class="c-login__title">Inicio de Sesión</h1>
     </div>
 
-    <form class="login__form" (ngSubmit)="onLogin()">
+    <form class="c-login__form" (ngSubmit)="onLogin()">
       @if (errorMessage) {
-      <div class="login__error">
+      <div class="c-login__error">
         {{ errorMessage }}
       </div>
       }
 
-      <div class="login__field">
-        <label class="login__label" for="email">Email: *</label>
-        <input [(ngModel)]="credentials.email" name="email" id="email" class="login__input" #emailInput="ngModel"
+      <div class="c-login__field">
+        <label class="c-login__label" for="email">Email: *</label>
+        <input [(ngModel)]="credentials.email" name="email" id="email" class="c-login__input" #emailInput="ngModel"
           placeholder="admin@example.com" required>
       </div>
       @if(emailInput.invalid && emailInput.touched){
-      <p class="login__error-message">El email es obligatorio</p>
+      <p class="c-login__error-message">El email es obligatorio</p>
       }
 
-      <div class="login__field">
-        <label class="login__label" for="password">Contraseña: *</label>
-        <input type="password" [(ngModel)]="credentials.password" name="password" id="password" class="login__input"
+      <div class="c-login__field">
+        <label class="c-login__label" for="password">Contraseña: *</label>
+        <input type="password" [(ngModel)]="credentials.password" name="password" id="password" class="c-login__input"
           #passwordInput="ngModel" placeholder="••••••••" required>
       </div>
       @if(passwordInput.invalid && passwordInput.touched){
-      <p class="login__error-message">La contraseña es obligatoria</p>
+      <p class="c-login__error-message">La contraseña es obligatoria</p>
       }
 
-      <a class="login__btn-register" (click)="onRegister()">
+      <a class="c-login__btn-register" (click)="onRegister()">
         ¿No tienes cuenta? Regístrate
       </a>
 
-      <button type="submit" class="login__btn" [disabled]="isLoading">
+      <button type="submit" class="c-login__btn" [disabled]="isLoading">
         {{ isLoading ? 'Iniciando sesión...' : 'Iniciar Sesión' }}
       </button>
     </form>

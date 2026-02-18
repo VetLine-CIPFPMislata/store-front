@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, of, catchError, tap } from 'rxjs';
 import { AuthService } from './auth.service';
-import { Cart, CartItem, AddToCartRequest, UpdateQuantityRequest, CheckoutRequest, Order } from '../Modelos/Cart';
+import { Cart, AddToCartRequest, UpdateQuantityRequest, CheckoutRequest, Order } from '../Modelos/Cart';
 
 @Injectable({
     providedIn: 'root'

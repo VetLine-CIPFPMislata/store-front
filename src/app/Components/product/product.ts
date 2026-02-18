@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Http } from '../../Services/http';
@@ -12,7 +12,7 @@ import { Articulo } from '../../Modelos/Articulo';
   templateUrl: './product.html',
   styleUrl: './product.scss',
 })
-export class Product implements OnInit {
+export class Product {
   product: Articulo | null = null;
   quantity: number = 1;
   selectedImage: string = '';
@@ -28,8 +28,7 @@ export class Product implements OnInit {
   ) { }
 
 
-  ngOnInit(): void {
-    //arreglar esto 
+  ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.loadProduct(Number(id));
@@ -90,7 +89,7 @@ export class Product implements OnInit {
         next: (cart) => {
           this.isAddingToCart = false;
           if (cart) {
-            this.quantity = 1; // Reset quantity after adding
+            this.quantity = 1;
           }
         },
         error: () => {
@@ -103,7 +102,6 @@ export class Product implements OnInit {
   getStars(rating: number = 0): string[] {
     const stars = [];
     const fullStars = Math.floor(rating);
-    const hasHalfStar = rating % 1 !== 0;
 
     for (let i = 0; i < fullStars; i++) {
       stars.push('★');

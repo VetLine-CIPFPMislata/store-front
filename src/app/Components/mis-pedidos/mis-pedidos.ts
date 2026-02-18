@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { AuthService } from '../../Services/auth.service';
 import { CarritoService } from '../../Services/carrito.service';
@@ -12,7 +12,7 @@ import { OrderDetailComponent } from '../order-detail/order-detail';
   templateUrl: './mis-pedidos.html',
   styleUrl: './mis-pedidos.scss',
 })
-export class MisPedidos implements OnInit {
+export class MisPedidos {
   orders: Order[] = [];
   loading: boolean = false;
   error: string | null = null;
@@ -40,7 +40,6 @@ export class MisPedidos implements OnInit {
     this.carritoService.getUserOrders(userId).subscribe({
       next: (orders) => {
         this.orders = orders.sort((a, b) => {
-          // Ordenar por fecha descendente (más reciente primero)
           return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
         });
         this.loading = false;
