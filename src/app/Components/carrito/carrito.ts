@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule, DecimalPipe } from '@angular/common';
+import { DecimalPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -10,7 +10,7 @@ import { Cart, CartItem } from '../../Modelos/Cart';
 
 @Component({
   selector: 'app-carrito',
-  imports: [CommonModule, DecimalPipe, FormsModule],
+  imports: [DecimalPipe, FormsModule],
   templateUrl: './carrito.html',
   styleUrl: './carrito.scss',
 })

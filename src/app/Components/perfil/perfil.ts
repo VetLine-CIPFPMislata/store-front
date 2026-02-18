@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
 import { CarritoService } from '../../Services/carrito.service';
@@ -10,7 +9,7 @@ import { OrderDetailComponent } from '../order-detail/order-detail';
 
 @Component({
   selector: 'app-perfil',
-  imports: [CommonModule, OrderDetailComponent],
+  imports: [OrderDetailComponent],
   templateUrl: './perfil.html',
   styleUrl: './perfil.scss',
 })
